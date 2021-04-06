@@ -5,7 +5,50 @@
 
 {% block container %}
 
-    {{ form_start(formEvent) }}
+<div class="row">
+    <div class="col-md-12">
+
+        {{ form_start(formEvent) }}
+
+        <div class="row">
+            <div class="col-md-6" >
+
+                <label>Intitulé sortie : </label>
+                    {{ form_widget(formEvent.nameEvent) }}
+                <br><br>
+
+                <label>Début de l'évenement : </label><br>
+                {{ form_widget(formEvent.StartDateTime) }}
+                <br>
+
+                <label>Durée : </label>
+                {{ form_widget(formEvent.duration) }}
+                <br><br>
+
+                <label>Inscription jusqu'au : </label><br>
+                {{ form_widget(formEvent.registrationDeadLine) }}
+                <br><br>
+
+
+            </div>
+
+            <div class="col-md-6" >
+
+                <label>Nombre maximum de participants : </label><br>
+                {{ form_widget(formEvent.nbRegistrationsMax) }}
+                <br><br>
+
+                <label>Description : </label>
+                {{ form_widget(formEvent.infoEvent) }}
+                <br><br>
+
+                <label>Status : </label>
+                {{ form_widget(formEvent.status) }}
+                <br><br>
+            </div>
+
+
+
 
     {{ form_widget(formEvent) }}
     <button>Ajouter</button>

@@ -1,0 +1,30 @@
+{% extends 'base.html.twig' %}
+
+{% block titlePage %}Detail sortie{% endblock %}
+
+
+{% block container %}
+
+    <div class="row">
+        <div class="col-md-12">
+            <div class="row" >
+                <div class="col-md-3">
+                </div>
+                <div class="col-md-6" style="align-items: center">
+
+                    <h2>{{ detailEvent.nameEvent | capitalize }}</h2>
+                    <li>Description : {{ detailEvent.infoEvent }}</li>
+                    <li>Auteur : {{ detailEvent.duration }}</li>
+
+
+
+                </div>
+                <div class="col-md-3">
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+{% endblock %}
