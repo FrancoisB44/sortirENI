@@ -9,33 +9,33 @@
                 integrity="sha384-JEW9xMcG8R+pH31jmWH6WWP0WintQrMb4s7ZOdauHnUtxwoG2vI5DkLtS3qm9Ekf"
                 crossorigin="anonymous"></script>
 
-        <div class="container-fluid">
-            <div class="row">
-                <div class="col-md-4">
+        <div class="container-fluid ">
+            <header class="row text-light bg-success d-flex align-items-center mb-5 p-5 shadow-lg">
+                <div class="col-lg-4 col-sm-12 d-flex justify-content-center">
                     <h1>
                         Sortir.com
                     </h1>
                 </div>
-                <div class="col-md-4">
+                <div class="col-lg-4 col-sm-12 d-flex justify-content-center">
                     <h3>
                         {% block titlePage %}{% endblock %}
                     </h3>
                 </div>
-                <div class="col-md-4">
+                <div class="col-lg-4 col-sm-12 d-flex justify-content-center">
                     <ul class="nav">
                         <li class="nav-item">
-                            <a class="nav-link" href="#">Accueil</a>
+                            <a class="nav-link bg-white mx-4 my-2 rounded" href="#">Accueil</a>
                         </li>
-                        <li class="nav-item">
+                        <li class="nav-item bg-white mx-4 my-2 rounded">
                             <a class="nav-link" href="#">Se connecter</a>
                         </li>
-                        <li class="nav-item">
+                        <li class="nav-item bg-white mx-4 my-2 rounded">
                             <a class="nav-link" href="#">S'inscrire</a>
                         </li>
 
                     </ul>
                 </div>
-            </div>
+            </header>
             <div class="row">
 
                 {% for status, messages in app.flashes %}
@@ -56,11 +56,12 @@
                 <div class="col-md-2">
                 </div>
             </div>
-            <div class="row">
-                <div class="col-md-12">
+            <footer class="row mt-5 d-flex justify-content-center">
+                <div class=" bg-success fixed-bottom col-md-12 ">
                     {% block footer %}{% endblock %}
+                    <p class="text-light">123</p>
                 </div>
-            </div>
+            </footer>
         </div>
 
 
