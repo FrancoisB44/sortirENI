@@ -20,7 +20,7 @@
 
                     <ul style="list-style-type: none">
                         {% for event in listEvent %}
-                            <li>{{ event.nameEvent }} ({{ event.infoEvent }})</li>
+                            <li><a href="{{ url('details', {"id" : event.id }) }}">{{ event.nameEvent }}</a></li>
 
                         {% endfor %}
                     </ul>
