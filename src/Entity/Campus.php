@@ -10,17 +10,13 @@ use Doctrine\ORM\Mapping as ORM;
  */
 class Campus
 {
+
     /**
      * @ORM\Id
      * @ORM\GeneratedValue
      * @ORM\Column(type="integer")
      */
     private $id;
-
-    /**
-     * @ORM\Column(type="string", length=255)
-     */
-    private $idCampus;
 
     /**
      * @ORM\Column(type="string", length=255)
@@ -41,22 +37,6 @@ class Campus
     public function setId($id): void
     {
         $this->id = $id;
-    }
-
-    /**
-     * @return mixed
-     */
-    public function getIdCampus()
-    {
-        return $this->idCampus;
-    }
-
-    /**
-     * @param mixed $idCampus
-     */
-    public function setIdCampus($idCampus): void
-    {
-        $this->idCampus = $idCampus;
     }
 
     /**

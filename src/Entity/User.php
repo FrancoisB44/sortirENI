@@ -78,6 +78,7 @@ class User implements UserInterface
         $this->id = $id;
     }
 
+
     /**
      * @return mixed
      */

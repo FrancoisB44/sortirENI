@@ -10,17 +10,13 @@ use Doctrine\ORM\Mapping as ORM;
  */
 class Status
 {
+
     /**
      * @ORM\Id
      * @ORM\GeneratedValue
      * @ORM\Column(type="integer")
      */
     private $id;
-
-    /**
-     * @ORM\Column(type="string", length=255)
-     */
-    private $idStatus;
 
     /**
      * @ORM\Column(type="string", length=255)
@@ -33,22 +29,6 @@ class Status
     public function getId()
     {
         return $this->id;
-    }
-
-    /**
-     * @param mixed $id
-     */
-    public function setId($id): void
-    {
-        $this->id = $id;
-    }
-
-    /**
-     * @return mixed
-     */
-    public function getIdStatus()
-    {
-        return $this->idStatus;
     }
 
     /**

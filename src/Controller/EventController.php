@@ -16,7 +16,7 @@ use Symfony\Component\Routing\Annotation\Route;
 class EventController extends AbstractController
 {
     /**
-     * @Route("/create", name="create", methods={"GET"})
+     * @Route("/create", name="create")
      */
     public function createEvent(Request $request, EntityManagerInterface $entityManager): Response
     {
@@ -40,7 +40,7 @@ class EventController extends AbstractController
 
 
     /**
-     * @Route(path="/list", name="list", methods={"GET"})
+     * @Route(path="/list", name="list")
      */
     public function listEvent(EntityManagerInterface $entityManager) {
 

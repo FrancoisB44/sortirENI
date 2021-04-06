@@ -20,11 +20,6 @@ class City
     /**
      * @ORM\Column(type="string", length=255)
      */
-    private $idCity;
-
-    /**
-     * @ORM\Column(type="string", length=255)
-     */
     private $nameCity;
 
     /**
@@ -48,29 +43,6 @@ class City
         $this->id = $id;
     }
 
-    /**
-     * @return mixed
-     */
-    public function getIdCity()
-    {
-        return $this->idCity;
-    }
-
-    /**
-     * @param mixed $idCity
-     */
-    public function setIdCity($idCity): void
-    {
-        $this->idCity = $idCity;
-    }
-
-    /**
-     * @return mixed
-     */
-    public function getNameCity()
-    {
-        return $this->nameCity;
-    }
 
     /**
      * @param mixed $nameCity
