@@ -18,42 +18,43 @@ class Event
     private $id;
 
     /**
-     * @ORM\GeneratedValue(strategy="AUTO")
-     * @ORM\Column(type="string", length=255)
-     */
-    private $idEvent;
-
-    /**
+     * @Assert\NotBlank(message="Renseignez l'intitulé")
      * @ORM\Column(type="string", length=255)
      */
     private $nameEvent;
 
     /**
+     * @Assert\NotBlank(message="Renseignez la date et l'heure de début")
      * @ORM\Column(type="datetime")
      */
     private $StartDateTime;
 
     /**
+     * @Assert\NotBlank(message="Renseignez la durée")
      * @ORM\Column(type="integer")
      */
     private $duration;
 
     /**
+     * @Assert\NotBlank(message="Renseignez la date limite d'inscription")
      * @ORM\Column(type="datetime")
      */
     private $registrationDeadLine;
 
     /**
+     * @Assert\NotBlank(message="Renseignez le nombre max de participants")
      * @ORM\Column(type="decimal", precision=10, scale=0, nullable=true)
      */
     private $nbRegistrationsMax;
 
     /**
+     * @Assert\NotBlank(message="Renseignez la description")
      * @ORM\Column(type="text", nullable=true)
      */
     private $infoEvent;
 
     /**
+     * @Assert\NotBlank(message="Renseignez le status (ouvert, archivé, etc")
      * @ORM\Column(type="string", length=255)
      */
     private $status;
@@ -72,22 +73,6 @@ class Event
     public function setId($id): void
     {
         $this->id = $id;
-    }
-
-    /**
-     * @return mixed
-     */
-    public function getIdEvent()
-    {
-        return $this->idEvent;
-    }
-
-    /**
-     * @param mixed $idEvent
-     */
-    public function setIdEvent($idEvent): void
-    {
-        $this->idEvent = $idEvent;
     }
 
     /**

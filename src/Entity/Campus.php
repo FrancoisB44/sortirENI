@@ -20,11 +20,6 @@ class Campus
     /**
      * @ORM\Column(type="string", length=255)
      */
-    private $idCampus;
-
-    /**
-     * @ORM\Column(type="string", length=255)
-     */
     private $nameCampus;
 
     /**
@@ -41,22 +36,6 @@ class Campus
     public function setId($id): void
     {
         $this->id = $id;
-    }
-
-    /**
-     * @return mixed
-     */
-    public function getIdCampus()
-    {
-        return $this->idCampus;
-    }
-
-    /**
-     * @param mixed $idCampus
-     */
-    public function setIdCampus($idCampus): void
-    {
-        $this->idCampus = $idCampus;
     }
 
     /**
