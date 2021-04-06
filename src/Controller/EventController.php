@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use App\Entity\Event;
 use App\Form\EventType;
+use App\Repository\EventRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -48,6 +49,18 @@ class EventController extends AbstractController
 
         return $this->render('event/listEvent.html.twig', ['listEvent' => $listEvent]);
     }
+
+    /**
+     * @Route(path="/details/{id}", requirements={"id":"\d+"}, name="details", methods={"GET"})
+     */
+    public function detailEvent($id, EventRepository $eventRepository) {
+
+        $detailEvent = $eventRepository->find($id);
+
+
+        return $this->render('event/detailsEvent.html.twig', ['detailEvent' => $detailEvent]);
+    }
+
 
 }
 
