@@ -24,18 +24,21 @@
                 <div class="col-lg-4 col-sm-12 d-flex justify-content-center">
                     <ul class="nav">
                         <li class="nav-item">
-                            <a class="nav-link bg-white mx-4 my-2 rounded" href="#">Accueil</a>
+                            <a class="nav-link bg-white mx-4 my-2 rounded" href="{{ path('home') }}">Home</a>
                         </li>
                         {% if app.user %}
                             <li class="nav-item">
-                                <a class="nav-link bg-white mx-4 my-2 rounded" href="#">Mon Profil</a>
+                                <a class="nav-link bg-white mx-4 my-2 rounded" href="#">My Profile</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link bg-white mx-4 my-2 rounded" href="{{ path('app_logout') }}">LogOut</a>
                             </li>
                         {% else %}
                             <li class="nav-item bg-white mx-4 my-2 rounded">
-                                <a class="nav-link" href="#">Se connecter</a>
+                                <a class="nav-link" href="{{ path('app_login') }}">Login</a>
                             </li>
                             <li class="nav-item bg-white mx-4 my-2 rounded">
-                                <a class="nav-link" href="#">S'inscrire</a>
+                                <a class="nav-link" href="{{ path('app_register') }}">S'inscrire</a>
                             </li>
                         {% endif %}
                     </ul>
