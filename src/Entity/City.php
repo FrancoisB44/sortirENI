@@ -43,6 +43,7 @@ class City
         $this->id = $id;
     }
 
+
     /**
      * @param mixed $nameCity
      */

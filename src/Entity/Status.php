@@ -10,6 +10,7 @@ use Doctrine\ORM\Mapping as ORM;
  */
 class Status
 {
+
     /**
      * @ORM\Id
      * @ORM\GeneratedValue

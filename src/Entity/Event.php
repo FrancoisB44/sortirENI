@@ -75,6 +75,7 @@ class Event
         $this->id = $id;
     }
 
+
     /**
      * @return mixed
      */

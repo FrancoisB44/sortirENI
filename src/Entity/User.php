@@ -75,6 +75,7 @@ class User
         $this->id = $id;
     }
 
+
     /**
      * @return mixed
      */
