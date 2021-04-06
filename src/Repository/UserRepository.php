@@ -27,7 +27,6 @@ class UserRepository extends ServiceEntityRepository
         return $req->getQuery()->getResult();
 
     }
-
     /*
      * Used to upgrade (rehash) the user's password automatically over time.
      */
