@@ -2,25 +2,25 @@
 
 namespace App\Repository;
 
-use App\Entity\Etat;
+use App\Entity\Status;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
 
 /**
- * @method Etat|null find($id, $lockMode = null, $lockVersion = null)
- * @method Etat|null findOneBy(array $criteria, array $orderBy = null)
- * @method Etat[]    findAll()
- * @method Etat[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
+ * @method Status|null find($id, $lockMode = null, $lockVersion = null)
+ * @method Status|null findOneBy(array $criteria, array $orderBy = null)
+ * @method Status[]    findAll()
+ * @method Status[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
  */
 class EtatRepository extends ServiceEntityRepository
 {
     public function __construct(ManagerRegistry $registry)
     {
-        parent::__construct($registry, Etat::class);
+        parent::__construct($registry, Status::class);
     }
 
     // /**
-    //  * @return Etat[] Returns an array of Etat objects
+    //  * @return Status[] Returns an array of Status objects
     //  */
     /*
     public function findByExampleField($value)
@@ -37,7 +37,7 @@ class EtatRepository extends ServiceEntityRepository
     */
 
     /*
-    public function findOneBySomeField($value): ?Etat
+    public function findOneBySomeField($value): ?Status
     {
         return $this->createQueryBuilder('e')
             ->andWhere('e.exampleField = :val')

@@ -8,7 +8,7 @@ use Doctrine\ORM\Mapping as ORM;
 /**
  * @ORM\Entity(repositoryClass=ParticipantRepository::class)
  */
-class Participant
+class User
 {
     /**
      * @ORM\Id
