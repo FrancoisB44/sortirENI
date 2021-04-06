@@ -53,7 +53,9 @@ class EventController extends AbstractController
     /**
      * @Route(path="/details/{id}", requirements={"id":"\d+"}, name="details", methods={"GET"})
      */
-    public function detailEvent($id, EventRepository $eventRepository) {
+    public function detailEvent(Request $request, EventRepository $eventRepository) {
+
+        $id = $request->get('id');
 
         $detailEvent = $eventRepository->find($id);
 

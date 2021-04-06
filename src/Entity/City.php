@@ -2,7 +2,7 @@
 
 namespace App\Entity;
 
-use App\Repository\VilleRepository;
+use App\Repository\CityRepository;
 use Doctrine\ORM\Mapping as ORM;
 
 /**

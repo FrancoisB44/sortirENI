@@ -13,10 +13,40 @@
                 <div class="col-md-6" style="align-items: center">
 
                     <h2>{{ detailEvent.nameEvent | capitalize }}</h2>
+                    <li>Début événement : {{ detailEvent.StartDateTime|date("d/m/Y") }} à {{ detailEvent.StartDateTime|date("H:i") }}</li>
                     <li>Description : {{ detailEvent.infoEvent }}</li>
-                    <li>Auteur : {{ detailEvent.duration }}</li>
+                    <li>Durée en minutes de l'événement : {{ detailEvent.duration }}</li>
+                    <br>
+
+                    {% set dateLimitRegistration = detailEvent.registrationDeadLine %}
+                    {% set dateLimitEvent = detailEvent.StartDateTime %}
+                    {% set today = "now" %}
+                    {% set differenceRegistration = date(dateLimitRegistration).diff(date(today)) %}
+                    {% set differenceEvent = date(dateLimitEvent).diff(date(today)) %}
+                    {% set leftDaysRegistration = differenceRegistration.days %}
+                    {% set leftDaysEvent = differenceEvent.days %}
+
+                    {% if date(dateLimitEvent) > date(today) %}
+                        {% if date(dateLimitRegistration) > date(today) %}
+                            <li>Inscription jusqu'au : {{ detailEvent.registrationDeadLine|date("d/m/Y") }} à {{ detailEvent.registrationDeadLine|date("H:i") }}</li>
+                            <p>(Il ne vous reste plus que {{ leftDaysRegistration }} jours pour vous inscrire)</p>
+                            <li>Plus que XX places disponibles sur {{ detailEvent.nbRegistrationsMax }}</li>
+{#                        {% elseif date(detailEvent.registrationDeadLine) < today %}#}
+                            {% else %}
+                            <li>Trop tard, inscriptions terminées depuis le {{ detailEvent.registrationDeadLine|date("d/m/Y") }} à {{ detailEvent.registrationDeadLine|date("H:i") }}. L'événement débutera sans vous dans {{ leftDaysEvent }} jours</li>
+                        {% endif %}
+                    {% else %}
+                        <li>Evenement terminé, dommage ! L'événement s'est déroulé sans vous le {{ detailEvent.StartDateTime|date("d/m/Y") }}</li>
+                    {% endif %}
 
 
+
+
+                    <br><br>
+
+                    <button type="submit" class="btn btn-success" onclick="history.go(-1)">
+                        Retour à la liste
+                    </button>
 
                 </div>
                 <div class="col-md-3">
