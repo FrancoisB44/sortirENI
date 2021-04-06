@@ -19,6 +19,29 @@ class UserRepository extends ServiceEntityRepository
         parent::__construct($registry, User::class);
     }
 
+
+    // methode pr recuperer  les utilisateurs en BDD
+    public function getAllUser(){
+        $req= $this->createQueryBuilder('user');
+        $req->where('user.id > 0');
+        return $req->getQuery()->getResult();
+
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
     // /**
     //  * @return User[] Returns an array of User objects
     //  */

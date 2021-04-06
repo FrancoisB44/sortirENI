@@ -17,10 +17,17 @@ class User
      */
     private $id;
 
+//    /**
+//     * @ORM\Column(type="string", length=255)
+//     */
+//    private $idUser;
+
     /**
-     * @ORM\Column(type="string", length=255)
+     * @ORM\Column (type="string", length=100)
      */
-    private $idUser;
+    private $pseudo;
+
+
 
     /**
      * @ORM\Column(type="string", length=255)
@@ -73,22 +80,36 @@ class User
         $this->id = $id;
     }
 
+//    /**
+//     * @return mixed
+//     */
+//    public function getIdUser()
+//    {
+//        return $this->idUser;
+//    }
+
+//    /**
+//     * @param mixed $idUser
+//     */
+//    public function setIdUser($idUser): void
+//    {
+//        $this->idUser = $idUser;
+//    }
     /**
      * @return mixed
      */
-    public function getIdUser()
+    public function getPseudo()
     {
-        return $this->idUser;
+        return $this->pseudo;
     }
 
     /**
-     * @param mixed $idUser
+     * @param mixed $pseudo
      */
-    public function setIdUser($idUser): void
+    public function setPseudo($pseudo): void
     {
-        $this->idUser = $idUser;
+        $this->pseudo = $pseudo;
     }
-
     /**
      * @return mixed
      */
