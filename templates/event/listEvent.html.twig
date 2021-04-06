@@ -1,0 +1,37 @@
+{% extends 'base.html.twig' %}
+
+{% block titlePage %}Liste des sorties{% endblock %}
+
+
+{% block container %}
+
+    <div class="row">
+        <div class="col-md-12">
+            <div class="row" >
+                <div class="col-md-3">
+                </div>
+                <div class="col-md-6" style="align-items: center">
+
+{#                    {%  if app.user %}#}
+{#                        <p style="text-align: center">Bienvenue {{ app.user.username }}</p>#}
+{#                    {% endif %}#}
+
+                    <h3 style="text-align: center">Liste des sorties</h3>
+
+                    <ul style="list-style-type: none">
+                        {% for event in listEvent %}
+                            <li>{{ event.nomSortie }} ({{ event.infosSortie }})</li>
+
+                        {% endfor %}
+                    </ul>
+
+                </div>
+                <div class="col-md-3">
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+{% endblock %}

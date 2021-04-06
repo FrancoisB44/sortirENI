@@ -6,155 +6,203 @@ use App\Repository\EventRepository;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * @ORM\Entity(repositoryClass=SortieRepository::class)
+ * @ORM\Entity(repositoryClass=EventRepository::class)
  */
 class Event
 {
     /**
      * @ORM\Id
-     * @ORM\GeneratedValue
-     * @ORM\Column(type="integer")
+     * @ORM\GeneratedValue(strategy="AUTO")
+     * @ORM\Column(name="id", type="integer")
      */
     private $id;
 
     /**
+     * @ORM\GeneratedValue(strategy="AUTO")
      * @ORM\Column(type="string", length=255)
      */
-    private $idSortie;
+    private $idEvent;
 
     /**
      * @ORM\Column(type="string", length=255)
      */
-    private $nomSortie;
+    private $nameEvent;
 
     /**
      * @ORM\Column(type="datetime")
      */
-    private $dateHeureDebut;
+    private $StartDateTime;
+
+    /**
+     * @ORM\Column(type="integer")
+     */
+    private $duration;
 
     /**
      * @ORM\Column(type="datetime")
      */
-    private $duree;
-
-    /**
-     * @ORM\Column(type="datetime")
-     */
-    private $dateLimiteInscription;
+    private $registrationDeadLine;
 
     /**
      * @ORM\Column(type="decimal", precision=10, scale=0, nullable=true)
      */
-    private $nbInscriptionsMax;
+    private $nbRegistrationsMax;
 
     /**
      * @ORM\Column(type="text", nullable=true)
      */
-    private $infosSortie;
+    private $infoEvent;
 
     /**
      * @ORM\Column(type="string", length=255)
      */
-    private $etat;
+    private $status;
 
-    public function getId(): ?int
+    /**
+     * @return mixed
+     */
+    public function getId()
     {
         return $this->id;
     }
 
-    public function getIdSortie(): ?string
+    /**
+     * @param mixed $id
+     */
+    public function setId($id): void
     {
-        return $this->idSortie;
+        $this->id = $id;
     }
 
-    public function setIdSortie(string $idSortie): self
+    /**
+     * @return mixed
+     */
+    public function getIdEvent()
     {
-        $this->idSortie = $idSortie;
-
-        return $this;
+        return $this->idEvent;
     }
 
-    public function getNomSortie(): ?string
+    /**
+     * @param mixed $idEvent
+     */
+    public function setIdEvent($idEvent): void
     {
-        return $this->nomSortie;
+        $this->idEvent = $idEvent;
     }
 
-    public function setNomSortie(string $nomSortie): self
+    /**
+     * @return mixed
+     */
+    public function getNameEvent()
     {
-        $this->nomSortie = $nomSortie;
-
-        return $this;
+        return $this->nameEvent;
     }
 
-    public function getDateHeureDebut(): ?\DateTimeInterface
+    /**
+     * @param mixed $nameEvent
+     */
+    public function setNameEvent($nameEvent): void
     {
-        return $this->dateHeureDebut;
+        $this->nameEvent = $nameEvent;
     }
 
-    public function setDateHeureDebut(\DateTimeInterface $dateHeureDebut): self
+    /**
+     * @return mixed
+     */
+    public function getStartDateTime()
     {
-        $this->dateHeureDebut = $dateHeureDebut;
-
-        return $this;
+        return $this->StartDateTime;
     }
 
-    public function getDuree(): ?\DateTimeInterface
+    /**
+     * @param mixed $StartDateTime
+     */
+    public function setStartDateTime($StartDateTime): void
     {
-        return $this->duree;
+        $this->StartDateTime = $StartDateTime;
     }
 
-    public function setDuree(\DateTimeInterface $duree): self
+    /**
+     * @return mixed
+     */
+    public function getDuration()
     {
-        $this->duree = $duree;
-
-        return $this;
+        return $this->duration;
     }
 
-    public function getDateLimiteInscription(): ?\DateTimeInterface
+    /**
+     * @param mixed $duration
+     */
+    public function setDuration($duration): void
     {
-        return $this->dateLimiteInscription;
+        $this->duration = $duration;
     }
 
-    public function setDateLimiteInscription(\DateTimeInterface $dateLimiteInscription): self
+    /**
+     * @return mixed
+     */
+    public function getRegistrationDeadLine()
     {
-        $this->dateLimiteInscription = $dateLimiteInscription;
-
-        return $this;
+        return $this->registrationDeadLine;
     }
 
-    public function getNbInscriptionsMax(): ?string
+    /**
+     * @param mixed $registrationDeadLine
+     */
+    public function setRegistrationDeadLine($registrationDeadLine): void
     {
-        return $this->nbInscriptionsMax;
+        $this->registrationDeadLine = $registrationDeadLine;
     }
 
-    public function setNbInscriptionsMax(?string $nbInscriptionsMax): self
+    /**
+     * @return mixed
+     */
+    public function getNbRegistrationsMax()
     {
-        $this->nbInscriptionsMax = $nbInscriptionsMax;
-
-        return $this;
+        return $this->nbRegistrationsMax;
     }
 
-    public function getInfosSortie(): ?string
+    /**
+     * @param mixed $nbRegistrationsMax
+     */
+    public function setNbRegistrationsMax($nbRegistrationsMax): void
     {
-        return $this->infosSortie;
+        $this->nbRegistrationsMax = $nbRegistrationsMax;
     }
 
-    public function setInfosSortie(?string $infosSortie): self
+    /**
+     * @return mixed
+     */
+    public function getInfoEvent()
     {
-        $this->infosSortie = $infosSortie;
-
-        return $this;
+        return $this->infoEvent;
     }
 
-    public function getEtat(): ?string
+    /**
+     * @param mixed $infoEvent
+     */
+    public function setInfoEvent($infoEvent): void
     {
-        return $this->etat;
+        $this->infoEvent = $infoEvent;
     }
 
-    public function setEtat(string $etat): self
+    /**
+     * @return mixed
+     */
+    public function getStatus()
     {
-        $this->etat = $etat;
-
-        return $this;
+        return $this->status;
     }
+
+    /**
+     * @param mixed $status
+     */
+    public function setStatus($status): void
+    {
+        $this->status = $status;
+    }
+
+
+
+
 }

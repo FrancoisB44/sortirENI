@@ -1,0 +1,20 @@
+{% extends 'base.html.twig' %}
+
+{% block titlePage %}Ajouter une sortie{% endblock %}
+
+
+{% block container %}
+
+    {{ form_start(formEvent) }}
+
+    {{ form_widget(formEvent) }}
+    <button>Ajouter</button>
+
+    {{ form_end(formEvent) }}
+
+
+
+{% endblock %}
+
+
+

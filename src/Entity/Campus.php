@@ -25,34 +25,56 @@ class Campus
     /**
      * @ORM\Column(type="string", length=255)
      */
-    private $nomCampus;
+    private $nameCampus;
 
-    public function getId(): ?int
+    /**
+     * @return mixed
+     */
+    public function getId()
     {
         return $this->id;
     }
 
-    public function getIdCampus(): ?string
+    /**
+     * @param mixed $id
+     */
+    public function setId($id): void
+    {
+        $this->id = $id;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getIdCampus()
     {
         return $this->idCampus;
     }
 
-    public function setIdCampus(string $idCampus): self
+    /**
+     * @param mixed $idCampus
+     */
+    public function setIdCampus($idCampus): void
     {
         $this->idCampus = $idCampus;
-
-        return $this;
     }
 
-    public function getNomCampus(): ?string
+    /**
+     * @return mixed
+     */
+    public function getNameCampus()
     {
-        return $this->nomCampus;
+        return $this->nameCampus;
     }
 
-    public function setNomCampus(string $nomCampus): self
+    /**
+     * @param mixed $nameCampus
+     */
+    public function setNameCampus($nameCampus): void
     {
-        $this->nomCampus = $nomCampus;
-
-        return $this;
+        $this->nameCampus = $nameCampus;
     }
+
+
+
 }

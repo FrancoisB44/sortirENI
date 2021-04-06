@@ -6,7 +6,7 @@ use App\Repository\ParticipantRepository;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * @ORM\Entity(repositoryClass=ParticipantRepository::class)
+ * @ORM\Entity(repositoryClass=UserRepository::class)
  */
 class User
 {
@@ -20,22 +20,22 @@ class User
     /**
      * @ORM\Column(type="string", length=255)
      */
-    private $idParticipant;
+    private $idUser;
 
     /**
      * @ORM\Column(type="string", length=255)
      */
-    private $nom;
+    private $nameUser;
 
     /**
      * @ORM\Column(type="string", length=255)
      */
-    private $prenom;
+    private $firstNameUser;
 
     /**
      * @ORM\Column(type="decimal", precision=10, scale=0, nullable=true)
      */
-    private $telephone;
+    private $phoneNumber;
 
     /**
      * @ORM\Column(type="string", length=255)
@@ -45,116 +45,164 @@ class User
     /**
      * @ORM\Column(type="string", length=255)
      */
-    private $motPasse;
+    private $password;
 
     /**
      * @ORM\Column(type="boolean")
      */
-    private $administrateur;
+    private $admin;
 
     /**
      * @ORM\Column(type="boolean")
      */
-    private $actif;
+    private $active;
 
-    public function getId(): ?int
+    /**
+     * @return mixed
+     */
+    public function getId()
     {
         return $this->id;
     }
 
-    public function getIdParticipant(): ?string
+    /**
+     * @param mixed $id
+     */
+    public function setId($id): void
     {
-        return $this->idParticipant;
+        $this->id = $id;
     }
 
-    public function setIdParticipant(string $idParticipant): self
+    /**
+     * @return mixed
+     */
+    public function getIdUser()
     {
-        $this->idParticipant = $idParticipant;
-
-        return $this;
+        return $this->idUser;
     }
 
-    public function getNom(): ?string
+    /**
+     * @param mixed $idUser
+     */
+    public function setIdUser($idUser): void
     {
-        return $this->nom;
+        $this->idUser = $idUser;
     }
 
-    public function setNom(string $nom): self
+    /**
+     * @return mixed
+     */
+    public function getNameUser()
     {
-        $this->nom = $nom;
-
-        return $this;
+        return $this->nameUser;
     }
 
-    public function getPrenom(): ?string
+    /**
+     * @param mixed $nameUser
+     */
+    public function setNameUser($nameUser): void
     {
-        return $this->prenom;
+        $this->nameUser = $nameUser;
     }
 
-    public function setPrenom(string $prenom): self
+    /**
+     * @return mixed
+     */
+    public function getFirstNameUser()
     {
-        $this->prenom = $prenom;
-
-        return $this;
+        return $this->firstNameUser;
     }
 
-    public function getTelephone(): ?string
+    /**
+     * @param mixed $firstNameUser
+     */
+    public function setFirstNameUser($firstNameUser): void
     {
-        return $this->telephone;
+        $this->firstNameUser = $firstNameUser;
     }
 
-    public function setTelephone(?string $telephone): self
+    /**
+     * @return mixed
+     */
+    public function getPhoneNumber()
     {
-        $this->telephone = $telephone;
-
-        return $this;
+        return $this->phoneNumber;
     }
 
-    public function getMail(): ?string
+    /**
+     * @param mixed $phoneNumber
+     */
+    public function setPhoneNumber($phoneNumber): void
+    {
+        $this->phoneNumber = $phoneNumber;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getMail()
     {
         return $this->mail;
     }
 
-    public function setMail(string $mail): self
+    /**
+     * @param mixed $mail
+     */
+    public function setMail($mail): void
     {
         $this->mail = $mail;
-
-        return $this;
     }
 
-    public function getMotPasse(): ?string
+    /**
+     * @return mixed
+     */
+    public function getPassword()
     {
-        return $this->motPasse;
+        return $this->password;
     }
 
-    public function setMotPasse(string $motPasse): self
+    /**
+     * @param mixed $password
+     */
+    public function setPassword($password): void
     {
-        $this->motPasse = $motPasse;
-
-        return $this;
+        $this->password = $password;
     }
 
-    public function getAdministrateur(): ?bool
+    /**
+     * @return mixed
+     */
+    public function getAdmin()
     {
-        return $this->administrateur;
+        return $this->admin;
     }
 
-    public function setAdministrateur(bool $administrateur): self
+    /**
+     * @param mixed $admin
+     */
+    public function setAdmin($admin): void
     {
-        $this->administrateur = $administrateur;
-
-        return $this;
+        $this->admin = $admin;
     }
 
-    public function getActif(): ?bool
+    /**
+     * @return mixed
+     */
+    public function getActive()
     {
-        return $this->actif;
+        return $this->active;
     }
 
-    public function setActif(bool $actif): self
+    /**
+     * @param mixed $active
+     */
+    public function setActive($active): void
     {
-        $this->actif = $actif;
-
-        return $this;
+        $this->active = $active;
     }
+
+
+
+
+
 }

@@ -6,7 +6,7 @@ use App\Repository\VilleRepository;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * @ORM\Entity(repositoryClass=VilleRepository::class)
+ * @ORM\Entity(repositoryClass=CityRepository::class)
  */
 class City
 {
@@ -20,56 +20,83 @@ class City
     /**
      * @ORM\Column(type="string", length=255)
      */
-    private $idVille;
+    private $idCity;
 
     /**
      * @ORM\Column(type="string", length=255)
      */
-    private $nomVille;
+    private $nameCity;
 
     /**
      * @ORM\Column(type="decimal", precision=5, scale=0)
      */
-    private $codePostal;
+    private $zipCode;
 
-    public function getId(): ?int
+    /**
+     * @return mixed
+     */
+    public function getId()
     {
         return $this->id;
     }
 
-    public function getIdVille(): ?string
+    /**
+     * @param mixed $id
+     */
+    public function setId($id): void
     {
-        return $this->idVille;
+        $this->id = $id;
     }
 
-    public function setIdVille(string $idVille): self
+    /**
+     * @return mixed
+     */
+    public function getIdCity()
     {
-        $this->idVille = $idVille;
-
-        return $this;
+        return $this->idCity;
     }
 
-    public function getNomVille(): ?string
+    /**
+     * @param mixed $idCity
+     */
+    public function setIdCity($idCity): void
     {
-        return $this->nomVille;
+        $this->idCity = $idCity;
     }
 
-    public function setNomVille(string $nomVille): self
+    /**
+     * @return mixed
+     */
+    public function getNameCity()
     {
-        $this->nomVille = $nomVille;
-
-        return $this;
+        return $this->nameCity;
     }
 
-    public function getCodePostal(): ?string
+    /**
+     * @param mixed $nameCity
+     */
+    public function setNameCity($nameCity): void
     {
-        return $this->codePostal;
+        $this->nameCity = $nameCity;
     }
 
-    public function setCodePostal(string $codePostal): self
+    /**
+     * @return mixed
+     */
+    public function getZipCode()
     {
-        $this->codePostal = $codePostal;
-
-        return $this;
+        return $this->zipCode;
     }
+
+    /**
+     * @param mixed $zipCode
+     */
+    public function setZipCode($zipCode): void
+    {
+        $this->zipCode = $zipCode;
+    }
+
+
+
+
 }

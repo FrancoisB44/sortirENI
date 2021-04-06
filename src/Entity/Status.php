@@ -6,7 +6,7 @@ use App\Repository\EtatRepository;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * @ORM\Entity(repositoryClass=EtatRepository::class)
+ * @ORM\Entity(repositoryClass=StatusRepository::class)
  */
 class Status
 {
@@ -20,39 +20,62 @@ class Status
     /**
      * @ORM\Column(type="string", length=255)
      */
-    private $idEtat;
+    private $idStatus;
 
     /**
      * @ORM\Column(type="string", length=255)
      */
-    private $libelle;
+    private $wording;
 
-    public function getId(): ?int
+    /**
+     * @return mixed
+     */
+    public function getId()
     {
         return $this->id;
     }
 
-    public function getIdEtat(): ?string
+    /**
+     * @param mixed $id
+     */
+    public function setId($id): void
     {
-        return $this->idEtat;
+        $this->id = $id;
     }
 
-    public function setIdEtat(string $idEtat): self
+    /**
+     * @return mixed
+     */
+    public function getIdStatus()
     {
-        $this->idEtat = $idEtat;
-
-        return $this;
+        return $this->idStatus;
     }
 
-    public function getLibelle(): ?string
+    /**
+     * @param mixed $idStatus
+     */
+    public function setIdStatus($idStatus): void
     {
-        return $this->libelle;
+        $this->idStatus = $idStatus;
     }
 
-    public function setLibelle(string $libelle): self
+    /**
+     * @return mixed
+     */
+    public function getWording()
     {
-        $this->libelle = $libelle;
-
-        return $this;
+        return $this->wording;
     }
+
+    /**
+     * @param mixed $wording
+     */
+    public function setWording($wording): void
+    {
+        $this->wording = $wording;
+    }
+
+
+
+
 }

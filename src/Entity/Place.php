@@ -6,7 +6,7 @@ use App\Repository\PlaceRepository;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * @ORM\Entity(repositoryClass=LieuRepository::class)
+ * @ORM\Entity(repositoryClass=PlaceRepository::class)
  */
 class Place
 {
@@ -20,17 +20,17 @@ class Place
     /**
      * @ORM\Column(type="string", length=255)
      */
-    private $idLieu;
+    private $idPlace;
 
     /**
      * @ORM\Column(type="string", length=255)
      */
-    private $nomLieu;
+    private $namePlace;
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
      */
-    private $rue;
+    private $street;
 
     /**
      * @ORM\Column(type="float", nullable=true)
@@ -42,68 +42,103 @@ class Place
      */
     private $longitude;
 
-    public function getId(): ?int
+    /**
+     * @return mixed
+     */
+    public function getId()
     {
         return $this->id;
     }
 
-    public function getIdLieu(): ?string
+    /**
+     * @param mixed $id
+     */
+    public function setId($id): void
     {
-        return $this->idLieu;
+        $this->id = $id;
     }
 
-    public function setIdLieu(string $idLieu): self
+    /**
+     * @return mixed
+     */
+    public function getIdPlace()
     {
-        $this->idLieu = $idLieu;
-
-        return $this;
+        return $this->idPlace;
     }
 
-    public function getNomLieu(): ?string
+    /**
+     * @param mixed $idPlace
+     */
+    public function setIdPlace($idPlace): void
     {
-        return $this->nomLieu;
+        $this->idPlace = $idPlace;
     }
 
-    public function setNomLieu(string $nomLieu): self
+    /**
+     * @return mixed
+     */
+    public function getNamePlace()
     {
-        $this->nomLieu = $nomLieu;
-
-        return $this;
+        return $this->namePlace;
     }
 
-    public function getRue(): ?string
+    /**
+     * @param mixed $namePlace
+     */
+    public function setNamePlace($namePlace): void
     {
-        return $this->rue;
+        $this->namePlace = $namePlace;
     }
 
-    public function setRue(?string $rue): self
+    /**
+     * @return mixed
+     */
+    public function getStreet()
     {
-        $this->rue = $rue;
-
-        return $this;
+        return $this->street;
     }
 
-    public function getLatitude(): ?float
+    /**
+     * @param mixed $street
+     */
+    public function setStreet($street): void
+    {
+        $this->street = $street;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getLatitude()
     {
         return $this->latitude;
     }
 
-    public function setLatitude(?float $latitude): self
+    /**
+     * @param mixed $latitude
+     */
+    public function setLatitude($latitude): void
     {
         $this->latitude = $latitude;
-
-        return $this;
     }
 
-    public function getLongitude(): ?float
+    /**
+     * @return mixed
+     */
+    public function getLongitude()
     {
         return $this->longitude;
     }
 
-    public function setLongitude(?float $longitude): self
+    /**
+     * @param mixed $longitude
+     */
+    public function setLongitude($longitude): void
     {
         $this->longitude = $longitude;
-
-        return $this;
     }
+
+
+
+
 }
