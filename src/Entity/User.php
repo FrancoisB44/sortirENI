@@ -17,11 +17,6 @@ class User
      */
     private $id;
 
-//    /**
-//     * @ORM\Column(type="string", length=255)
-//     */
-//    private $idUser;
-
     /**
      * @ORM\Column (type="string", length=100)
      */
@@ -80,21 +75,6 @@ class User
         $this->id = $id;
     }
 
-//    /**
-//     * @return mixed
-//     */
-//    public function getIdUser()
-//    {
-//        return $this->idUser;
-//    }
-
-//    /**
-//     * @param mixed $idUser
-//     */
-//    public function setIdUser($idUser): void
-//    {
-//        $this->idUser = $idUser;
-//    }
     /**
      * @return mixed
      */
