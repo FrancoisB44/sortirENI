@@ -1,0 +1,25 @@
+/* Css pr base.html.twig*/
+body{
+    display: flex;
+
+}
+#bkgd{
+    background-image: url('/img/bgd.png');
+    background-repeat:no-repeat;
+    background-size:cover;
+    background-attachment: scroll;
+    background-position: top;
+
+}
+
+.bg {
+    background-color: #1f5f8f !important;
+    margin: auto;
+}
+.bg-succ {
+    background-color: #1f5f8f !important;
+    margin: auto;
+}
+#main{
+    padding: 15% 0;
+}
