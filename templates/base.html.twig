@@ -29,7 +29,7 @@
                         </li>
                         {% if app.user %}
                             <li class="nav-item">
-                                <a class="nav-link bg-white mx-4 my-2 rounded" href="#">My Profile</a>
+                                <a class="nav-link bg-white mx-4 my-2 rounded" href="{{ path('user_display_user', {"id":app.user.id}) }}">Mon profil</a>
                             </li>
                             <li class="nav-item">
                                 <a class="nav-link bg-white mx-4 my-2 rounded" href="{{ path('create') }}">Create Event</a>
