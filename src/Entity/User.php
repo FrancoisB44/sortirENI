@@ -26,7 +26,6 @@ class User implements UserInterface
     private $pseudo;
 
 
-
     /**
      * @ORM\Column(type="string", length=255)
      */
@@ -47,11 +46,15 @@ class User implements UserInterface
      */
     private $mail;
 
-    /**
+    /**@var string The hashed password
      * @ORM\Column(type="string", length=255)
      */
     private $password;
 
+    /**
+     * @ORM\Column(type="boolean")
+     */
+    private $roles = [];
     /**
      * @ORM\Column(type="boolean")
      */
@@ -94,6 +97,7 @@ class User implements UserInterface
     {
         $this->pseudo = $pseudo;
     }
+
     /**
      * @return mixed
      */
@@ -144,6 +148,7 @@ class User implements UserInterface
 
     /**
      * @return mixed
+     * @see UserInterface
      */
     public function getMail()
     {
@@ -206,24 +211,68 @@ class User implements UserInterface
         $this->active = $active;
     }
 
-
+    /**
+     * @see UserInterface
+     */
     public function getRoles()
     {
-        // TODO: Implement getRoles() method.
+        {
+            $roles = $this->roles;
+            // guarantee every user at least has ROLE_USER
+            $roles[] = 'ROLE_USER';// on ajoute le role user ds le tableau de roles et un retourne ce tab avc la nvlle valeur
+            return array_unique($roles);
+        }
     }
 
-    public function getSalt()
+    public function setRoles(array $roles): self
     {
-        // TODO: Implement getSalt() method.
+        $this->roles = $roles;
+
+        return $this;
     }
 
-    public function getUsername()
+    /**
+     * Returning a salt is only needed, if you are not using a modern
+     * hashing algorithm (e.g. bcrypt or sodium) in your security.yaml.
+     *
+     * @see UserInterface
+     */
+    public function getSalt(): ?string
     {
-        // TODO: Implement getUsername() method.
+        return null;
     }
-
+//    public function getUsername()
+//    {
+//
+//    }
+    /**
+     * @see UserInterface
+     */
     public function eraseCredentials()
     {
-        // TODO: Implement eraseCredentials() method.
+        // If you store any temporary, sensitive data on the user, clear it here
+        // $this->plainPassword = null;
+    }
+
+    /**
+     * A visual identifier that represents this user.
+     *
+     * @see UserInterface
+     */
+    public function getUsername()
+    {
+        return (string)$this->pseudo;
+    }
+
+    public function setUsername(string $username): self
+    {
+        $this->username = $username;
+
+        return $this;
+    }
+
+    public function __toString()
+    {
+        return $this->pseudo;
     }
 }

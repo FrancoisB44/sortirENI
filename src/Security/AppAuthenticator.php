@@ -88,6 +88,8 @@ class AppAuthenticator extends AbstractFormLoginAuthenticator implements Passwor
         // If there are no credentials to check, you can just return true
         //throw new \Exception('TODO: check the credentials inside '.__FILE__);
     }
+
+
     public function getPassword($credentials): ?string
     {
         return $credentials['password'];
