@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\UserRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Security\Core\User\UserInterface;
@@ -64,6 +66,27 @@ class User implements UserInterface
      * @ORM\Column(type="boolean")
      */
     private $active;
+
+    /**
+     * @ORM\ManyToMany(targetEntity=Event::class, inversedBy="users")
+     */
+    private $inscription;
+
+    /**
+     * @ORM\OneToMany(targetEntity=Event::class, mappedBy="user")
+     */
+    private $planner;
+
+    /**
+     * @ORM\ManyToOne(targetEntity=Campus::class, inversedBy="users")
+     */
+    private $campus;
+
+    public function __construct()
+    {
+        $this->inscription = new ArrayCollection();
+        $this->planner = new ArrayCollection();
+    }
 
     /**
      * @return mixed
@@ -229,6 +252,7 @@ class User implements UserInterface
     public function setRoles(array $roles): self
     {
         $this->roles = $roles;
+
         return $this;
     }
 
@@ -275,5 +299,71 @@ class User implements UserInterface
     public function __toString()
     {
         return $this->pseudo;
+    }
+
+    /**
+     * @return Collection|Event[]
+     */
+    public function getInscription(): Collection
+    {
+        return $this->inscription;
+    }
+
+    public function addInscription(Event $inscription): self
+    {
+        if (!$this->inscription->contains($inscription)) {
+            $this->inscription[] = $inscription;
+        }
+
+        return $this;
+    }
+
+    public function removeInscription(Event $inscription): self
+    {
+        $this->inscription->removeElement($inscription);
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Event[]
+     */
+    public function getPlanner(): Collection
+    {
+        return $this->planner;
+    }
+
+    public function addPlanner(Event $planner): self
+    {
+        if (!$this->planner->contains($planner)) {
+            $this->planner[] = $planner;
+            $planner->setUser($this);
+        }
+
+        return $this;
+    }
+
+    public function removePlanner(Event $planner): self
+    {
+        if ($this->planner->removeElement($planner)) {
+            // set the owning side to null (unless already changed)
+            if ($planner->getUser() === $this) {
+                $planner->setUser(null);
+            }
+        }
+
+        return $this;
+    }
+
+    public function getCampus(): ?Campus
+    {
+        return $this->campus;
+    }
+
+    public function setCampus(?Campus $campus): self
+    {
+        $this->campus = $campus;
+
+        return $this;
     }
 }

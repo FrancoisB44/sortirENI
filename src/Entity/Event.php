@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\EventRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
 
@@ -54,11 +56,36 @@ class Event
      */
     private $infoEvent;
 
+
     /**
-     * @Assert\NotBlank(message="Renseignez le status (ouvert, archivé, etc")
-     * @ORM\Column(type="string", length=255)
+     * @ORM\ManyToOne(targetEntity=Place::class, inversedBy="events")
+     */
+    private $place;
+
+    /**
+     * @ORM\ManyToOne(targetEntity=Status::class, inversedBy="event")
      */
     private $status;
+
+    /**
+     * @ORM\ManyToMany(targetEntity=User::class, mappedBy="inscription")
+     */
+    private $users;
+
+    /**
+     * @ORM\ManyToOne(targetEntity=User::class, inversedBy="planner")
+     */
+    private $user;
+
+    /**
+     * @ORM\ManyToOne(targetEntity=Campus::class, inversedBy="event")
+     */
+    private $campus;
+
+    public function __construct()
+    {
+        $this->users = new ArrayCollection();
+    }
 
     /**
      * @return mixed
@@ -173,20 +200,80 @@ class Event
         $this->infoEvent = $infoEvent;
     }
 
-    /**
-     * @return mixed
-     */
-    public function getStatus()
+
+    public function getPlace(): ?Place
+    {
+        return $this->place;
+    }
+
+    public function setPlace(?Place $place): self
+    {
+        $this->place = $place;
+
+        return $this;
+    }
+
+    public function getStatus(): ?Status
     {
         return $this->status;
     }
 
-    /**
-     * @param mixed $status
-     */
-    public function setStatus($status): void
+    public function setStatus(?Status $status): self
     {
         $this->status = $status;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|User[]
+     */
+    public function getUsers(): Collection
+    {
+        return $this->users;
+    }
+
+    public function addUser(User $user): self
+    {
+        if (!$this->users->contains($user)) {
+            $this->users[] = $user;
+            $user->addInscription($this);
+        }
+
+        return $this;
+    }
+
+    public function removeUser(User $user): self
+    {
+        if ($this->users->removeElement($user)) {
+            $user->removeInscription($this);
+        }
+
+        return $this;
+    }
+
+    public function getUser(): ?User
+    {
+        return $this->user;
+    }
+
+    public function setUser(?User $user): self
+    {
+        $this->user = $user;
+
+        return $this;
+    }
+
+    public function getCampus(): ?Campus
+    {
+        return $this->campus;
+    }
+
+    public function setCampus(?Campus $campus): self
+    {
+        $this->campus = $campus;
+
+        return $this;
     }
 
 

@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\CityRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -26,6 +28,16 @@ class City
      * @ORM\Column(type="decimal", precision=5, scale=0)
      */
     private $zipCode;
+
+    /**
+     * @ORM\OneToMany(targetEntity=Place::class, mappedBy="city")
+     */
+    private $places;
+
+    public function __construct()
+    {
+        $this->places = new ArrayCollection();
+    }
 
     /**
      * @return mixed
@@ -66,6 +78,36 @@ class City
     public function setZipCode($zipCode): void
     {
         $this->zipCode = $zipCode;
+    }
+
+    /**
+     * @return Collection|Place[]
+     */
+    public function getPlaces(): Collection
+    {
+        return $this->places;
+    }
+
+    public function addPlace(Place $place): self
+    {
+        if (!$this->places->contains($place)) {
+            $this->places[] = $place;
+            $place->setCity($this);
+        }
+
+        return $this;
+    }
+
+    public function removePlace(Place $place): self
+    {
+        if ($this->places->removeElement($place)) {
+            // set the owning side to null (unless already changed)
+            if ($place->getCity() === $this) {
+                $place->setCity(null);
+            }
+        }
+
+        return $this;
     }
 
 
