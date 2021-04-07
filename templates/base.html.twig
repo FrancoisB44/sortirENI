@@ -8,7 +8,8 @@
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/js/bootstrap.bundle.min.js"
                 integrity="sha384-JEW9xMcG8R+pH31jmWH6WWP0WintQrMb4s7ZOdauHnUtxwoG2vI5DkLtS3qm9Ekf"
                 crossorigin="anonymous"></script>
-
+    </head>
+    <body>
         <div class="container-fluid ">
             <header class="row text-light bg-success d-flex align-items-center mb-5 p-5 shadow-lg">
                 <div class="col-lg-4 col-sm-12 d-flex justify-content-center">
@@ -29,6 +30,12 @@
                         {% if app.user %}
                             <li class="nav-item">
                                 <a class="nav-link bg-white mx-4 my-2 rounded" href="#">My Profile</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link bg-white mx-4 my-2 rounded" href="{{ path('create') }}">Create Event</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link bg-white mx-4 my-2 rounded" href="{{ path('list') }}">Event's List</a>
                             </li>
                             <li class="nav-item">
                                 <a class="nav-link bg-white mx-4 my-2 rounded" href="{{ path('app_logout') }}">LogOut</a>
@@ -74,5 +81,5 @@
 
 
 
-
+    </body>
 </html>

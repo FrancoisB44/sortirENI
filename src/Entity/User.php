@@ -46,7 +46,7 @@ class User implements UserInterface
      */
     private $mail;
 
-    /**@var string The hashed password
+    /**
      * @ORM\Column(type="string", length=255)
      */
     private $password;
@@ -166,17 +166,19 @@ class User implements UserInterface
     /**
      * @return mixed
      */
-    public function getPassword()
+    public function getPassword(): string
     {
-        return $this->password;
+        return (string)$this->password;
     }
 
     /**
      * @param mixed $password
      */
-    public function setPassword($password): void
+    public function setPassword($password): self
     {
         $this->password = $password;
+
+        return $this;
     }
 
     /**
@@ -214,7 +216,7 @@ class User implements UserInterface
     /**
      * @see UserInterface
      */
-    public function getRoles()
+    public function getRoles(): array
     {
         {
             $roles = $this->roles;
@@ -227,7 +229,6 @@ class User implements UserInterface
     public function setRoles(array $roles): self
     {
         $this->roles = $roles;
-
         return $this;
     }
 
