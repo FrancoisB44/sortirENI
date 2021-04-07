@@ -1,0 +1,24 @@
+{%  extends('base.html.twig') %}
+{% block titlePage %}Mon Profil{% endblock %}
+
+
+{% block container  %}
+    <row class="d-flex justify-content-center align-items-center">
+        <div class="m-4">
+            <p class="text danger border"> IMAGE</p>
+        </div>
+        <div class="m-4 ">
+            <ul class="list-group ">
+                <h3>{{ profile.pseudo }}</h3>
+                <li class="list-group-item"> Prénom: {{ profile.firstNameUser }}</li>
+                <li class="list-group-item"> Nom: {{ profile.nameUser }}</li>
+                <li class="list-group-item"> Téléphone: {{ profile.phoneNumber }}</li>
+                <li class="list-group-item"> Email: {{ profile.mail }}</li>
+                <li class="list-group-item text-danger">Campus: CAMPUS </li>
+            </ul>
+                <a href="{{ path('user_modify_user', {'id': profile.id }) }}" class="btn-success m-2">Modifier</a>
+        </div>
+    </row>
+
+
+{% endblock %}
