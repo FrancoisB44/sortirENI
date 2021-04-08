@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use App\Entity\Event;
 use App\Entity\Place;
+use App\Entity\User;
 use App\Form\EventType;
 use App\Repository\EventRepository;
 use Doctrine\ORM\EntityManagerInterface;
@@ -29,9 +30,10 @@ class EventController extends AbstractController
         $formEvent->handleRequest($request);
 
         if ($formEvent->isSubmitted() && $formEvent->isValid()) {
+//            $event->setUser($this->getUser()->getUsername());
+            $event->setUser($this->getUser());
 
             $entityManager->persist($event);
-
             $entityManager->flush();
 
             $this->addFlash('success', 'Sortie ajoutée !');

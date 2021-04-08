@@ -16,6 +16,7 @@
                     <li>Début événement : {{ detailEvent.StartDateTime|date("d/m/Y") }} à {{ detailEvent.StartDateTime|date("H:i") }}</li>
                     <li>Description : {{ detailEvent.infoEvent }}</li>
                     <li>Durée en minutes de l'événement : {{ detailEvent.duration }}</li>
+                    <li>Evenement organisé par : {{ detailEvent.user }}</li>
                     <br>
 
                     {% set dateLimitRegistration = detailEvent.registrationDeadLine %}
