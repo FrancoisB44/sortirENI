@@ -22,7 +22,6 @@
                     <br>
 
 
-
                     {% set dateLimitRegistration = detailEvent.registrationDeadLine %}
                     {% set dateLimitEvent = detailEvent.StartDateTime %}
                     {% set today = "now" %}
@@ -43,9 +42,6 @@
                     {% else %}
                         <li>L'événement s'est déroulé sans vous le {{ detailEvent.StartDateTime|date("d/m/Y") }}</li>
                     {% endif %}
-
-
-
 
                     <br><br>
 
