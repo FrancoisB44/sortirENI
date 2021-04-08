@@ -1,0 +1,40 @@
+{% extends 'base.html.twig' %}
+
+{% block titlePage %}Ajouter un campus{% endblock %}
+
+
+{% block container %}
+
+    <div class="row">
+    <div class="col-md-12">
+
+    {{ form_start(formCampus) }}
+
+    <div class="row">
+    <div class="col-md-6" >
+
+        <label>Nom du Campus : </label>
+        {{ form_widget(formCampus.nameCampus) }}
+        <br><br>
+
+
+    </div>
+
+    <div class="col-md-6" >
+
+
+
+
+    </div>
+
+
+
+
+    {{ form_widget(formCampus) }}
+    <button>Ajouter</button>
+
+    {{ form_end(formCampus) }}
+
+
+
+{% endblock %}

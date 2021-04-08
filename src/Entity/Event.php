@@ -220,7 +220,7 @@ class Event
 
     public function setStatus(?Status $status): self
     {
-        $this->status = $status;
+        $this-> status = $status;
 
         return $this;
     }
@@ -275,6 +275,7 @@ class Event
 
         return $this;
     }
+
 
 
 

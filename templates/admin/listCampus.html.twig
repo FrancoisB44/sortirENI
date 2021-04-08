@@ -1,0 +1,41 @@
+{% extends 'base.html.twig' %}
+
+{% block titlePage %}Liste des sorties{% endblock %}
+
+
+{% block container %}
+
+    <div class="row">
+        <div class="col-md-12">
+            <div class="row" >
+                <div class="col-md-3">
+                </div>
+                <div class="col-md-6" style="align-items: center">
+
+                    {#                    {%  if app.user %}#}
+                    {#                        <p style="text-align: center">Bienvenue {{ app.user.username }}</p>#}
+                    {#                    {% endif %}#}
+
+                    <h3 style="text-align: center">Liste des campus</h3>
+
+                    <ul style="list-style-type: none">
+                        {% for campus in listCampus %}
+                            <li><a href="{{ url('list_campus', {"id" : campus.id }) }}">{{ campus.nameCampus }}</a></li>
+
+                        {% endfor %}
+                    </ul>
+
+                    <button type="submit" class="btn btn-success" onclick="history.go(-1)">
+                        Retour
+                    </button>
+
+                </div>
+                <div class="col-md-3">
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+{% endblock %}

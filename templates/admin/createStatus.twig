@@ -1,0 +1,40 @@
+{% extends 'base.html.twig' %}
+
+{% block titlePage %}Ajouter un etat d'événement{% endblock %}
+
+
+{% block container %}
+
+    <div class="row">
+    <div class="col-md-12">
+
+    {{ form_start(formStatus) }}
+
+    <div class="row">
+    <div class="col-md-6" >
+
+        <label>Ajouter un état : </label>
+        {{ form_widget(formStatus.wording) }}
+        <br><br>
+
+
+    </div>
+
+    <div class="col-md-6" >
+
+
+
+
+    </div>
+
+
+
+
+    {{ form_widget(formStatus) }}
+    <button>Ajouter</button>
+
+    {{ form_end(formStatus) }}
+
+
+
+{% endblock %}

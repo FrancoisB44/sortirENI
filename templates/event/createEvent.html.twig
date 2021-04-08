@@ -14,7 +14,7 @@
             <div class="col-md-6" >
 
                 <label>Intitulé sortie : </label>
-                    {{ form_widget(formEvent.nameEvent) }}
+                {{ form_widget(formEvent.nameEvent) }}
                 <br><br>
 
                 <label>Début de l'évenement : </label><br>
@@ -29,11 +29,6 @@
                 {{ form_widget(formEvent.registrationDeadLine) }}
                 <br><br>
 
-
-            </div>
-
-            <div class="col-md-6" >
-
                 <label>Nombre maximum de participants : </label><br>
                 {{ form_widget(formEvent.nbRegistrationsMax) }}
                 <br><br>
@@ -42,9 +37,25 @@
                 {{ form_widget(formEvent.infoEvent) }}
                 <br><br>
 
+
+            </div>
+
+            <div class="col-md-6" >
+
+                <label>Campus : </label>
+                {{ form_widget(formEvent.campus) }}
+                <br><br>
+
                 <label>Status : </label>
                 {{ form_widget(formEvent.status) }}
                 <br><br>
+
+                <label>Place : </label>
+                {{ form_widget(formEvent.place) }}
+                <br><br>
+
+
+
             </div>
 
 
