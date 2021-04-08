@@ -30,7 +30,7 @@ body{
     padding: 15% 0;
 }
 
-/*css button  login.html.twig*/
+/*css button  login.html.twig */
 #butt{
     margin: 10% 0;
     border:1px solid black;
@@ -41,4 +41,15 @@ body{
 }
 .password{
     padding: 5% 0 ;
+}
+
+/*css register.html.twig*/
+#but{
+    margin: 10% 0;
+    border:1px solid black;
+}
+
+#bu{
+    margin: 10% 0;
+    border:1px solid black;
 }

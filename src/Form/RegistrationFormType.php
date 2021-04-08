@@ -52,8 +52,8 @@ class RegistrationFormType extends AbstractType
                 'invalid_message' => 'The password fields must match.',
                 'options' => ['attr' => ['class' => 'password-field']],
                 'required' => true,
-                'first_options'  => ['label' => 'Password'],
-                'second_options' => ['label' => 'Repeat Password'],
+               'first_options'  => ['label' => ' '],
+                'second_options' => ['label' => ' '],
             ])
             ->add('picture', FileType::class, [
                 'label' => 'Image de profil',

@@ -8,16 +8,80 @@
         <div class="alert alert-danger" role="alert">{{ flashError }}</div>
     {% endfor %}
 
-    <h1>Register</h1>
+<div class="row p-1">
+    <div class="col-md-6"></div>
+    <div class="col-md-3">
+<h1 class="h3 mb-3 font-weight-normal">Inscription</h1>
+    </div>
+    <div class="col-md-3"></div>
+{{ form_start(registrationForm) }}
 
-    {{ form_start(registrationForm) }}
-    {{ form_widget(registrationForm) }}
-{#        {{ form_row(registrationForm.pseudo) }}#}
-{#        {{ form_row(registrationForm.plainPassword, {#}
-{#            label: 'Password'#}
-{#        }) }}#}
-{#        {{ form_row(registrationForm.agreeTerms) }}#}
+<div class="row p-4">
+    <div class="col-md-2"></div>
+    <div class="col-md-4 align-middle"><label for="name"> Image de Profil:</label></div>
+    <div class="col-md-3">{{ form_widget(registrationForm.picture) }} </div>
+</div>
 
-        <button type="submit" class="btn"> Valider</button>
+<div class="row p-3">
+    <div class="col-md-2"></div>
+    <div class="col-md-4 align-middle"><label for="name">Pseudo :</label></div>
+    <div class="col-md-3">{{ form_widget(registrationForm.pseudo) }}</div>
+</div>
+
+<div class="row p-3">
+    <div class="col-md-2"></div>
+    <div class="col-md-4 align-middle"><label for="name">Nom :</label></div>
+    <div class="col-md-3">{{ form_widget(registrationForm.nameUser) }}</div>
+</div>
+
+<div class="row p-3">
+    <div class="col-md-2"></div>
+    <div class="col-md-4 align-middle"><label for="name">Prénom :</label></div>
+    <div class="col-md-3">{{ form_widget(registrationForm.firstNameUser) }}</div>
+</div>
+
+<div class="row p-3">
+    <div class="col-md-2"></div>
+    <div class="col-md-4 align-middle"><label for="name">Numéro de téléphone :</label></div>
+    <div class="col-md-3">{{ form_widget(registrationForm.phoneNumber) }}</div>
+</div>
+
+<div class="row p-3">
+    <div class="col-md-2"></div>
+    <div class="col-md-4 align-middle"><label for="name">E-mail:</label></div>
+    <div class="col-md-3">{{ form_widget(registrationForm.mail) }} </div>
+</div>
+<div class="row p-1">
+    <div class="col-md-2"></div>
+    <div class="col-md-4 align-middle"><label for="name">Mot de Passe:</label></div>
+    <div class="col-md-3">{{ form_widget(registrationForm.plainPassword) }}  </div>
+</div>
+<div class="row p-3">
+    <div class="col-md-2"></div>
+    <div class="col-md-4"><label for="name">Nom du Campus:</label></div>
+    <div class="col-md-3">{{ form_widget(registrationForm.campus) }} </div>
+</div>
+<div class="row p-3">
+    <div class="col-md-2"></div>
+    <div class="col-md-4"><label for="name">Statut:</label></div>
+    <div class="col-md-3">{{ form_widget(registrationForm.active) }} </div>
+</div>
+<div class="row p-2">
+    <div class="col-md-2"></div>
+    <div class="col-md-4 "><label for="name">AgreeTerms:</label></div>
+    <div class="col-md-3">{{ form_widget(registrationForm.agreeTerms) }} </div>
+</div>
+
+<div class="row p-4">
+    <div class="col-md-5"></div>
+    <div class="col-md-2">
+        <button id="but" class="btn btn-lg btn-white" type="submit">
+            Valider
+        </button>
+    </div>
+    <div class="col-md-2">
+        <button id="bu" type="submit"  onclick="history.go(-1)" class="btn btn-lg btn-white ">Annuler</button>
+    </div>
+
     {{ form_end(registrationForm) }}
-{% endblock %}
+    {% endblock %}
