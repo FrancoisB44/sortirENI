@@ -6,15 +6,23 @@ use App\Entity\Campus;
 use App\Entity\City;
 use App\Entity\Place;
 use App\Entity\Status;
+use App\Entity\User;
+use App\Form\AdminUserRegistrationFormType;
 use App\Form\CampusType;
 use App\Form\CityType;
 use App\Form\PlaceType;
+use App\Form\CreateUserType;
+use App\Form\RegistrationFormType;
 use App\Form\StatusType;
+use App\Security\AppAuthenticator;
+use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
+use Symfony\Component\Security\Guard\GuardAuthenticatorHandler;
 
 /**
  * @Route("/admin")
@@ -117,6 +125,48 @@ class AdminController extends AbstractController
             ]);
     }
 
+    /**
+     * @Route("/create_user_as_admin", name="create_user_as_admin")
+     */
+    public function createUserAsAdmin(Request $request,UserPasswordEncoderInterface $passwordEncoder, GuardAuthenticatorHandler $guardHandler, AppAuthenticator $authenticator)
+    {
+        $user = new User();
+        $form = $this->createForm(AdminUserRegistrationFormType::class, $user);
+        $form->handleRequest($request);
 
+        if ($form->isSubmitted() && $form->isValid()) {
+            // encode the plain password
+            $user->setPassword(
+                $passwordEncoder->encodePassword(
+                    $user,
+                    $form->get('plainPassword')->getData()
+                )
+            );
 
+            $entityManager = $this->getDoctrine()->getManager();
+            $entityManager->persist($user);
+            $entityManager->flush();
+            // do anything else you need here, like send an email
+
+            return $guardHandler->authenticateUserAndHandleSuccess(
+                $user,
+                $request,
+                $authenticator,
+                'main' // firewall name in security.yaml
+            );
+        }
+
+        return $this->render('create_user/createProfileAsAdmin.html.twig', [
+            'registrationForm' => $form->createView(),
+        ]);
+    }
+
+    /**
+     * @Route("/list_user", name="list_user")
+     */
+    public function listUser(EntityManagerInterface $entityManager){
+        $list = $entityManager->getRepository(User::class)->findAll();
+        dump($list);
+        exit();
+    }
 }

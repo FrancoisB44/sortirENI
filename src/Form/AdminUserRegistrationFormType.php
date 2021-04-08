@@ -13,7 +13,7 @@ use Symfony\Component\Validator\Constraints\IsTrue;
 use Symfony\Component\Validator\Constraints\Length;
 use Symfony\Component\Validator\Constraints\NotBlank;
 
-class RegistrationFormType extends AbstractType
+class AdminUserRegistrationFormType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
@@ -24,6 +24,7 @@ class RegistrationFormType extends AbstractType
             ->add('phoneNumber')
             ->add('mail')
             ->add('campus')
+            ->add('admin')
             ->add('active')
             ->add('agreeTerms', CheckboxType::class, [
                 'mapped' => false,
@@ -52,9 +53,7 @@ class RegistrationFormType extends AbstractType
                 'required' => true,
                 'first_options'  => ['label' => 'Password'],
                 'second_options' => ['label' => 'Repeat Password'],
-            ])
-           
-        ;
+            ]);
     }
 
     public function configureOptions(OptionsResolver $resolver)
