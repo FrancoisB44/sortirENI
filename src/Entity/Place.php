@@ -6,6 +6,7 @@ use App\Repository\PlaceRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Entity(repositoryClass=PlaceRepository::class)
@@ -22,21 +23,25 @@ class Place
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Assert\NotBlank(message="Veuillez renseigner un nom de lieu")
      */
     private $namePlace;
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
+     * @Assert\NotBlank(message="Veuillez renseigner une rue")
      */
     private $street;
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Assert\NotBlank(message="Veuillez renseigner une ville")
      */
     private $nameCity;
 
     /**
      * @ORM\Column(type="decimal", precision=5, scale=0)
+     * @Assert\NotBlank(message="Veuillez renseigner un code postale")
      */
     private $zipCode;
 
