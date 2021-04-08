@@ -3,12 +3,14 @@
 namespace App\Controller;
 
 use App\Entity\User;
+use App\Form\ModificationFormType;
 use App\Form\RegistrationFormType;
 use App\Repository\EventRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 
 /**
  * Class ModifyUserController
@@ -29,15 +31,24 @@ class ModifyUserController extends AbstractController
 
     /**
      * @Route("/modify/{id}", requirements={"id":"\d+"}, name="modify_user", methods={"GET","POST"})
+     *
      */
-    public function modifyUser(Request $request, EntityManagerInterface $entityManager)
+    public function modifyUser(Request $request, EntityManagerInterface $entityManager, UserPasswordEncoderInterface $passwordEncoder)
     {
         $profileId = $request->get('id');
         $profile = $entityManager->getRepository(User::class)->find($profileId);
-        $createUser = new User();
-        $form = $this->createForm(RegistrationFormType::class, $profile);
+        $pass = $profile->getPassword();
+        dump($pass);
+        $form = $this->createForm(ModificationFormType::class, $profile);
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
+            $passChek = $passwordEncoder->encodePassword(
+                $profile,
+                $form["oldPassword"]->getData()
+            );
+            dump($passChek);
+            exit();
+
             $entityManager->persist($profile);
             $entityManager->flush();
             $this->addFlash('success', 'Modification success');
@@ -45,4 +56,5 @@ class ModifyUserController extends AbstractController
         }
         return $this->render('modify_user/modifyProfile.html.twig', ["userForm" => $form->createView()]);
     }
+
 }
