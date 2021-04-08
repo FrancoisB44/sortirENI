@@ -11,6 +11,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
+use Symfony\Component\Validator\Constraints\Image;
 
 /**
  * Class ModifyUserController
@@ -39,15 +40,28 @@ class ModifyUserController extends AbstractController
         $profile = $entityManager->getRepository(User::class)->find($profileId);
         $pass = $profile->getPassword();
         dump($pass);
-        $form = $this->createForm(ModificationFormType::class, $profile);
+        $form = $this->createForm(ModificationFormType::class,$profile);
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
-            $passChek = $passwordEncoder->encodePassword(
-                $profile,
-                $form["oldPassword"]->getData()
-            );
-            dump($passChek);
-            exit();
+            //test pr modifier l image
+            $image=$form->get('picture')->getData();
+
+            if ($image) {
+                //Recupe le nom du fichier
+                $originalFileName = pathinfo($image->getClientOriginalName(), PATHINFO_FILENAME);
+                //generer un nouveau nom unique pour l'image
+                $newFileName = uniqid() . '.' . $image->guessExtension();
+                try {
+                    //upload l image ds un dossier du projet
+                    $image->move(
+                        $this->getParameter('picture_profile_directory'), $newFileName);// para de direction de l'upload
+                } catch (FileException $e) {
+                    //TODO traiter l'exception
+                }
+                $profile->setPictureName($newFileName);
+            }
+
+            //fin test de modification image
 
             $entityManager->persist($profile);
             $entityManager->flush();
