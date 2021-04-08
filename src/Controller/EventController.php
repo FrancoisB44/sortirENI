@@ -33,6 +33,27 @@ class EventController extends AbstractController
 //            $event->setUser($this->getUser()->getUsername());
             $event->setUser($this->getUser());
 
+            $dEvent = $event->getStartDateTime();
+            $dLRegistration = $event->getRegistrationDeadLine();
+            $today = new \DateTime('now');
+//            dump($today);
+//            dump($dEvent);
+//            dump($dLRegistration);
+//            exit();
+
+//            $dateLimitRegistration = date('m/d/Y h:i', '', $dLRegistration);
+//            $dateEvent = date('m/d/Y h:i', $dEvent);
+//            $leftDaysRegistration = $differenceRegistration.days;
+//            $leftDaysEvent = $differenceEvent.days;
+
+            if ($dEvent > $today) {
+                $event->setStatus()->setId(5);
+            } elseif ($dEvent < $today and $dLRegistration > $today) {
+                $event->setStatus()->setId(3);
+            } elseif ($dEvent < $today and $dLRegistration < $today) {
+                $event->setStatus()->setId(2);
+            }
+
             $entityManager->persist($event);
             $entityManager->flush();
 
