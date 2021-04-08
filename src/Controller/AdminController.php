@@ -46,10 +46,13 @@ class AdminController extends AbstractController
 
             $this->addFlash('success', 'Campus ajouté !');
 
-            return $this->redirectToRoute('list_campus');
+            return $this->redirectToRoute('list_campus'); // rester sur la meme page
         }
-
+        //mettre l id ds le path
+        // faire un campus repository et faire un find all
+// recuperer ma liste de campus + ajouter au tableau des para a afficher dc apres le create view
         return $this->render('admin/createCampus.twig', [ 'formCampus' => $formCampus->createView() ]);
+
     }
 
     /**

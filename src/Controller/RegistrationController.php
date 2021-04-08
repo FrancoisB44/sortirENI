@@ -24,6 +24,26 @@ class RegistrationController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+
+            //debut test image
+            $image=$form->get('picture')->getData(); //recuperation fichier ds Usertype
+
+            if($image){
+                //Recupe le nom du fichier
+                $originalFileName=pathinfo($image->getClientOriginalName(),PATHINFO_FILENAME);
+                //generer un nouveau nom unique pour l'image
+                $newFileName=uniqid().'.'.$image->guessExtension();
+                try{
+                    //upload l image ds un dossier du projet
+                    $image->move(
+                        $this->getParameter('picture_profile_directory'),$newFileName);// para de direction de l'upload
+                }catch (FileException $e){
+                    //TODO traiter l'exception
+                }
+                $user->setPictureName($newFileName);
+            }
+            //fin test
+
             //Set admin to false/0
             $user->setAdmin(0);
             // encode the plain password

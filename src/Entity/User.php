@@ -82,6 +82,11 @@ class User implements UserInterface
      */
     private $campus;
 
+    /**
+     * @ORM\Column(type="string", length=100, nullable=true)
+     */
+    private $pictureName;
+
     public function __construct()
     {
         $this->inscription = new ArrayCollection();
@@ -363,6 +368,18 @@ class User implements UserInterface
     public function setCampus(?Campus $campus): self
     {
         $this->campus = $campus;
+
+        return $this;
+    }
+
+    public function getPictureName(): ?string
+    {
+        return $this->pictureName;
+    }
+
+    public function setPictureName(?string $pictureName): self
+    {
+        $this->pictureName = $pictureName;
 
         return $this;
     }

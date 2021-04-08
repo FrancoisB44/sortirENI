@@ -5,7 +5,8 @@
 {% block container  %}
     <row class="d-flex justify-content-center align-items-center">
         <div class="m-4">
-            <p class="text danger border"> IMAGE</p>
+            <p class="text danger border"> </p>
+            <img src="{{ asset('img/profilePicture/'~ app.user.pictureName) }}" alt="image de profil">
         </div>
         <div class="m-4 ">
             <ul class="list-group ">

@@ -16,10 +16,29 @@ body{
     background-color: #1f5f8f !important;
     margin: auto;
 }
+/* Css pr base.html.twig footer */
 .bg-succ {
     background-color: #1f5f8f !important;
     margin: auto;
 }
+.text-light{
+    color: black!important;
+    text-align: center;
+}
+/*css block container base.html.twig*/
 #main{
     padding: 15% 0;
+}
+
+/*css button  login.html.twig*/
+#butt{
+    margin: 10% 0;
+    border:1px solid black;
+}
+.pseudo{
+    padding: 5% 0 ;
+
+}
+.password{
+    padding: 5% 0 ;
 }
