@@ -14,6 +14,7 @@ class CityType extends AbstractType
         $builder
             ->add('nameCity')
             ->add('zipCode')
+
         ;
     }
 

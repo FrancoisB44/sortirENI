@@ -3,8 +3,10 @@
 namespace App\Controller;
 
 use App\Entity\Campus;
+use App\Entity\City;
 use App\Entity\Status;
 use App\Form\CampusType;
+use App\Form\CityType;
 use App\Form\StatusType;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -86,7 +88,32 @@ class AdminController extends AbstractController
     }
 
 
+    /**
+     * @Route("/create_city", name="create_city")
+     */
+    public function createCity(Request $request, EntityManagerInterface $entityManager): Response
+    {
+        $city = new City();
 
+        $formCity = $this->createForm(CityType::class, $city);
+        $formCity->handleRequest($request);
+
+        if ($formCity->isSubmitted() && $formCity->isValid()) {
+
+            $entityManager->persist($city);
+            $entityManager->flush();
+
+            $this->addFlash('success', 'Ville ajoutée !');
+
+            return $this->redirectToRoute('create_city');
+        }
+        $listCity = $entityManager->getRepository('App:City')->findAll();
+
+        return $this->render('admin/createCity.html.twig', [
+            'formCity' => $formCity->createView(),
+            'listCity' => $listCity,
+            ]);
+    }
 
 
 

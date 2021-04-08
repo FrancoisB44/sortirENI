@@ -55,6 +55,13 @@ class City
         $this->id = $id;
     }
 
+    /**
+     * @return mixed
+     */
+    public function getNameCity()
+    {
+        return $this->nameCity;
+    }
 
     /**
      * @param mixed $nameCity
@@ -110,7 +117,10 @@ class City
         return $this;
     }
 
-
+    public function __toString()
+    {
+        return $this->nameCity;
+    }
 
 
 }

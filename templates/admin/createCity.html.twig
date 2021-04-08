@@ -1,0 +1,58 @@
+{% extends 'base.html.twig' %}
+
+{% block titlePage %}Ajouter une ville{% endblock %}
+
+
+{% block container %}
+
+    <div class="row">
+    <div class="col-md-12">
+
+    {{ form_start(formCity) }}
+
+    <div class="row">
+    <div class="col-md-6" >
+
+        <label>Ville : </label>
+        {{ form_widget(formCity.nameCity) }}
+        <br><br>
+
+        <label>Code postal : </label>
+        {{ form_widget(formCity.zipCode) }}
+        <br><br>
+
+
+        {{ form_widget(formCity) }}
+        <button>Ajouter</button>
+
+        {{ form_end(formCity) }}
+
+    </div>
+
+    <div class="col-md-6" style="align-items: center">
+
+{#                            {%  if app.user %}#}
+{#                                <p style="text-align: center">Bienvenue {{ app.user.username }}</p>#}
+{#                            {% endif %}#}
+
+        <h3 style="text-align: center">Liste des villes</h3>
+
+        <ul style="list-style-type: none">
+
+            {% for city in listCity %}
+                <li><a href="{{ url('create_city', {"id" : city.id }) }}">{{ city.nameCity }} ({{ city.zipCode }})</a></li>
+
+            {% endfor %}
+        </ul>
+
+
+    </div>
+
+
+
+
+
+
+
+
+{% endblock %}
