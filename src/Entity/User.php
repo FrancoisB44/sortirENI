@@ -56,7 +56,6 @@ class User implements UserInterface
 
     /**
      * @ORM\Column(type="string", length=255)
-     * @Assert\NotBlank(message="Veuillez renseigner un mot de passe")
      */
     private $password;
 

@@ -178,7 +178,39 @@ class AdminController extends AbstractController
      */
     public function listUser(EntityManagerInterface $entityManager){
         $list = $entityManager->getRepository(User::class)->findAll();
-        dump($list);
-        exit();
+
+        return $this->render('admin/listUsersAsAdmin.html.twig', ['listUsers'=> $list]);
+    }
+
+    /**
+     * @Route("/delete_user/{id}",requirements={"id":"\d+"}, name="delete_user")
+     */
+    public function deleteUser($id, EntityManagerInterface $entityManager){
+        $repo = $entityManager->getRepository(User::class);
+        $user = $repo->find($id);
+
+        $entityManager->remove($user);
+        $entityManager->flush();
+
+        $this->addFlash('success','utilisateur'.$user->getUsername().'a été supprimé');
+
+        $list = $entityManager->getRepository(User::class)->findAll();
+
+        return $this->render('admin/listUsersAsAdmin.html.twig', ['listUsers'=> $list]);
+    }
+
+    /**
+     * @Route("/disable_user/{id}",requirements={"id":"\d+"}, name="disable_user")
+     */
+    public function disableUser($id, EntityManagerInterface $entityManager){
+        $repo = $entityManager->getRepository(User::class);
+        $user = $repo->find($id);
+
+
+        $this->addFlash('success','utilisateur'.$user->getUsername().'inactif');
+
+        $list = $entityManager->getRepository(User::class)->findAll();
+
+        return $this->render('admin/listUsersAsAdmin.html.twig', ['listUsers'=> $list]);
     }
 }

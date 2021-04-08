@@ -23,7 +23,7 @@ class Status
 
     /**
      * @ORM\Column(type="string", length=255)
-     *@Assert\NotBlank(message="Veuillez renseigner un libellé)
+     *@Assert\NotBlank(message="Veuillez renseigner un libellé")
      */
     private $wording;
 

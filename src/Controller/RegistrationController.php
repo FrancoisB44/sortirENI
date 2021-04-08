@@ -1,7 +1,5 @@
 <?php
-
 namespace App\Controller;
-
 use App\Entity\User;
 use App\Form\RegistrationFormType;
 use App\Security\AppAuthenticator;
@@ -11,7 +9,6 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 use Symfony\Component\Security\Guard\GuardAuthenticatorHandler;
-
 class RegistrationController extends AbstractController
 {
     /**
@@ -22,12 +19,9 @@ class RegistrationController extends AbstractController
         $user = new User();
         $form = $this->createForm(RegistrationFormType::class, $user);
         $form->handleRequest($request);
-
         if ($form->isSubmitted() && $form->isValid()) {
-
             //debut test image
             $image=$form->get('picture')->getData(); //recuperation fichier ds Usertype
-
             if($image){
                 //Recupe le nom du fichier
                 $originalFileName=pathinfo($image->getClientOriginalName(),PATHINFO_FILENAME);
@@ -43,7 +37,6 @@ class RegistrationController extends AbstractController
                 $user->setPictureName($newFileName);
             }
             //fin test
-
             //Set admin to false/0
             $user->setAdmin(0);
             // encode the plain password
@@ -53,12 +46,10 @@ class RegistrationController extends AbstractController
                     $form->get('plainPassword')->getData()
                 )
             );
-
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->persist($user);
             $entityManager->flush();
             // do anything else you need here, like send an email
-
             return $guardHandler->authenticateUserAndHandleSuccess(
                 $user,
                 $request,
@@ -66,7 +57,6 @@ class RegistrationController extends AbstractController
                 'main' // firewall name in security.yaml
             );
         }
-
         return $this->render('registration/register.html.twig', [
             'registrationForm' => $form->createView(),
         ]);
