@@ -8,23 +8,31 @@
     <div class="row">
     <div class="col-md-12">
 
-    {{ form_start(formCity) }}
+    {{ form_start(formPlace) }}
 
     <div class="row">
     <div class="col-md-6" >
 
-        <label>Code postal : </label>
-        {{ form_widget(formCity.zipCode) }}
+        <label>Lieu : </label>
+        {{ form_widget(formPlace.namePlace) }}
+        <br><br>
+
+        <label>Rue : </label>
+        {{ form_widget(formPlace.street) }}
         <br><br>
 
         <label>Code postal : </label>
-        {{ form_widget(formCity.nameCity) }}
+        {{ form_widget(formPlace.zipCode) }}
         <br><br>
 
-        {{ form_widget(formCity) }}
+        <label>Ville : </label>
+        {{ form_widget(formPlace.nameCity) }}
+        <br><br>
+
+        {{ form_widget(formPlace) }}
         <button>Ajouter</button>
 
-        {{ form_end(formCity) }}
+        {{ form_end(formPlace) }}
 
     </div>
 
@@ -34,12 +42,12 @@
 {#                                <p style="text-align: center">Bienvenue {{ app.user.username }}</p>#}
 {#                            {% endif %}#}
 
-        <h3 style="text-align: center">Liste des villes</h3>
+        <h3 style="text-align: center">Liste des Lieux</h3>
 
         <ul style="list-style-type: none">
 
-            {% for city in listCity %}
-                <li><a href="{{ url('create_city', {"id" : city.id }) }}">{{ city.nameCity }} ({{ city.zipCode }})</a></li>
+            {% for place in listPlace %}
+                <li><a href="{{ url('create_place', {"id" : place.id }) }}">{{ place.namePlace }} : {{ place.street }} à {{ place.nameCity }} ({{ place.zipCode }})</a></li>
 
             {% endfor %}
         </ul>

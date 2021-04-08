@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\Event;
+use App\Entity\Place;
 use App\Form\EventType;
 use App\Repository\EventRepository;
 use Doctrine\ORM\EntityManagerInterface;
@@ -22,7 +23,7 @@ class EventController extends AbstractController
     public function createEvent(Request $request, EntityManagerInterface $entityManager): Response
     {
         $event = new Event();
-//        $event->setPlace()->setId();
+
 
         $formEvent = $this->createForm(EventType::class, $event);
         $formEvent->handleRequest($request);
@@ -30,6 +31,7 @@ class EventController extends AbstractController
         if ($formEvent->isSubmitted() && $formEvent->isValid()) {
 
             $entityManager->persist($event);
+
             $entityManager->flush();
 
             $this->addFlash('success', 'Sortie ajoutée !');

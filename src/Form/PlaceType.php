@@ -14,8 +14,9 @@ class PlaceType extends AbstractType
         $builder
             ->add('namePlace')
             ->add('street')
+            ->add('nameCity')
+            ->add('zipCode')
 
-            ->add('city', CityType::class)
         ;
     }
 

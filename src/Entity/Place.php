@@ -31,6 +31,48 @@ class Place
     private $street;
 
     /**
+     * @ORM\Column(type="string", length=255)
+     */
+    private $nameCity;
+
+    /**
+     * @ORM\Column(type="decimal", precision=5, scale=0)
+     */
+    private $zipCode;
+
+    /**
+     * @return mixed
+     */
+    public function getNameCity()
+    {
+        return $this->nameCity;
+    }
+
+    /**
+     * @param mixed $nameCity
+     */
+    public function setNameCity($nameCity): void
+    {
+        $this->nameCity = $nameCity;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getZipCode()
+    {
+        return $this->zipCode;
+    }
+
+    /**
+     * @param mixed $zipCode
+     */
+    public function setZipCode($zipCode): void
+    {
+        $this->zipCode = $zipCode;
+    }
+
+    /**
      * @ORM\Column(type="float", nullable=true)
      */
     private $latitude;
@@ -40,10 +82,10 @@ class Place
      */
     private $longitude;
 
-    /**
-     * @ORM\ManyToOne(targetEntity=City::class, inversedBy="places")
-     */
-    private $city;
+//    /**
+//     * @ORM\ManyToOne(targetEntity=City::class, inversedBy="places")
+//     */
+//    private $city;
 
     /**
      * @ORM\OneToMany(targetEntity=Event::class, mappedBy="place")
@@ -135,17 +177,17 @@ class Place
         $this->longitude = $longitude;
     }
 
-    public function getCity(): ?City
-    {
-        return $this->city;
-    }
-
-    public function setCity(?City $city): self
-    {
-        $this->city = $city;
-
-        return $this;
-    }
+//    public function getCity(): ?City
+//    {
+//        return $this->city;
+//    }
+//
+//    public function setCity(?City $city): self
+//    {
+//        $this->city = $city;
+//
+//        return $this;
+//    }
 
     /**
      * @return Collection|Event[]
@@ -179,7 +221,7 @@ class Place
 
     public function __toString()
     {
-        return $this->city;
+        return $this->nameCity;
     }
 
 

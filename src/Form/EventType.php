@@ -3,6 +3,7 @@
 namespace App\Form;
 
 use App\Entity\Campus;
+use App\Entity\City;
 use App\Entity\Event;
 use App\Entity\Place;
 use App\Repository\PlaceRepository;
@@ -23,8 +24,18 @@ class EventType extends AbstractType
             ->add('registrationDeadLine')
             ->add('nbRegistrationsMax')
             ->add('infoEvent')
-            ->add('status')
+//            ->add('status')
             ->add('campus')
+            ->add('place', PlaceType::class)
+
+//            ->add('place', EntityType::class, array(
+//                'class'=>'App\Entity\Place',
+////                'choice_label'=>'street',
+//                'expanded'=>false,
+//                'multiple'=>false,
+//            ))
+
+
 //            ->add('place', EntityType::class, array(
 //                'class'=>Place::class,
 //
@@ -32,14 +43,9 @@ class EventType extends AbstractType
 //                    return $placeRepository->quer
 //                }
 //            ))
-            ->add('place', PlaceType::class)
-//            ->add('place', EntityType::class, array(
-//                'class'=>'App\Entity\Place',
-//                'choice_label'=>'street',
-//                'expanded'=>false,
-//                'multiple'=>false,
-//            ))
-//            ->add('place', PlaceType::class)
+
+
+
         ;
     }
 

@@ -10,53 +10,56 @@
 
         {{ form_start(formEvent) }}
 
-        <div class="row">
-            <div class="col-md-6" >
+        <h3>Etape 1 : sélectionnez ou ajoutez un lieu</h3>
 
-                <label>Intitulé sortie : </label>
-                {{ form_widget(formEvent.nameEvent) }}
-                <br><br>
+        <label>Campus : </label>
+        {{ form_widget(formEvent.campus) }}
+        <br><br>
 
-                <label>Début de l'évenement : </label><br>
-                {{ form_widget(formEvent.StartDateTime) }}
-                <br>
+        <label>Lieu : </label>
+        {{ form_widget(formEvent.place.namePlace) }}
+        <br><br>
 
-                <label>Durée : </label>
-                {{ form_widget(formEvent.duration) }}
-                <br><br>
+        <label>Rue : </label>
+        {{ form_widget(formEvent.place.street) }}
+        <br><br>
 
-                <label>Inscription jusqu'au : </label><br>
-                {{ form_widget(formEvent.registrationDeadLine) }}
-                <br><br>
+        <label>Code Postal : </label>
+        {{ form_widget(formEvent.place.zipCode) }}
+        <br><br>
 
-                <label>Nombre maximum de participants : </label><br>
-                {{ form_widget(formEvent.nbRegistrationsMax) }}
-                <br><br>
-
-                <label>Description : </label>
-                {{ form_widget(formEvent.infoEvent) }}
-                <br><br>
+        <label>Ville : </label>
+        {{ form_widget(formEvent.place.nameCity) }}
+        <br><br>
 
 
-            </div>
+        <h3>Etape 2 : créez un événement </h3>
 
-            <div class="col-md-6" >
+        {{ form_start(formEvent) }}
 
-                <label>Campus : </label>
-                {{ form_widget(formEvent.campus) }}
-                <br><br>
+        <label>Intitulé sortie : </label>
+        {{ form_widget(formEvent.nameEvent) }}
+        <br><br>
 
-                <label>Status : </label>
-                {{ form_widget(formEvent.status) }}
-                <br><br>
+        <label>Début de l'évenement : </label><br>
+        {{ form_widget(formEvent.StartDateTime) }}
+        <br>
 
-                <label>Place : </label>
-                {{ form_widget(formEvent.place) }}
-                <br><br>
+        <label>Durée : </label>
+        {{ form_widget(formEvent.duration) }}
+        <br><br>
 
+        <label>Inscription jusqu'au : </label><br>
+        {{ form_widget(formEvent.registrationDeadLine) }}
+        <br><br>
 
+        <label>Nombre maximum de participants : </label><br>
+        {{ form_widget(formEvent.nbRegistrationsMax) }}
+        <br><br>
 
-            </div>
+        <label>Description : </label>
+        {{ form_widget(formEvent.infoEvent) }}
+        <br><br>
 
 
 

@@ -4,9 +4,11 @@ namespace App\Controller;
 
 use App\Entity\Campus;
 use App\Entity\City;
+use App\Entity\Place;
 use App\Entity\Status;
 use App\Form\CampusType;
 use App\Form\CityType;
+use App\Form\PlaceType;
 use App\Form\StatusType;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -89,29 +91,29 @@ class AdminController extends AbstractController
 
 
     /**
-     * @Route("/create_city", name="create_city")
+     * @Route("/create_place", name="create_place")
      */
-    public function createCity(Request $request, EntityManagerInterface $entityManager): Response
+    public function createPlace(Request $request, EntityManagerInterface $entityManager): Response
     {
-        $city = new City();
+        $place = new Place();
 
-        $formCity = $this->createForm(CityType::class, $city);
-        $formCity->handleRequest($request);
+        $formPlace = $this->createForm(PlaceType::class, $place);
+        $formPlace->handleRequest($request);
 
-        if ($formCity->isSubmitted() && $formCity->isValid()) {
+        if ($formPlace->isSubmitted() && $formPlace->isValid()) {
 
-            $entityManager->persist($city);
+            $entityManager->persist($place);
             $entityManager->flush();
 
-            $this->addFlash('success', 'Ville ajoutée !');
+            $this->addFlash('success', 'Lieu ajouté !');
 
-            return $this->redirectToRoute('create_city');
+            return $this->redirectToRoute('create_place');
         }
-        $listCity = $entityManager->getRepository('App:City')->findAll();
+        $listPlace = $entityManager->getRepository('App:Place')->findAll();
 
-        return $this->render('admin/createCity.html.twig', [
-            'formCity' => $formCity->createView(),
-            'listCity' => $listCity,
+        return $this->render('admin/createPlace.html.twig', [
+            'formPlace' => $formPlace->createView(),
+            'listPlace' => $listPlace,
             ]);
     }
 

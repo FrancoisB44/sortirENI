@@ -58,7 +58,7 @@ class Event
 
 
     /**
-     * @ORM\ManyToOne(targetEntity=Place::class, inversedBy="events")
+     * @ORM\ManyToOne(targetEntity=Place::class, inversedBy="events", cascade={"persist"})
      */
     private $place;
 
@@ -276,8 +276,9 @@ class Event
         return $this;
     }
 
-
-
+    public function addPlace()
+    {
+    }
 
 
 }

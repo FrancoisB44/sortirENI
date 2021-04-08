@@ -26,7 +26,7 @@ class Status
     private $wording;
 
     /**
-     * @ORM\OneToMany(targetEntity=Event::class, mappedBy="status2")
+     * @ORM\OneToMany(targetEntity=Event::class, mappedBy="status")
      */
     private $event;
 
