@@ -8,7 +8,7 @@
             <p class="text danger border"> IMAGE</p>
         </div>
         <div class="m-4 ">
-                <h3>>--Profil--<</h3>
+                <h3>{{ app.user }}</h3>
                 {{ form_start(userForm) }}
                 {{ form_widget(userForm)}}
                 <button class="btn-success m-2" type="submit">Valider</button>

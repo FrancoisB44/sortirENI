@@ -14,7 +14,7 @@
                 <li class="list-group-item"> Nom: {{ profile.nameUser }}</li>
                 <li class="list-group-item"> Téléphone: {{ profile.phoneNumber }}</li>
                 <li class="list-group-item"> Email: {{ profile.mail }}</li>
-                <li class="list-group-item text-danger">Campus: CAMPUS </li>
+                <li class="list-group-item">Campus: {{ profile.campus}} </li>
             </ul>
                 <a href="{{ path('user_modify_user', {'id': profile.id }) }}" class="btn-success m-2">Modifier</a>
         </div>

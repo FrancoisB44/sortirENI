@@ -47,7 +47,7 @@ class AdminController extends AbstractController
 
         $listCampus = $entityManager->getRepository('App:Campus')->findAll();
 
-        return $this->render('admin/listStatus.html.twig', ['listCampus' => $listCampus]);
+        return $this->render('admin/listCampus.html.twig', ['listCampus' => $listCampus]);
     }
 
 
