@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use App\Entity\Event;
 use App\Entity\Place;
+use App\Entity\Status;
 use App\Entity\User;
 use App\Form\EventType;
 use App\Repository\EventRepository;
@@ -33,6 +34,8 @@ class EventController extends AbstractController
 //            $event->setUser($this->getUser()->getUsername());
             $event->setUser($this->getUser());
 
+
+
             $dEvent = $event->getStartDateTime();
             $dLRegistration = $event->getRegistrationDeadLine();
             $today = new \DateTime('now');
@@ -46,12 +49,22 @@ class EventController extends AbstractController
 //            $leftDaysRegistration = $differenceRegistration.days;
 //            $leftDaysEvent = $differenceEvent.days;
 
-            if ($dEvent > $today) {
-                $event->setStatus()->setId(5);
-            } elseif ($dEvent < $today and $dLRegistration > $today) {
-                $event->setStatus()->setId(3);
-            } elseif ($dEvent < $today and $dLRegistration < $today) {
-                $event->setStatus()->setId(2);
+            $statutId = $entityManager->getRepository(Status::class)->findAll();
+
+//            dump($statutId[0]);
+//            exit();
+
+
+            if ($dEvent < $today) {
+
+                $event->setStatus($statutId[6]);
+//                $event->setStatus()->setId(5);
+            } elseif ($dEvent > $today and $dLRegistration < $today) {
+                $event->setStatus($statutId[2]);
+//                $event->setStatus()->setId(3);
+            } elseif ($dEvent > $today and $dLRegistration > $today) {
+                $event->setStatus($statutId[1]);
+//                $event->setStatus()->setId(2);
             }
 
             $entityManager->persist($event);

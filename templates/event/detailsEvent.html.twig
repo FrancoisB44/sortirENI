@@ -18,6 +18,8 @@
                     <li>Durée en minutes de l'événement : {{ detailEvent.duration }}</li>
                     <li>Evenement organisé par : {{ detailEvent.user }}</li>
                     <br>
+                    <li>Inscription : {{ detailEvent.status }}</li>
+                    <br>
 
 
 
@@ -39,7 +41,7 @@
                             <li>Trop tard, inscriptions terminées depuis le {{ detailEvent.registrationDeadLine|date("d/m/Y") }} à {{ detailEvent.registrationDeadLine|date("H:i") }}. L'événement débutera sans vous dans {{ leftDaysEvent }} jours</li>
                         {% endif %}
                     {% else %}
-                        <li>Evenement terminé, dommage ! L'événement s'est déroulé sans vous le {{ detailEvent.StartDateTime|date("d/m/Y") }}</li>
+                        <li>L'événement s'est déroulé sans vous le {{ detailEvent.StartDateTime|date("d/m/Y") }}</li>
                     {% endif %}
 
 
