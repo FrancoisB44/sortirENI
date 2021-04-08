@@ -46,14 +46,19 @@ class AdminController extends AbstractController
 
             $this->addFlash('success', 'Campus ajouté !');
 
-            return $this->redirectToRoute('list_campus'); // rester sur la meme page
+            return $this->redirectToRoute('create_campus'); // rester sur la meme page
         }
+        $listCampus = $entityManager->getRepository('App:Campus')->findAll();
         //mettre l id ds le path
         // faire un campus repository et faire un find all
 // recuperer ma liste de campus + ajouter au tableau des para a afficher dc apres le create view
-        return $this->render('admin/createCampus.twig', [ 'formCampus' => $formCampus->createView() ]);
+        return $this->render('admin/createCampus.twig', [
+            'formCampus' => $formCampus->createView(),
+            'listCampus' => $listCampus,
+            ]);
 
     }
+
 
     /**
      * @Route(path="/list_campus", name="list_campus")
@@ -83,10 +88,14 @@ class AdminController extends AbstractController
 
             $this->addFlash('success', 'Etat ajouté !');
 
-            return $this->redirectToRoute('list_status');
+            return $this->redirectToRoute('create_status');
         }
+        $listStatus = $entityManager->getRepository('App:Status')->findAll();
 
-        return $this->render('admin/createStatus.twig', [ 'formStatus' => $formStatus->createView() ]);
+        return $this->render('admin/createStatus.twig', [
+            'formStatus' => $formStatus->createView(),
+            'listStatus' => $listStatus,
+            ]);
     }
 
 

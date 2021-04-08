@@ -20,10 +20,20 @@
 
     </div>
 
-    <div class="col-md-6" >
+    <div class="col-md-6" style="align-items: center">
 
+        {#                    {%  if app.user %}#}
+        {#                        <p style="text-align: center">Bienvenue {{ app.user.username }}</p>#}
+        {#                    {% endif %}#}
 
+        <h3 style="text-align: center">Liste des campus</h3>
 
+        <ul style="list-style-type: none">
+            {% for campus in listCampus %}
+                <li><a href="{{ url('list_campus', {"id" : campus.id }) }}">{{ campus.nameCampus }}</a></li>
+
+            {% endfor %}
+        </ul>
 
     </div>
 

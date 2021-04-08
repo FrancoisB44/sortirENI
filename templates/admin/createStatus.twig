@@ -20,13 +20,22 @@
 
     </div>
 
-    <div class="col-md-6" >
+    <div class="col-md-6" style="align-items: center">
 
+        {#                    {%  if app.user %}#}
+        {#                        <p style="text-align: center">Bienvenue {{ app.user.username }}</p>#}
+        {#                    {% endif %}#}
 
+        <h3 style="text-align: center">Liste des états</h3>
 
+        <ul style="list-style-type: none">
+            {% for status in listStatus %}
+                <li><a href="{{ url('list_status', {"id" : status.id }) }}">{{ status.wording }}</a></li>
+
+            {% endfor %}
+        </ul>
 
     </div>
-
 
 
 
