@@ -2,6 +2,7 @@
 
 namespace App\Repository;
 
+use App\Data\SearchData;
 use App\Entity\Event;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
@@ -19,32 +20,87 @@ class EventRepository extends ServiceEntityRepository
         parent::__construct($registry, Event::class);
     }
 
-    // /**
-    //  * @return Event[] Returns an array of Event objects
-    //  */
-    /*
-    public function findByExampleField($value)
-    {
-        return $this->createQueryBuilder('s')
-            ->andWhere('s.exampleField = :val')
-            ->setParameter('val', $value)
-            ->orderBy('s.id', 'ASC')
-            ->setMaxResults(10)
-            ->getQuery()
-            ->getResult()
-        ;
-    }
-    */
 
-    /*
-    public function findOneBySomeField($value): ?Event
-    {
-        return $this->createQueryBuilder('s')
-            ->andWhere('s.exampleField = :val')
-            ->setParameter('val', $value)
+    // Affichage de la liste Campus(id)
+    public function findByCampus($idCampus) {
+        return $this->createQueryBuilder('idCampus')
+            ->andWhere('idCampus.id = :val')
+            ->setParameter('val', $idCampus)
             ->getQuery()
-            ->getOneOrNullResult()
-        ;
+            ->getResult();
     }
-    */
+
+
+    /**
+     * Récupère les Events en lien avec la recherche
+     * @return Event[]
+     */
+    public function findSearch(SearchData $searchData) : array
+    {
+        $query = $this
+            ->createQueryBuilder('search')
+            ->select('search', 'campus')
+            ->join('search.campus', 'campus');
+
+        if(!empty($searchData->textSearch)) {
+            $query = $query
+                ->andWhere('search.nameEvent LIKE :textSearch')
+                ->setParameter('textSearch', "%{$searchData->textSearch}%");
+        }
+
+        if(!empty($searchData->campusSearch)) {
+            $query = $query
+                ->andWhere('search.campus IN (:campus)')
+                ->setParameter('campus', $searchData->campusSearch);
+        }
+
+        if(!empty($searchData->statusSearch)) {
+            $query = $query
+                ->andWhere('search.status IN (:status)')
+                ->setParameter('status', $searchData->statusSearch);
+        }
+
+//        if(!empty($searchData->dateStartSearch)) {
+//            $query = $query
+//                ->andWhere('search.StartDateTime IN (:dateStartSearch)')
+//                ->setParameter('dateStartSearch', ($searchData->dateStartSearch)->format('d/m/Y'));
+//        }
+//
+//        if(!empty($searchData->dateRegistrationSearch)) {
+//            $query = $query
+//                ->andWhere('search.registrationDeadLine IN (:dateRegistrationSearch)')
+//                ->setParameter('dateRegistrationSearch', ($searchData->dateRegistrationSearch)->format('d/m/Y'));
+//        }
+
+
+        return $query->getQuery()->getResult();
+    }
 }
+// /**
+//  * @return Event[] Returns an array of Event objects
+//  */
+/*
+public function findByExampleField($value)
+{
+    return $this->createQueryBuilder('s')
+        ->andWhere('s.exampleField = :val')
+        ->setParameter('val', $value)
+        ->orderBy('s.id', 'ASC')
+        ->setMaxResults(10)
+        ->getQuery()
+        ->getResult()
+    ;
+}
+*/
+
+/*
+public function findOneBySomeField($value): ?Event
+{
+    return $this->createQueryBuilder('s')
+        ->andWhere('s.exampleField = :val')
+        ->setParameter('val', $value)
+        ->getQuery()
+        ->getOneOrNullResult()
+    ;
+}
+*/

@@ -1,0 +1,65 @@
+{% extends 'base.html.twig' %}
+
+{% block titlePage %}Liste des sorties{% endblock %}
+
+
+{% block container %}
+
+    <div class="row">
+        <div class="col-md-12">
+            <div class="row" >
+
+                <div class=""col-md-12>
+
+                    {{ form_start(formSearch) }}
+
+                        {{ form_row(formSearch.textSearch) }}<br>
+
+                        <h5>Filter par campus</h5>
+                        {{ form_row(formSearch.campusSearch) }}<br>
+
+                        <h5>Filter par état de l'événement</h5>
+                        {{ form_row(formSearch.statusSearch) }}<br>
+
+{#                    <h5>Début de l'événement : </h5>#}
+{#                    {{ form_row(formSearch.dateStartSearch) }}<br>#}
+
+{#                    <h5>Fin de l'événement : </h5>#}
+{#                    {{ form_row(formSearch.dateRegistrationSearch) }}<br>#}
+
+                    <button type="submit" class="btn btn-primary">Rechercher</button>
+
+
+                    {{ form_end(formSearch) }}
+
+                </div>
+
+                <div class=""col-md-12>
+                <div class="col-md-3">
+                </div>
+                <div class="col-md-6" style="align-items: center">
+
+{#                    {%  if app.user %}#}
+{#                        <p style="text-align: center">Bienvenue {{ app.user.username }}</p>#}
+{#                    {% endif %}#}
+
+                    <h3 style="text-align: center">Liste des sorties</h3>
+
+                    <ul style="list-style-type: none">
+                        {% for event in listByFilters %}
+                            <li><a href="{{ url('details', {"id" : event.id }) }}">{{ event.nameEvent }} ({{ event.status }}) : {{ event.campus }}</a></li>
+
+                        {% endfor %}
+                    </ul>
+
+                </div>
+                <div class="col-md-3">
+                </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+{% endblock %}

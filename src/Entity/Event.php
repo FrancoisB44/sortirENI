@@ -280,5 +280,11 @@ class Event
     {
     }
 
+    public function __toString()
+    {
+        return $this->campus;
+    }
+
+
 
 }

@@ -2,11 +2,15 @@
 
 namespace App\Controller;
 
+use App\Data\SearchData;
+use App\Entity\Campus;
 use App\Entity\Event;
 use App\Entity\Place;
 use App\Entity\Status;
 use App\Entity\User;
 use App\Form\EventType;
+use App\Form\SearchType;
+use App\Repository\CampusRepository;
 use App\Repository\EventRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -67,8 +71,14 @@ class EventController extends AbstractController
     public function listEvent(EntityManagerInterface $entityManager) {
 
         $listEvent = $entityManager->getRepository('App:Event')->findAll();
+//        $listCampus = $entityManager->getRepository(Campus::class)->findAll();
+//        $listByCampus = $entityManager->getRepository('App:Event')->findByCampus('id');
 
-        return $this->render('event/listEvent.html.twig', ['listEvent' => $listEvent]);
+        return $this->render('event/listEvent.html.twig', [
+            'listEvent' => $listEvent,
+//            'listCampus' => $listCampus,
+//            'listByCampus' => $listByCampus
+        ]);
     }
 
     /**
@@ -84,6 +94,26 @@ class EventController extends AbstractController
         return $this->render('event/detailsEvent.html.twig', ['detailEvent' => $detailEvent]);
     }
 
+
+
+    /**
+     * @Route(path="/list2", name="list2")
+     */
+    public function findByFilters(EventRepository $eventRepository, Request $request) {
+
+        $data = new SearchData();
+        $formSearch = $this->createForm(SearchType::class, $data);
+
+        $formSearch->handleRequest($request);
+
+
+        $listByFilters = $eventRepository->findSearch($data);
+
+        return $this->render('event/listEvent2.html.twig', [
+            'listByFilters' => $listByFilters,
+            'formSearch' => $formSearch->createView()
+        ]);
+    }
 
 
 
