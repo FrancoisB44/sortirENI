@@ -4,10 +4,12 @@ namespace App\Controller;
 
 use App\Entity\User;
 use App\Form\ModificationFormType;
+use App\Form\ModifyProfileAsAdminFormType;
 use App\Form\RegistrationFormType;
 use App\Repository\EventRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\File\Exception\FileException;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
@@ -40,7 +42,7 @@ class ModifyUserController extends AbstractController
         $profile = $entityManager->getRepository(User::class)->find($profileId);
         $pass = $profile->getPassword();
         dump($pass);
-        $form = $this->createForm(ModificationFormType::class,$profile);
+        $form = $this->createForm(ModifyProfileAsAdminFormType::class,$profile);
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
             //test pr modifier l image

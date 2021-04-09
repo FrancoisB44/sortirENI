@@ -60,7 +60,7 @@ class User implements UserInterface
     private $password;
 
     /**
-     * @ORM\Column(type="boolean")
+     * @ORM\Column(type="json")
      */
     private $roles = [];
     /**
@@ -92,6 +92,7 @@ class User implements UserInterface
      * @ORM\Column(type="string", length=100, nullable=true)
      */
     private $pictureName;
+
 
     public function __construct()
     {
@@ -386,6 +387,18 @@ class User implements UserInterface
     public function setPictureName(?string $pictureName): self
     {
         $this->pictureName = $pictureName;
+
+        return $this;
+    }
+
+    public function getRole(): ?Role
+    {
+        return $this->role;
+    }
+
+    public function setRole(?Role $role): self
+    {
+        $this->role = $role;
 
         return $this;
     }

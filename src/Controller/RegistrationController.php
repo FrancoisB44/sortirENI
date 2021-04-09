@@ -1,8 +1,10 @@
 <?php
 namespace App\Controller;
+use App\Entity\Role;
 use App\Entity\User;
 use App\Form\RegistrationFormType;
 use App\Security\AppAuthenticator;
+use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -14,9 +16,17 @@ class RegistrationController extends AbstractController
     /**
      * @Route("/register", name="app_register")
      */
-    public function register(Request $request, UserPasswordEncoderInterface $passwordEncoder, GuardAuthenticatorHandler $guardHandler, AppAuthenticator $authenticator): Response
+    public function register( Request $request, UserPasswordEncoderInterface $passwordEncoder, GuardAuthenticatorHandler $guardHandler, AppAuthenticator $authenticator): Response
     {
         $user = new User();
+
+        //SET Role to USER
+        $roles[] = "ROLE_USER";
+        $user->setRoles($roles);
+
+        //Set admin to false/0
+        $user->setAdmin(0);
+
         $form = $this->createForm(RegistrationFormType::class, $user);
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
@@ -36,9 +46,6 @@ class RegistrationController extends AbstractController
                 }
                 $user->setPictureName($newFileName);
             }
-            //fin test
-            //Set admin to false/0
-            $user->setAdmin(0);
             // encode the plain password
             $user->setPassword(
                 $passwordEncoder->encodePassword(

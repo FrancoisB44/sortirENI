@@ -10,6 +10,8 @@ use App\Entity\User;
 use App\Form\AdminUserRegistrationFormType;
 use App\Form\CampusType;
 use App\Form\CityType;
+use App\Form\ModificationFormType;
+use App\Form\ModifyProfileAsAdminFormType;
 use App\Form\PlaceType;
 use App\Form\CreateUserType;
 use App\Form\RegistrationFormType;
@@ -200,17 +202,20 @@ class AdminController extends AbstractController
     }
 
     /**
-     * @Route("/disable_user/{id}",requirements={"id":"\d+"}, name="disable_user")
+     * @Route("/modify_user_as_admin/{id}", requirements={"id":"\d+"}, name="modify_user_as_admin")
      */
-    public function disableUser($id, EntityManagerInterface $entityManager){
-        $repo = $entityManager->getRepository(User::class);
-        $user = $repo->find($id);
-
-
-        $this->addFlash('success','utilisateur'.$user->getUsername().'inactif');
-
-        $list = $entityManager->getRepository(User::class)->findAll();
-
-        return $this->render('admin/listUsersAsAdmin.html.twig', ['listUsers'=> $list]);
+    public function modifyUser(Request $request, EntityManagerInterface $entityManager, UserPasswordEncoderInterface $passwordEncoder)
+    {
+        $profileId = $request->get('id');
+        $profile = $entityManager->getRepository(User::class)->find($profileId);
+        $form = $this->createForm(ModifyProfileAsAdminFormType::class,$profile);
+        $form->handleRequest($request);
+        if ($form->isSubmitted() && $form->isValid()) {
+            $entityManager->persist($profile);
+            $entityManager->flush();
+            $this->addFlash('success', 'Modification success');
+            return $this->redirectToRoute('list_user');// pas sur du nom de la route
+        }
+        return $this->render('admin/modifyProfileAsAdmin.html.twig', ["userForm" => $form->createView(), "user"=>$profile]);
     }
 }
