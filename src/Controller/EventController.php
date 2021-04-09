@@ -58,7 +58,7 @@ class EventController extends AbstractController
 
             $this->addFlash('success', 'Sortie ajoutée !');
 
-            return $this->redirectToRoute('list');
+            return $this->redirectToRoute('list2');
         }
 
         return $this->render('event/createEvent.html.twig', [ 'formEvent' => $formEvent->createView() ]);
@@ -71,13 +71,13 @@ class EventController extends AbstractController
     public function listEvent(EntityManagerInterface $entityManager) {
 
         $listEvent = $entityManager->getRepository('App:Event')->findAll();
-//        $listCampus = $entityManager->getRepository(Campus::class)->findAll();
-//        $listByCampus = $entityManager->getRepository('App:Event')->findByCampus('id');
+        $listCampus = $entityManager->getRepository(Campus::class)->findAll();
+        $listByCampus = $entityManager->getRepository('App:Event')->findByCampus('id');
 
         return $this->render('event/listEvent.html.twig', [
             'listEvent' => $listEvent,
-//            'listCampus' => $listCampus,
-//            'listByCampus' => $listByCampus
+            'listCampus' => $listCampus,
+            'listByCampus' => $listByCampus
         ]);
     }
 

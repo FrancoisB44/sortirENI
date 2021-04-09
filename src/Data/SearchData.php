@@ -39,7 +39,7 @@ class SearchData
     /**
      * @var \DateTime
      */
-    public $dateRegistrationSearch;
+    public $dateEndSearch;
 
 
 

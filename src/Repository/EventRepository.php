@@ -60,17 +60,17 @@ class EventRepository extends ServiceEntityRepository
                 ->setParameter('status', $searchData->statusSearch);
         }
 
-//        if(!empty($searchData->dateStartSearch)) {
-//            $query = $query
-//                ->andWhere('search.StartDateTime IN (:dateStartSearch)')
-//                ->setParameter('dateStartSearch', ($searchData->dateStartSearch)->format('d/m/Y'));
-//        }
-//
-//        if(!empty($searchData->dateRegistrationSearch)) {
-//            $query = $query
-//                ->andWhere('search.registrationDeadLine IN (:dateRegistrationSearch)')
-//                ->setParameter('dateRegistrationSearch', ($searchData->dateRegistrationSearch)->format('d/m/Y'));
-//        }
+        if(!empty($searchData->dateStartSearch)) {
+            $query = $query
+                ->andWhere('search.StartDateTime > (:dateStartSearch)')
+                ->setParameter('dateStartSearch', ($searchData->dateStartSearch));
+        }
+
+        if(!empty($searchData->dateEndSearch)) {
+            $query = $query
+                ->andWhere('search.StartDateTime < (:dateEndSearch)')
+                ->setParameter('dateEndSearch', ($searchData->dateEndSearch));
+        }
 
 
         return $query->getQuery()->getResult();

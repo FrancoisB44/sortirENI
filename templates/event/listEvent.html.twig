@@ -9,29 +9,29 @@
         <div class="col-md-12">
             <div class="row" >
 
-                <div class=""col-md-12>
+{#                <div class=""col-md-12>#}
 
 
 {#                    {{ form_start(formEvent) }}#}
 
-                    <label>Campus : </label>
+{#                    <label>Campus : </label>#}
 {#                    {{ form_widget(formEvent.campus) }}#}
-                    {% for campus in listCampus %}
-                        <li><a href="">{{ campus.nameCampus }}</a></li>
-                    {% endfor %}
-                    <br><br>
+{#                    {% for campus in listCampus %}#}
+{#                        <li><a href="">{{ campus.nameCampus }}</a></li>#}
+{#                    {% endfor %}#}
+{#                    <br><br>#}
 
-                    <div>
-                        {% for event in listByCampus %}
-                            <li><a href="{{ url('details', {"id" : event.id }) }}">{{ event.nameEvent }}</a></li>
-                        {% endfor %}
+{#                    <div>#}
+{#                        {% for event in listByCampus %}#}
+{#                            <li><a href="{{ url('details', {"id" : event.id }) }}">{{ event.nameEvent }}</a></li>#}
+{#                        {% endfor %}#}
 
-                        <form action="listEvent.html.twig" method="post">
-                            <button type="submit" >Rechercher</button>
-                        </form>
+{#                        <form action="listEvent.html.twig" method="post">#}
+{#                            <button type="submit" >Rechercher</button>#}
+{#                        </form>#}
 
 
-                    </div>
+{#                    </div>#}
 {#                    {{ form_end(formEvent) }}#}
 
 
@@ -41,7 +41,7 @@
 
 
 
-                </div>
+{#                </div>#}
 
                 <div class="col-md-3">
                 </div>
