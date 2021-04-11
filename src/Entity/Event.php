@@ -46,7 +46,7 @@ class Event
 
     /**
      * @Assert\NotBlank(message="Renseignez le nombre max de participants")
-     * @ORM\Column(type="decimal", precision=10, scale=0, nullable=true)
+     * @ORM\Column(type="integer", precision=10, scale=0, nullable=true)
      */
     private $nbRegistrationsMax;
 

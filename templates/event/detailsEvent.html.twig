@@ -34,7 +34,7 @@
                         {% if date(dateLimitRegistration) > date(today) %}
                             <li>Inscription jusqu'au : {{ detailEvent.registrationDeadLine|date("d/m/Y") }} à {{ detailEvent.registrationDeadLine|date("H:i") }}</li>
                             <p>(Il ne vous reste plus que {{ leftDaysRegistration }} jours pour vous inscrire)</p>
-                            <li>Plus que XX places disponibles sur {{ detailEvent.nbRegistrationsMax }}</li>
+                            <li>Déjà {{ detailEvent.users|length }} place(s) réservée(s) sur les {{ detailEvent.nbRegistrationsMax }} places disponibles</li>
                         {% elseif date(detailEvent.registrationDeadLine) < today %}
                             {% else %}
                             <li>Trop tard, inscriptions terminées depuis le {{ detailEvent.registrationDeadLine|date("d/m/Y") }} à {{ detailEvent.registrationDeadLine|date("H:i") }}. L'événement débutera sans vous dans {{ leftDaysEvent }} jours</li>
@@ -44,6 +44,32 @@
                     {% endif %}
 
                     <br><br>
+
+
+                    {% if participants | length > 0 %}
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th>Pseudo</th>
+                                <th>Nom</th>
+                                <th></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                        {% for participants in participants  %}
+                            <tr>
+                                <td>{{ participants.pseudo }}</td>
+                                <td>{{ participants.username }} {{ participants.firstNameUser }}</td>
+                                <td>
+                                    <!--Ajouter bouton uniquement si différent user-->
+                                    <a href="{{ url('user_display_user', {"id" : participants.id }) }}" class="btn btn-success btn-sm">Consulter profil</a>
+                                </td>
+                            </tr>
+                        {% endfor %}
+                        </tbody>
+                    </table>
+                    {% endif %}
+
 
                     <button type="submit" class="btn btn-success" onclick="history.go(-1)">
                         Retour à la liste

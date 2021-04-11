@@ -88,10 +88,17 @@ class EventController extends AbstractController
 
         $id = $request->get('id');
 
+        $eventRepository = $this->getDoctrine()->getRepository(Event::class);
+        $event = $eventRepository->find($id);
+        $participants = $event->getUsers();
+
         $detailEvent = $eventRepository->find($id);
 
 
-        return $this->render('event/detailsEvent.html.twig', ['detailEvent' => $detailEvent]);
+        return $this->render('event/detailsEvent.html.twig', [
+            'detailEvent' => $detailEvent,
+            'participants' => $participants
+        ]);
     }
 
 
@@ -115,6 +122,38 @@ class EventController extends AbstractController
         ]);
     }
 
+    /**
+     * @Route(path="/subscribe/{id}", requirements={"id":"\d+"}, name="subscribe", methods={"GET"})
+     */
+    public function subscribe(Request $request, EventRepository $eventRepository, EntityManagerInterface $entityManager) {
+        $id = $request->get('id');
+        $inscription = $eventRepository->find($id);
+
+        if(count($inscription->getUsers()) < $inscription->getNbRegistrationsMax()) {
+            $inscription->addUser($this->getUser());
+            $entityManager = $this->getDoctrine()->getManager();
+            $entityManager->persist($inscription);
+            $entityManager->flush();
+        } else {
+            $this->addFlash('danger', 'Dommage, il n\'y a plus de place');
+        }
+
+        return $this->redirectToRoute('list2');
+    }
+
+
+//    public function place(Request $request, $placeId) {
+//        $event = new Event();
+//        $em = $this->getDoctrine()->getManager();
+//        $placeSearch = $em->getRepository(Place::class)->findAllPlaceByCity($placeId);
+//
+//        $form = $this->createForm(
+//            Event::class,
+//            $event,
+//            ['placeSearch' => $placeSearch]
+//
+//        );
+//    }
 
 
 
