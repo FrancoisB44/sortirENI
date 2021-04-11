@@ -45,12 +45,46 @@
 
                     <h3 style="text-align: center">Liste des sorties</h3>
 
-                    <ul style="list-style-type: none">
-                        {% for event in listByFilters %}
-                            <li><a href="{{ url('details', {"id" : event.id }) }}">{{ event.nameEvent }} ({{ event.status }}) : {{ event.campus }}</a></li>
+{#                    <ul style="list-style-type: none">#}
+{#                        {% for event in listByFilters %}#}
+{#                            <li><a href="{{ url('details', {"id" : event.id }) }}">{{ event.nameEvent }} ({{ event.status }}) : {{ event.campus }}</a></li>#}
 
-                        {% endfor %}
-                    </ul>
+{#                        {% endfor %}#}
+{#                    </ul>#}
+
+                    {% if listByFilters | length > 0 %}
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <th>Sortie</th>
+                                    <th>Débute le </th>
+                                    <th>Inscription jusqu'au </th>
+                                    <th>inscrits / places</th>
+                                    <th>Etat </th>
+                                    <th>Organisateur </th>
+                                    <th>Actions </th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% for event in listByFilters %}
+                                    <tr>
+                                        <td>{{ event.nameEvent }}</td>
+                                        <td>{{ event.startDateTime|date("d/m/Y") }}</td>
+                                        <td>{{ event.registrationDeadLine|date("d/m/Y") }}</td>
+                                        <td>{{ event.nbRegistrationsMax }}</td>
+                                        <td>{{ event.status }}</td>
+                                        <td>{{ event.user }}</td>
+                                        <td>
+                                            <a href="{{ url('details', {"id" : event.id }) }}" class="btn btn-success btn-sm"></a>
+                                        </td>
+                                    </tr>
+                                {% endfor %}
+                            </tbody>
+                        </table>
+                    {% else %}
+                        <p>Aucune sortie ne correspond à votre recherche </p>
+                    {% endif %}
+
 
                 </div>
                 <div class="col-md-3">

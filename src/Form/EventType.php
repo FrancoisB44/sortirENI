@@ -11,6 +11,7 @@ use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\Form\Extension\Core\Type\DateTimeType;
 
 class EventType extends AbstractType
 {
@@ -19,14 +20,30 @@ class EventType extends AbstractType
         $builder
 
             ->add('nameEvent')
-            ->add('StartDateTime')
-            ->add('duration')
-            ->add('registrationDeadLine')
+            ->add('StartDateTime', DateTimeType::class, [
+                'date_widget' => 'single_text',
+                'time_widget' => 'single_text'
+            ])
+            ->add('duration', DateTimeType::class, [
+                'time_widget' => 'single_text'
+            ])
+            ->add('registrationDeadLine', DateTimeType::class, [
+                'date_widget' => 'single_text',
+                'time_widget' => 'single_text'
+            ])
             ->add('nbRegistrationsMax')
             ->add('infoEvent')
 //            ->add('status')
             ->add('campus')
             ->add('place', PlaceType::class)
+//            ->add('place', Place::class, array(
+//                'mapped' => false,
+//                'class' => Place::class,
+//                'property' => 'namePlace',
+//                'empty_value' => '--Sélectionnez un lieu--',
+//                'label' => 'Choix du lieu',
+//                'multiple' => false,
+//            ))
 
 //            ->add('place', EntityType::class, array(
 //                'class'=>'App\Entity\Place',

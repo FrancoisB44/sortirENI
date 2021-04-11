@@ -53,13 +53,14 @@ class SearchType extends AbstractType
                 'multiple' => true
             ])
             ->add('dateStartSearch', DateTimeType::class, [
-                'label' => false,
-//                'require' => false,
-//                'empty_data' => ''
+                'required' => false,
+                'date_widget' => 'single_text',
+                'time_widget' => 'single_text',
             ])
             ->add('dateEndSearch', DateTimeType::class, [
-                'label' => false,
-//                'require' => false
+                'required' => false,
+                'date_widget' => 'single_text',
+                'time_widget' => 'single_text',
             ])
 
         ;
