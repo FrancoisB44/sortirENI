@@ -39,8 +39,9 @@ class EventRepository extends ServiceEntityRepository
     {
         $query = $this
             ->createQueryBuilder('search')
-            ->select('search', 'campus')
-            ->join('search.campus', 'campus');
+            ->select('search', 'campus', 'user')
+            ->join('search.campus', 'campus')
+            ->join('search.user', 'user');
 
         if(!empty($searchData->textSearch)) {
             $query = $query
@@ -71,6 +72,12 @@ class EventRepository extends ServiceEntityRepository
                 ->andWhere('search.StartDateTime < (:dateEndSearch)')
                 ->setParameter('dateEndSearch', ($searchData->dateEndSearch));
         }
+
+//        if(!empty($searchData->userSearch)) {
+//            $query = $query
+//                ->andWhere('search.user = (:user)')
+//                ->setParameter('userSearch', ($searchData->userSearch));
+//        }
 
 
         return $query->getQuery()->getResult();

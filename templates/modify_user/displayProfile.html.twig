@@ -17,7 +17,10 @@
                 <li class="list-group-item"> Email: {{ profile.mail }}</li>
                 <li class="list-group-item">Campus: {{ profile.campus}} </li>
             </ul>
-                <a href="{{ path('user_modify_user', {'id': profile.id }) }}" class="btn-success m-2">Modifier</a>
+            <br>
+            {% if app.user.id == profile.id %}
+                <a href="{{ path('user_modify_user', {'id': profile.id }) }}" class="btn btn-success btn-sm">Modifier</a>
+            {% endif %}
         </div>
     </row>
 

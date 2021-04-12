@@ -8,6 +8,8 @@ use App\Data\SearchData;
 use App\Entity\Campus;
 use App\Entity\Event;
 use App\Entity\Status;
+use App\Entity\User;
+use App\Repository\UserRepository;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\DateTimeType;
@@ -17,6 +19,10 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 
 class SearchType extends AbstractType
 {
+//    private $id = 1;
+//    public function __construct($id) {
+//        $id = $this->id;
+//    }
 
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
@@ -28,14 +34,6 @@ class SearchType extends AbstractType
                     'placeholder' => 'Rechercher une sortie'
                 ]
             ])
-
-//            ->add('campusSearch', EntityType::class, array(
-//                'class' => Campus::class,
-//                'choice_label' => function($campus) {
-//                    return $campus->getNameCampus();
-//                },
-//                'choice_value'=>'campusSearch'
-//            ))
 
 
             ->add('campusSearch', EntityType::class, [
@@ -64,6 +62,17 @@ class SearchType extends AbstractType
                 'date_widget' => 'single_text',
                 'time_widget' => 'single_text',
             ])
+
+//            ->add('userSearch', EntityType::class, array(
+//                'label' => 'Mes sorties',
+//                'required' => false,
+//                'class' => User::class,
+////                'query_builder' => function (UserRepository $repo) use ($id) {
+////                    return $repo->findBy($id);
+////                },
+//                'expanded' => false,
+//                'multiple' => false,
+//            ))
 
         ;
     }
