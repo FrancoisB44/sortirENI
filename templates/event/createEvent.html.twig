@@ -14,31 +14,58 @@
 
         <label>Campus : </label>
         {{ form_widget(formEvent.campus) }}
-        <br><br>
+<br>
 
-{#        <label>Ville : </label>#}
-{#        {{ form_widget(formEvent.place) }}#}
-{#        <br><br>#}
+        <label for="kw"> Ville : </label>
+{#            {{ form_label(formEvent.placeId) }}#}
+{#        {{ form_widget(formEvent.placeId) }}#}{# ca c est pr envoyer au controller #}
+        <input type="text" id="kw">
 
-        <label>Lieu : </label>
-        {{ form_widget(formEvent.place.namePlace) }}
-        <br><br>
+        <div id="results"></div>
 
-        <label>Rue : </label>
-        {{ form_widget(formEvent.place.street) }}
-        <br><br>
+        <script>
+            const searchCityUrl = "{{ path('demo_city_search') }}";
+        </script>
 
-        <label>Code Postal : </label>
-        {{ form_widget(formEvent.place.zipCode) }}
-        <br><br>
 
-        <label>Ville : </label>
-        {{ form_widget(formEvent.place.nameCity) }}
-        <br><br>
+        <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+        <script>
+
+            let searchInput = document.getElementById("kw");
+
+            searchInput.addEventListener("keyup", sendAjaxRequest);
+
+            function sendAjaxRequest() {
+
+                let keyword = searchInput.value;
+
+                axios.get(searchCityUrl, {
+                    params: {
+                        "keyword": keyword
+                    }
+                })
+                    .then(function (response) {
+                        console.log(response.data);
+                        let resultsContainer = document.getElementById("results")
+                        resultsContainer.innerHTML = response.data;
+                    });
+
+            }
+
+        </script>
+
+            <a href="{{ path('create_place_bis') }}"> Ajouter un lieu </a>
+
+
+{#        <label>Lieu : </label>#}
+{#        {{ form_widget(formEvent.place.namePlace) }}#}
+{#        <label>Rue : </label>#}
+{#        {{ form_widget(formEvent.place.street) }}#}
+{#        <label>Code Postal : </label>#}
+{#        {{ form_widget(formEvent.place.zipCode) }}#}
 
 
         <h3>Etape 2 : créez un événement </h3>
-
 
 
         <label>Intitulé sortie : </label>
@@ -64,18 +91,13 @@
         <label>Description : </label>
         {{ form_widget(formEvent.infoEvent) }}
         <br><br>
+        {{ form_errors(formEvent) }}
 
 
 
 
-    {{ form_widget(formEvent) }}
-    <button class="btn btn-success">Ajouter</button>
+        {{ form_widget(formEvent) }} <button class="btn btn-success">Ajouter</button>
 
-    {{ form_end(formEvent) }}
+        {{ form_end(formEvent) }}
 
-
-
-{% endblock %}
-
-
-
+        {% endblock %}

@@ -134,7 +134,34 @@ class AdminController extends AbstractController
             'listPlace' => $listPlace,
             ]);
     }
+    //test
+    /**
+     * @Route("/create_place_bis", name="create_place_bis")
+     */
+    public function createPlaceBis(Request $request, EntityManagerInterface $entityManager): Response
+    {
+        $place = new Place();
 
+        $formPlace = $this->createForm(PlaceType::class, $place);
+        $formPlace->handleRequest($request);
+
+        if ($formPlace->isSubmitted() && $formPlace->isValid()) {
+
+            $entityManager->persist($place);
+            $entityManager->flush();
+
+            $this->addFlash('success', 'Lieu ajouté !');
+
+            return $this->redirectToRoute('create');
+
+        }
+        $listPlace = $entityManager->getRepository('App:Place')->findAll();
+
+        return $this->render('admin/createPlace.html.twig', [
+            'formPlace' => $formPlace->createView(),
+            'listPlace' => $listPlace,
+        ]);
+    }
     /**
      * @Route("/create_user_as_admin", name="create_user_as_admin")
      */
