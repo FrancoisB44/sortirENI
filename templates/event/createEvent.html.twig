@@ -16,25 +16,25 @@
         {{ form_widget(formEvent.campus) }}
         <br><br>
 
-        <label>Ville : </label>
-        {{ form_widget(formEvent.place) }}
+{#        <label>Ville : </label>#}
+{#        {{ form_widget(formEvent.place) }}#}
+{#        <br><br>#}
+
+        <label>Lieu : </label>
+        {{ form_widget(formEvent.place.namePlace) }}
         <br><br>
 
-{#        <label>Lieu : </label>#}
-{#        {{ form_widget(formEvent.place.namePlace) }}#}
-{#        <br><br>#}
+        <label>Rue : </label>
+        {{ form_widget(formEvent.place.street) }}
+        <br><br>
 
-{#        <label>Rue : </label>#}
-{#        {{ form_widget(formEvent.place.street) }}#}
-{#        <br><br>#}
+        <label>Code Postal : </label>
+        {{ form_widget(formEvent.place.zipCode) }}
+        <br><br>
 
-{#        <label>Code Postal : </label>#}
-{#        {{ form_widget(formEvent.place.zipCode) }}#}
-{#        <br><br>#}
-
-{#        <label>Ville : </label>#}
-{#        {{ form_widget(formEvent.place.nameCity) }}#}
-{#        <br><br>#}
+        <label>Ville : </label>
+        {{ form_widget(formEvent.place.nameCity) }}
+        <br><br>
 
 
         <h3>Etape 2 : créez un événement </h3>

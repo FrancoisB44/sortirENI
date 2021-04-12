@@ -30,7 +30,6 @@ class EventController extends AbstractController
     {
         $event = new Event();
 
-
         $formEvent = $this->createForm(EventType::class, $event);
         $formEvent->handleRequest($request);
 
@@ -61,12 +60,14 @@ class EventController extends AbstractController
             return $this->redirectToRoute('list2');
         }
 
-        return $this->render('event/createEvent.html.twig', [ 'formEvent' => $formEvent->createView() ]);
+        return $this->render('event/createEvent.html.twig', [
+            'formEvent' => $formEvent->createView(),
+        ]);
     }
 
 
     /**
-     * @Route(path="/list", name="list")
+     * @Route(path="/list2", name="list2")
      */
     public function listEvent(EntityManagerInterface $entityManager) {
 
@@ -104,7 +105,7 @@ class EventController extends AbstractController
 
 
     /**
-     * @Route(path="/list2", name="list2")
+     * @Route(path="/list", name="list")
      */
     public function findByFilters(EventRepository $eventRepository, Request $request) {
 
@@ -127,10 +128,13 @@ class EventController extends AbstractController
      */
     public function subscribe(Request $request, EventRepository $eventRepository, EntityManagerInterface $entityManager) {
         $id = $request->get('id');
+
+        $eventRepository = $this->getDoctrine()->getRepository(Event::class);
         $inscription = $eventRepository->find($id);
 
         if(count($inscription->getUsers()) < $inscription->getNbRegistrationsMax()) {
             $inscription->addUser($this->getUser());
+
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->persist($inscription);
             $entityManager->flush();
@@ -138,7 +142,7 @@ class EventController extends AbstractController
             $this->addFlash('danger', 'Dommage, il n\'y a plus de place');
         }
 
-        return $this->redirectToRoute('list2');
+        return $this->redirectToRoute('list');
     }
 
 

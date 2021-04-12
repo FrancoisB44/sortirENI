@@ -29,9 +29,7 @@ class EventType extends AbstractType
                 'date_widget' => 'single_text',
                 'time_widget' => 'single_text'
             ])
-            ->add('duration', DateTimeType::class, [
-                'time_widget' => 'single_text'
-            ])
+            ->add('duration')
             ->add('registrationDeadLine', DateTimeType::class, [
                 'date_widget' => 'single_text',
                 'time_widget' => 'single_text'
@@ -43,11 +41,14 @@ class EventType extends AbstractType
                 'class' => 'App\Entity\Campus',
                 'placeholder' => '--Sélectionnez un campus--'
             ])
-            ->add('place', EntityType::class, [
-                'class' => 'App\Entity\Place',
-                'placeholder' => '--Sélectionnez une ville--',
-                'mapped' => false
-            ])
+
+            ->add('place', PlaceType::class)
+
+//            ->add('place', EntityType::class, [
+//                'class' => 'App\Entity\Place',
+//                'placeholder' => '--Sélectionnez une ville--',
+//                'mapped' => false
+//            ])
 
 //            ->add('place', Entity::class, array(
 //                'class' => Place::class,
