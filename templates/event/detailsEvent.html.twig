@@ -13,6 +13,7 @@
                 <div class="col-md-6" style="align-items: center">
 
                     <h2>{{ detailEvent.nameEvent | capitalize }}</h2>
+                    <button onclick="window.location.href='{{ path('inscription',{'id':detailEvent.id}) }}'">S'inscrire</button>
                     <li>Début événement : {{ detailEvent.StartDateTime|date("d/m/Y") }} à {{ detailEvent.StartDateTime|date("H:i") }}</li>
                     <li>Description : {{ detailEvent.infoEvent }}</li>
                     <li>Durée en minutes de l'événement : {{ detailEvent.duration }}</li>
