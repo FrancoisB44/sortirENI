@@ -1,0 +1,68 @@
+{% extends 'base.html.twig' %}
+
+ {% block titlePage %}
+     <h3>Démo ajax</h3>
+ {% endblock %}
+
+
+{% block container %}
+    <label for="kw"> Ville : </label>
+    <input type="text" id="kw">
+
+
+
+    <div id="results"></div>
+
+    <script>
+        const searchCityUrl = "{{ path('demo_city_search') }}";// on passe l url de ajaxcontrooler l25 :/demo/villes/recherche)
+        // on stock l url  ds une constante
+    </script>
+
+
+
+
+
+    {# requete en Js direct ds le twig #}
+    {# permet d utiliser les fction d axios #}
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script>
+        {# Js-> reaction a un evenment: quand la ersonne tape ds l input l10 #}
+
+        {# dc cible cet evnmt et le mettre sous ecoute #}
+        {# utilisation du doc.getElmtbyId en utilisant l id  kw l10 #}
+        let searchInput = document.getElementById("kw");
+
+        {# mise sous ecoute de  evnmt avc  un addeventlistener #}
+        {# keyup => quand on relache une touche de clavier, + appelle d une fonction( creation de la fction ss parenthese on ne veut pas l appeler) #}
+        searchInput.addEventListener("keyup", sendAjaxRequest);
+
+        function sendAjaxRequest() {
+            //test  console.log("yoyo la pookie");
+            // c est la que je veux recupere ce que la personne a taper
+            let keyword = searchInput.value; // cible la valeur tapée + stocke ds une variable
+            //requete ajax en requete get(.get) qu on fait a une URL on veut mettre l url de la fonction ds le controller lie a cett twig
+
+            //reutilisation de la const l13
+            // on stocke ce que la personne a taper (notre keyword l39 ds un tit tableau d option
+            axios.get(searchCityUrl, {
+                params: {
+                    // on utilise en cle params => parametre d url
+                    "keyword": keyword
+                    // "keyword" => objet et je lui donne comme valeur ma variable (valeur ce qui a ete tape)
+                    // ca envoie la requete vers le serveur dc le serveur va repondre( reponse asynnchrone on recoit la rep plus tard)
+                }
+            })
+                .then(function (response) {//fction anonyme et on recoit en argument la response du serveur
+                    //on enchaine le .then apres le .get
+                    console.log(response.data); //affichage de la reponse
+                    //axios qui met ca ds .data
+                    let resultsContainer = document.getElementById("results")
+                    resultsContainer.innerHTML = response.data;
+                });
+
+        }
+
+    </script>
+
+
+{% endblock %}
