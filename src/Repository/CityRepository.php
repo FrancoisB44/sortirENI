@@ -19,14 +19,9 @@ class CityRepository extends ServiceEntityRepository
         parent::__construct($registry, City::class);
     }
 
-    //creation d'une methode pour recuperer les mots cles
 
-    public function searchCity(string $keyword){
-        $querybuilder = $this->createQueryBuilder('p');
-        $querybuilder->andWhere('p.nameCity LIKE :kw')->setParameter('kw','%'.$keyword.'%');
-        $querybuilder->setMaxResults(40);
-        return $querybuilder->getQuery()->getResult();
-}
+
+
 
 
 
