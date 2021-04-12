@@ -21,8 +21,8 @@ class RegistrationController extends AbstractController
         $user = new User();
 
         //SET Role to USER
-        $roles[] = "ROLE_USER";
-        $user->setRoles($roles);
+        //$roles[] = "ROLE_DISABLED";
+        //$user->setRoles($roles);
 
         //Set admin to false/0
         $user->setAdmin(0);

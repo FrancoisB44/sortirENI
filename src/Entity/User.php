@@ -256,7 +256,7 @@ class User implements UserInterface
         {
             $roles = $this->roles;
             // guarantee every user at least has ROLE_USER
-            $roles[] = 'ROLE_USER';// on ajoute le role user ds le tableau de roles et un retourne ce tab avc la nvlle valeur
+            $roles[] = 'ROLE_DISABLED';// on ajoute le role user ds le tableau de roles et un retourne ce tab avc la nvlle valeur
             return array_unique($roles);
         }
     }
@@ -391,15 +391,4 @@ class User implements UserInterface
         return $this;
     }
 
-//    public function getRole(): ?Role
-//    {
-//        return $this->role;
-//    }
-//
-//    public function setRole(?Role $role): self
-//    {
-//        $this->role = $role;
-//
-//        return $this;
-//    }
 }

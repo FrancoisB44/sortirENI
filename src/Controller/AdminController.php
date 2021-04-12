@@ -61,7 +61,6 @@ class AdminController extends AbstractController
 
     }
 
-
     /**
      * @Route(path="/list_campus", name="list_campus")
      */
@@ -71,7 +70,6 @@ class AdminController extends AbstractController
 
         return $this->render('admin/listCampus.html.twig', ['listCampus' => $listCampus]);
     }
-
 
     /**
      * @Route("/create_status", name="create_status")
@@ -100,7 +98,6 @@ class AdminController extends AbstractController
             ]);
     }
 
-
     /**
      * @Route(path="/list_status", name="list_status")
      */
@@ -110,7 +107,6 @@ class AdminController extends AbstractController
 
         return $this->render('admin/listStatus.html.twig', ['listStatus' => $listStatus]);
     }
-
 
     /**
      * @Route("/create_place", name="create_place")
@@ -218,4 +214,12 @@ class AdminController extends AbstractController
         }
         return $this->render('admin/modifyProfileAsAdmin.html.twig', ["userForm" => $form->createView(), "user"=>$profile]);
     }
+
+    /**
+     * @Route("/admin_home", name="admin_home")
+     */
+    public function mainAdmin(){
+        return $this->render('admin/mainAdmin.html.twig');
+    }
 }
+

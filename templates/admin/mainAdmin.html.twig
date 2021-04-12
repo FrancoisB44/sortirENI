@@ -1,0 +1,22 @@
+    {% extends 'base.html.twig' %}
+
+    {% block titlePage %}Admin Page{% endblock %}
+
+
+    {% block container %}
+
+        <div class="row bg-dark text-light">
+            <li class="nav-item">
+                <a class="nav-link bg-white mx-4 my-2 rounded" href="{{ path('list_user')}}">Liste profils</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link bg-white mx-4 my-2 rounded" href="{{ path('list') }}">Liste sorties</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link bg-white mx-4 my-2 rounded" href="{{ path('app_logout') }}">LogOut</a>
+            </li>
+        </div>
+
+
+
+    {% endblock %}

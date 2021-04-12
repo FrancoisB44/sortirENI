@@ -1,0 +1,22 @@
+{%  extends('base.html.twig') %}
+{% block titlePage %}Mon Profil{% endblock %}
+
+
+{% block container  %}
+    <row class="d-flex justify-content-center align-items-center">
+        <div class="m-4 ">
+                <h3>Modification du profil de : <strong>{{ user.pseudo }}</strong></h3>
+                <ul class="list-group">
+                    <li class="list-group-item">Nom: {{ user.nameUser }}</li>
+                    <li class="list-group-item">Prenom: {{ user.firstNameUser }}</li>
+                    <li class="list-group-item">Téléphone: {{ user.phoneNumber }}</li>
+                    <li class="list-group-item">Email: {{ user.mail }}</li>
+                </ul>
+                {{ form_start(userForm) }}
+                {{ form_widget(userForm)}}
+                <button class="btn-success m-2" type="submit" >Valider</button>
+                {{ form_end(userForm) }}
+    </row>
+
+
+{% endblock %}
