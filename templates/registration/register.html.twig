@@ -54,8 +54,13 @@
 <div class="row p-1">
     <div class="col-md-2"></div>
     <div class="col-md-4 align-middle"><label for="name">Mot de Passe:</label></div>
-    <div class="col-md-3">{{ form_widget(registrationForm.plainPassword) }}  </div>
+    <div class="col-md-3">{{ form_widget(registrationForm.plainPassword.first) }}  </div>
 </div>
+    <div class="row p-1">
+        <div class="col-md-2"></div>
+        <div class="col-md-4 align-middle"><label for="name">Confirmation de Mot de Passe:</label></div>
+        <div class="col-md-3">{{ form_widget(registrationForm.plainPassword.second) }}  </div>
+    </div>
 <div class="row p-3">
     <div class="col-md-2"></div>
     <div class="col-md-4"><label for="name">Nom du Campus:</label></div>
