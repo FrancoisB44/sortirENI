@@ -26,16 +26,6 @@ class ModificationFormType extends AbstractType
             ->add('firstNameUser')
             ->add('phoneNumber')
             ->add('mail')
-            ->add('admin')
-            ->add('active')
-            ->add('agreeTerms', CheckboxType::class, [
-                'mapped' => false,
-                'constraints' => [
-                    new IsTrue([
-                        'message' => 'You should agree to our terms.',
-                    ]),
-                ],
-            ])
             ->add('plainPassword', RepeatedType::class, [
                 'mapped' => false,
                 'constraints' => [

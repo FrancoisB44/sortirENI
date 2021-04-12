@@ -107,10 +107,15 @@ class EventController extends AbstractController
     /**
      * @Route(path="/list", name="list")
      */
-    public function findByFilters(EventRepository $eventRepository, Request $request) {
+    public function findByFilters(EventRepository $eventRepository, Request $request, EntityManagerInterface $em) {
 
         $data = new SearchData();
         $formSearch = $this->createForm(SearchType::class, $data);
+
+//        $userRepository = $this->getDoctrine()->getRepository(SearchData::class);
+//        $planner = $userRepository->find($this->getUser()->getUsername());
+//        $em = $this->getDoctrine()->getManager()->getRepository('App:User');
+//        $user = $em->find($request->getUser());
 
         $formSearch->handleRequest($request);
 
@@ -119,7 +124,8 @@ class EventController extends AbstractController
 
         return $this->render('event/listEvent2.html.twig', [
             'listByFilters' => $listByFilters,
-            'formSearch' => $formSearch->createView()
+            'formSearch' => $formSearch->createView(),
+//            'planner' => $planner
         ]);
     }
 

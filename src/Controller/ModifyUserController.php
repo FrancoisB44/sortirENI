@@ -42,7 +42,7 @@ class ModifyUserController extends AbstractController
         $profile = $entityManager->getRepository(User::class)->find($profileId);
         $pass = $profile->getPassword();
         dump($pass);
-        $form = $this->createForm(ModifyProfileAsAdminFormType::class,$profile);
+        $form = $this->createForm(ModificationFormType::class,$profile);
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
             //test pr modifier l image

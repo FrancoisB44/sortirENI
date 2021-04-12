@@ -7,6 +7,7 @@ namespace App\Data;
 use App\Entity\Campus;
 use App\Entity\Status;
 use App\Entity\User;
+use Couchbase\UserSettings;
 
 class SearchData
 {
@@ -22,7 +23,7 @@ class SearchData
     public $campusSearch =[];
 
     /**
-     * @var User
+     * @var User[]
      */
     public $userSearch = [];
 
@@ -40,6 +41,11 @@ class SearchData
      * @var \DateTime
      */
     public $dateEndSearch;
+
+    /**
+     * @var Users
+     */
+    public $participantSearch = [];
 
 
 

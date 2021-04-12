@@ -12,10 +12,21 @@
                     <li class="list-group-item">Téléphone: {{ user.phoneNumber }}</li>
                     <li class="list-group-item">Email: {{ user.mail }}</li>
                 </ul>
+        </div>
+
+            <div class="m-4">
                 {{ form_start(userForm) }}
-                {{ form_widget(userForm)}}
-                <button class="btn-success m-2" type="submit" >Valider</button>
+                <div class="form-check d-flex flex-column">
+                    <p>
+                        {{ form_widget(userForm.roles)}}
+                    </p>
+
+
+                    <button class="btn-success m-2" type="submit" >Valider</button>
+                    <p>coucou</p>
                 {{ form_end(userForm) }}
+                </div>
+            </div>
     </row>
 
 

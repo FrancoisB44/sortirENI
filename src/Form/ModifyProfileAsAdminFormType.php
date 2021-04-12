@@ -22,7 +22,7 @@ class ModifyProfileAsAdminFormType extends AbstractType
     {
         $builder
 
-            ->add('roles', ChoiceType::class, [
+            ->add('roles', CheckboxType::class, [
                 'choices' => [
                     'Utilisateur' => 'ROLE_USER',
                     'Inactif' => 'ROLE_DISABLED',
@@ -30,7 +30,7 @@ class ModifyProfileAsAdminFormType extends AbstractType
                 ],
                 'expanded' => true,
                 'multiple' => true,
-                'label' => 'Rôles'
+                'label' => 'Rôles:'
             ])
             ;
     }
