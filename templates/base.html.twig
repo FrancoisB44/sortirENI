@@ -32,25 +32,25 @@
                 <div class="col-lg-4 col-sm-12 d-flex justify-content-center">
                     <ul class="nav">
                         <li class="nav-item">
-                            <a class="nav-link bg-white mx-4 my-2 rounded" href="{{ path('home') }}">Home</a>
+                            <a class="nav-link bg-white mx-4 my-2 rounded" href="{{ path('home') }}">Accueil</a>
                         </li>
                         {% if app.user %}
                             <li class="nav-item">
                                 <a class="nav-link bg-white mx-4 my-2 rounded" href="{{ path('user_display_user', {"id":app.user.id}) }}">Mon profil</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link bg-white mx-4 my-2 rounded" href="{{ path('create') }}">Create Event</a>
+                                <a class="nav-link bg-white mx-4 my-2 rounded" href="{{ path('create') }}">Créer sortie</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link bg-white mx-4 my-2 rounded" href="{{ path('list') }}">Event's List</a>
+                                <a class="nav-link bg-white mx-4 my-2 rounded" href="{{ path('list') }}">Liste sorties</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link bg-white mx-4 my-2 rounded" href="{{ path('app_logout') }}">LogOut</a>
+                                <a class="nav-link bg-white mx-4 my-2 rounded" href="{{ path('app_logout') }}">Déconnexion</a>
                                 <!---a gerer la deconnexion-->
                             </li>
                         {% else %}
                             <li class="nav-item bg-white mx-4 my-2 rounded">
-                                <a class="nav-link" href="{{ path('app_login') }}">Login</a>
+                                <a class="nav-link" href="{{ path('app_login') }}">Se connecter</a>
                             </li>
                             <li class="nav-item bg-white mx-4 my-2 rounded">
                                 <a class="nav-link" href="{{ path('app_register') }}">S'inscrire</a>
@@ -71,7 +71,7 @@
                     {% endfor %}
                 {% endfor %}
 
-                <div id="main" class="col-md-6 mx-auto">
+                <div id="main" class="col-md-8 mx-auto">
                     {% block container %}{% endblock %}
                 </div>
 

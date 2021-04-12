@@ -42,24 +42,27 @@ class SearchType extends AbstractType
                 'label' => false,
                 'required' => false,
                 'class' => Campus::class,
-                'expanded' => true,
+                'expanded' => false,
                 'multiple' => true
             ])
             ->add('statusSearch', EntityType::class, [
                 'label' => false,
                 'required' => false,
                 'class' => Status::class,
-                'expanded' => true,
+                'expanded' => false,
                 'multiple' => true
             ])
             ->add('dateStartSearch', DateTimeType::class, [
                 'label' => false,
-//                'require' => false,
-//                'empty_data' => ''
+                'required' => false,
+                'date_widget' => 'single_text',
+                'time_widget' => 'single_text',
             ])
             ->add('dateEndSearch', DateTimeType::class, [
                 'label' => false,
-//                'require' => false
+                'required' => false,
+                'date_widget' => 'single_text',
+                'time_widget' => 'single_text',
             ])
 
         ;

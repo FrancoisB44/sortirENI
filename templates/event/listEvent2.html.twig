@@ -9,7 +9,7 @@
         <div class="col-md-12">
             <div class="row" >
 
-                <div class=""col-md-12>
+                <div class="col-md-3" style="align-items: center">
 
                     {{ form_start(formSearch) }}
 
@@ -34,10 +34,7 @@
 
                 </div>
 
-                <div class=""col-md-12>
-                <div class="col-md-3">
-                </div>
-                <div class="col-md-6" style="align-items: center">
+                <div class="col-md-9" style="align-items: center">
 
 {#                    {%  if app.user %}#}
 {#                        <p style="text-align: center">Bienvenue {{ app.user.username }}</p>#}
@@ -45,17 +42,64 @@
 
                     <h3 style="text-align: center">Liste des sorties</h3>
 
-                    <ul style="list-style-type: none">
-                        {% for event in listByFilters %}
-                            <li><a href="{{ url('details', {"id" : event.id }) }}">{{ event.nameEvent }} ({{ event.status }}) : {{ event.campus }}</a></li>
+{#                    <ul style="list-style-type: none">#}
+{#                        {% for event in listByFilters %}#}
+{#                            <li><a href="{{ url('details', {"id" : event.id }) }}">{{ event.nameEvent }} ({{ event.status }}) : {{ event.campus }}</a></li>#}
 
-                        {% endfor %}
-                    </ul>
+{#                        {% endfor %}#}
+{#                    </ul>#}
 
+                    {% if listByFilters | length > 0 %}
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <th>Sortie</th>
+                                    <th>Débute le </th>
+                                    <th>Inscription jusqu'au </th>
+                                    <th>inscrits / places</th>
+                                    <th>Etat </th>
+                                    <th>Organisateur </th>
+                                    <th></th>
+                                    <th></th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% for event in listByFilters %}
+                                    <tr>
+                                        <td>{{ event.nameEvent }}</td>
+                                        <td>{{ event.startDateTime|date("d/m/Y") }}</td>
+                                        <td>{{ event.registrationDeadLine|date("d/m/Y") }}</td>
+                                        <td>{{ event.users|length }}/{{ event.nbRegistrationsMax }}</td>
+                                        <td>{{ event.status }}</td>
+                                        <td>{{ event.user }}</td>
+                                        <td>
+                                            <!-- Sortie ouverte, utilisateur pas encore inscrit et place dispo-->
+                                            {% if event.status == 'Ouverte' and event.user not in event.users and event.users|length < event.nbRegistrationsMax %}
+                                            <a href="{{ url('subscribe', {"id" : event.id }) }}" class="btn btn-primary btn-sm">S'inscrire</a>
+                                            {% endif %}
+                                            <!-- Sortie ouverte, utilisateur déjà inscrit-->
+
+                                            <!-- Sortie ouverte, mais plus de place-->
+
+                                            <!-- Sortie ouverte, mais utilisateur = organisateur-->
+
+                                            <!-- Sortie terminée-->
+
+                                            <!-- Inscription terminée-->
+                                        </td>
+                                        <td>
+                                            <a href="{{ url('details', {"id" : event.id }) }}" class="btn btn-success btn-sm">Détail</a>
+                                        </td>
+                                    </tr>
+                                {% endfor %}
+                            </tbody>
+                        </table>
+                    {% else %}
+                        <p>Aucune sortie ne correspond à votre recherche </p>
+                    {% endif %}
                 </div>
-                <div class="col-md-3">
-                </div>
-                </div>
+
+
             </div>
         </div>
     </div>
