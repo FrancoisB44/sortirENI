@@ -5,6 +5,7 @@ namespace App\Controller;
 
 
 use App\Repository\CityRepository;
+use App\Repository\PlaceRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -26,10 +27,10 @@ class AjaxController extends AbstractController
     /**
      * @Route ("/demo/villes/recherche", name="demo_city_search")
      */
-    public function citySearch(CityRepository $cityRepository, Request $request): Response
+    public function citySearch(PlaceRepository $placeRepository, Request $request): Response
     {
         $keyword=$request->query->get('keyword'); //le nom du parametre d url
-       $results=  $cityRepository->searchCity($keyword); // methode inventee je passe mes mot cles en argumentss
+       $results=  $placeRepository->searchCity($keyword); // methode inventee je passe mes mot cles en argumentss
         return $this->render("event/ajax_cities.html.twig",[
             "cities"=>$results
         ]);// renvoyer un morceaud  html avc les resultats dedans

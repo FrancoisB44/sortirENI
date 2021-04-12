@@ -1,6 +1,25 @@
+{# on veut retourner un morceau d html  et l injecter #}
 
-{# on veut retourner un morceau d html  et l injecter  #}
+{# {% for city in cities %} #}
+{# <option>{{ city.nameCity }}</option> #}
+{# {% endfor %} #}
 
+
+
+
+
+
+<select id="select_place" name="select_place">
 {% for city in cities %}
-<option>{{ city.nameCity }}</option>
+    <div class="card" >
+       <option value="{{ city.id }}"> {{ city.namePlace }} - {{ city.street }} - {{ city.zipCode }}-{{ city.nameCity }}</option>
+{#        <p>{{ city.namePlace }}</p>#}
+{#        <p>{{ city.street }}</p>#}
+{#        <option> Ville</option> < <p> {{ city.zipCode }}-{{ city.nameCity }} </p>#}
+        {# {{ form_widget(formEvent) }} <button class="btn btn-success">Selectionner ce lieu</button> #}
+    </div>
 {% endfor %}
+</select>
+
+
+<span onclick="newElement()" class="addBtn"><a href="{{ path('create_place') }}"> Ajouter un lieu </a></span>

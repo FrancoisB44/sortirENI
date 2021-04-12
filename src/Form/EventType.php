@@ -11,6 +11,7 @@ use Doctrine\ORM\EntityRepository;
 use Doctrine\ORM\Mapping\Entity;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Form\FormEvent;
 use Symfony\Component\Form\FormEvents;
@@ -42,8 +43,9 @@ class EventType extends AbstractType
                 'placeholder' => '--Sélectionnez un campus--'
             ])
 
-            ->add('place', PlaceType::class)
-
+//            ->add('placeId', TextType::class,[
+//                    'mapped' => false, // creer un champs qui n est pas lie a mon objet
+//                ])
 //            ->add('place', EntityType::class, [
 //                'class' => 'App\Entity\Place',
 //                'placeholder' => '--Sélectionnez une ville--',

@@ -12,6 +12,7 @@ use App\Form\EventType;
 use App\Form\SearchType;
 use App\Repository\CampusRepository;
 use App\Repository\EventRepository;
+use App\Repository\PlaceRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -26,7 +27,7 @@ class EventController extends AbstractController
     /**
      * @Route("/create", name="create")
      */
-    public function createEvent(Request $request, EntityManagerInterface $entityManager): Response
+    public function createEvent(Request $request, EntityManagerInterface $entityManager, PlaceRepository $placeRepository): Response
     {
         $event = new Event();
 
@@ -37,6 +38,9 @@ class EventController extends AbstractController
 //            $event->setUser($this->getUser()->getUsername());
             $event->setUser($this->getUser());
 
+            $idPlace= $request->get('select_place');
+            $place = $placeRepository->findOneBy(['id'=>$idPlace]);
+            $event->setPlace($place);
 
             $dEvent = $event->getStartDateTime();
             $dLRegistration = $event->getRegistrationDeadLine();
@@ -55,7 +59,7 @@ class EventController extends AbstractController
             $entityManager->persist($event);
             $entityManager->flush();
 
-            $this->addFlash('success', 'Sortie ajoutée !');
+            $this->addFlash('success', 'Sortie ajoutée !'. $idPlace);
 
             return $this->redirectToRoute('list2');
         }
