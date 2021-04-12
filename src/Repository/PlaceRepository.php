@@ -19,6 +19,14 @@ class PlaceRepository extends ServiceEntityRepository
         parent::__construct($registry, Place::class);
     }
 
+    //creation d'une methode pour recuperer les mots cles
+    public function searchCity(string $keyword){
+        $querybuilder = $this->createQueryBuilder('p');
+        $querybuilder->andWhere('p.nameCity LIKE :kw')->setParameter('kw','%'.$keyword.'%');
+        $querybuilder->setMaxResults(40);
+        return $querybuilder->getQuery()->getResult();
+    }
+
 //    public function findAllPlaceByCity($nameCity)
 //    {
 //        $qb = $this->createQueryBuilder('place');
