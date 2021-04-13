@@ -6,44 +6,72 @@
 {% block container %}
 
     <div class="row">
-    <div class="col-md-12">
-
-    {{ form_start(formCampus) }}
-
-    <div class="row">
-    <div class="col-md-6" >
-
-        <label>Nom du Campus : </label>
-        {{ form_widget(formCampus.nameCampus) }}
-        <br><br>
 
 
-    </div>
+            <div class="col-md-3"></div>
+            <div class="col-md-6" style="align-items: center">
 
-    <div class="col-md-6" style="align-items: center">
+{#                {{ form_start(formCampus) }}#}
 
-        {#                    {%  if app.user %}#}
-        {#                        <p style="text-align: center">Bienvenue {{ app.user.username }}</p>#}
-        {#                    {% endif %}#}
-
-        <h3 style="text-align: center">Liste des campus</h3>
-
-        <ul style="list-style-type: none">
-            {% for campus in listCampus %}
-                <li><a href="{{ url('list_campus', {"id" : campus.id }) }}">{{ campus.nameCampus }}</a></li>
-
-            {% endfor %}
-        </ul>
-
-    </div>
+{#                <label>Nom du Campus : </label>#}
+{#                <td>{{ form_widget(formCampus.nameCampus) }}</td>#}
+{#                <br>#}
 
 
+{#                {{ form_widget(formCampus) }}#}
+{#                <button type="submit" class="btn btn-primary">Ajouter</button><br>#}
+
+                {{ form_start(formCampus) }}
+
+                <h3 style="text-align: center">Liste des campus</h3>
+
+                {% if listCampus | length > 0 %}
+                <table class="table">
+                    <thead>
+                    <tr>
+                        <th>Campus</th>
+                        <th></th>
+                        <th></th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {% for campus in listCampus %}
+                    <tr>
+                        <td>{{ campus.nameCampus }}</td>
+                        <td>
+                            {#  #}
+                            <a href="{{ path('delete_campus', {'id': campus.id }) }}" class="btn btn-danger" >Supprimer</a>
+                        </td>
+                        <td>
+                            <!--href="{# {{ path('modify_campus_as_admin', {'id': campus.id }) }} #}"-->
+                            <a  class="btn btn-warning">Modifier</a>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                    <tr>
+                        <td>
+
+                            {{ form_widget(formCampus.nameCampus) }}
+
+                        </td>
+                        <td>
+                            {{ form_widget(formCampus) }}
+                            <button href="{{ path('create_campus') }}" class="btn btn-primary">Ajouter</button>
+                        </td>
+                    </tr>
+
+                    </tbody>
+                </table>
+                {% else %}
+                    <p>Aucun campus à afficher </p>
+                {% endif %}
+
+                {{ form_end(formCampus) }}
+            </div>
+            <div class="col-md-3"></div>
 
 
-    {{ form_widget(formCampus) }}
-    <button>Ajouter</button>
-
-    {{ form_end(formCampus) }}
+        </div>
 
 
 

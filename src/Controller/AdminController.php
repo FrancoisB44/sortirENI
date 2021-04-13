@@ -248,5 +248,39 @@ class AdminController extends AbstractController
     public function mainAdmin(){
         return $this->render('admin/mainAdmin.html.twig');
     }
+
+    /**
+     * @Route("/delete_campus/{id}",requirements={"id":"\d+"}, name="delete_campus")
+     */
+    public function deleteCampus(Request $request, EntityManagerInterface $entityManager){
+        $id = $request->get('id');
+
+        $campus = $entityManager->getRepository(Campus::class)->find($id);
+
+        $entityManager->remove($campus);
+        $entityManager->flush();
+
+        $this->addFlash('success','Le campus a été supprimé');
+
+        return $this->redirectToRoute('create_campus'); // rester sur la meme page
+    }
+
+    /**
+     * @Route("/delete_status/{id}",requirements={"id":"\d+"}, name="delete_status")
+     */
+    public function deleteStatus(Request $request, EntityManagerInterface $entityManager){
+        $id = $request->get('id');
+
+        $status = $entityManager->getRepository(Status::class)->find($id);
+
+        $entityManager->remove($status);
+        $entityManager->flush();
+
+        $this->addFlash('success','Le status a été supprimé');
+
+        return $this->redirectToRoute('create_status'); // rester sur la meme page
+    }
+
+
 }
 

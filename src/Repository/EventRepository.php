@@ -4,6 +4,7 @@ namespace App\Repository;
 
 use App\Data\SearchData;
 use App\Entity\Event;
+use App\Entity\User;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
 
@@ -42,6 +43,8 @@ class EventRepository extends ServiceEntityRepository
             ->select('search', 'campus', 'user')
             ->join('search.campus', 'campus')
             ->join('search.user', 'user');
+//            ->join('search.event', 'event');
+
 
         if(!empty($searchData->textSearch)) {
             $query = $query
@@ -73,11 +76,19 @@ class EventRepository extends ServiceEntityRepository
                 ->setParameter('dateEndSearch', ($searchData->dateEndSearch));
         }
 
-//        if(!empty($searchData->userSearch)) {
-//            $query = $query
-//                ->andWhere('search.user = (:user)')
-//                ->setParameter('userSearch', ($searchData->userSearch));
-//        }
+        if(!empty($searchData->userSearch)) {
+            $query = $query
+                ->andWhere('search.user = (:user)')
+                ->setParameter('user', ($searchData->userSearch));
+        }
+
+        if(!empty($searchData->participantSearch)) {
+            $query = $query
+                ->andWhere('search.user IN (:participant)')
+                ->setParameter('participant', ($searchData->participantSearch));
+        }
+
+
 
 
         return $query->getQuery()->getResult();

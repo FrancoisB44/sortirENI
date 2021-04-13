@@ -32,8 +32,12 @@
                     <h5>Fin de l'événement : </h5>
                     {{ form_row(formSearch.dateEndSearch) }}<br>
 
-{#                    <h5>Recherche organisateur : </h5>#}
-{#                    {{ form_row(formSearch.userSearch) }}<br>#}
+                    <h5>Sorties : </h5>
+                    {{ form_row(formSearch.userSearch) }}
+                    {{ form_row(formSearch.participantSearch) }}
+
+
+                    <br>
 
                     <div class="row">
                         <div class="col-md-6">
@@ -95,11 +99,11 @@
                                         </td>
                                         <td>{{ event.status }}</td>
                                         <td>
-                                            {% if event.user in event.users %}
+                                            {% if app.user in event.users %}
                                                 x
                                             {% endif %}
                                         </td>
-                                        <td><a href="{{ url('user_display_user', {"id" : event.id }) }}" >{{ event.user }}</a></td>
+                                        <td><a href="{{ url('user_display_user', {"id" : event.user.id }) }}" >{{ event.user }}</a></td>
 
                                         <td>
                                             <!-- Sortie ouverte, utilisateur pas encore inscrit et place dispo-->

@@ -5,9 +5,11 @@ namespace App\Data;
 
 
 use App\Entity\Campus;
+use App\Entity\Event;
 use App\Entity\Status;
 use App\Entity\User;
 use Couchbase\UserSettings;
+use Symfony\Component\Security\Core\User\UserInterface;
 
 class SearchData
 {
@@ -18,19 +20,35 @@ class SearchData
     public $textSearch = '';
 
     /**
-     * @var Campus[]
+     * @var Campus
      */
-    public $campusSearch =[];
+    public $campusSearch;
+
+//    /**
+//     * @return User
+//     */
+//    public function getUserSearch(): User
+//    {
+//        return $this->userSearch;
+//    }
+//
+//    /**
+//     * @param User $userSearch
+//     */
+//    public function setUserSearch(User $userSearch): void
+//    {
+//        $this->userSearch = $userSearch;
+//    }
 
     /**
-     * @var User[]
+     * @var User
      */
-    public $userSearch = [];
+    public $userSearch;
 
     /**
      * @var Status
      */
-    public $statusSearch = [];
+    public $statusSearch;
 
     /**
      * @var \DateTime
@@ -45,7 +63,7 @@ class SearchData
     /**
      * @var Users
      */
-    public $participantSearch = [];
+    public $participantSearch;
 
 
 

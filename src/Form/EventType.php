@@ -43,6 +43,8 @@ class EventType extends AbstractType
                 'placeholder' => '--Sélectionnez un campus--'
             ])
 
+
+
 //            ->add('placeId', TextType::class,[
 //                    'mapped' => false, // creer un champs qui n est pas lie a mon objet
 //                ])

@@ -2,47 +2,69 @@
 
 {% block titlePage %}Ajouter un etat d'événement{% endblock %}
 
-
 {% block container %}
 
     <div class="row">
-    <div class="col-md-12">
 
-    {{ form_start(formStatus) }}
 
-    <div class="row">
-    <div class="col-md-6" >
+        <div class="col-md-3"></div>
+        <div class="col-md-6" style="align-items: center">
 
-        <label>Ajouter un état : </label>
-        {{ form_widget(formStatus.wording) }}
-        <br><br>
+            {#                {{ form_start(formCampus) }}#}
+
+            {#                <label>Nom du Campus : </label>#}
+            {#                <td>{{ form_widget(formCampus.nameCampus) }}</td>#}
+            {#                <br>#}
+
+
+            {#                {{ form_widget(formCampus) }}#}
+            {#                <button type="submit" class="btn btn-primary">Ajouter</button><br>#}
+
+            {{ form_start(formStatus) }}
+
+            <h3 style="text-align: center">Liste des états</h3>
+
+            {% if listStatus | length > 0 %}
+                <table class="table">
+                    <thead>
+                    <tr>
+                        <th>Etat</th>
+                        <th></th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {% for status in listStatus %}
+                        <tr>
+                            <td>{{ status.wording }}</td>
+                            <td>
+                                <a href="{{ path('delete_status', {'id': status.id }) }}" class="btn btn-danger">Supprimer</a>
+                            </td>
+                        </tr>
+                    {% endfor %}
+                    <tr>
+                        <td>
+
+                            {{ form_widget(formStatus.wording) }}
+
+                        </td>
+                        <td>
+                            {{ form_widget(formStatus) }}
+                            <button href="{{ path('create_status') }}" class="btn btn-primary">Ajouter</button>
+                        </td>
+                    </tr>
+
+                    </tbody>
+                </table>
+            {% else %}
+                <p>Aucun état à afficher </p>
+            {% endif %}
+
+            {{ form_end(formStatus) }}
+        </div>
+        <div class="col-md-3"></div>
 
 
     </div>
-
-    <div class="col-md-6" style="align-items: center">
-
-        {#                    {%  if app.user %}#}
-        {#                        <p style="text-align: center">Bienvenue {{ app.user.username }}</p>#}
-        {#                    {% endif %}#}
-
-        <h3 style="text-align: center">Liste des états</h3>
-
-        <ul style="list-style-type: none">
-            {% for status in listStatus %}
-                <li><a href="{{ url('list_status', {"id" : status.id }) }}">{{ status.wording }}</a></li>
-
-            {% endfor %}
-        </ul>
-
-    </div>
-
-
-
-    {{ form_widget(formStatus) }}
-    <button>Ajouter</button>
-
-    {{ form_end(formStatus) }}
 
 
 

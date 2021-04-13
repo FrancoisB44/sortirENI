@@ -9,19 +9,21 @@ use App\Entity\Campus;
 use App\Entity\Event;
 use App\Entity\Status;
 use App\Entity\User;
-use App\Repository\UserRepository;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use Symfony\Component\Form\Extension\Core\Type\DateTimeType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
+
+
 class SearchType extends AbstractType
 {
-//    private $id = 1;
-//    public function __construct($id) {
-//        $id = $this->id;
+//    protected $user;
+//    public function __construct(Security $security) {
+//        $this->user = $security->getUser();
 //    }
 
     public function buildForm(FormBuilderInterface $builder, array $options)
@@ -36,20 +38,22 @@ class SearchType extends AbstractType
             ])
 
 
-            ->add('campusSearch', EntityType::class, [
+            ->add('campusSearch', EntityType::class, array(
                 'label' => false,
                 'required' => false,
                 'class' => Campus::class,
+                'placeholder' => 'Selectionnez un campus',
                 'expanded' => false,
-                'multiple' => true
-            ])
-            ->add('statusSearch', EntityType::class, [
+                'multiple' => false
+            ))
+            ->add('statusSearch', EntityType::class, array(
                 'label' => false,
                 'required' => false,
                 'class' => Status::class,
+                'placeholder' => 'Selectionnez un etat',
                 'expanded' => false,
-                'multiple' => true
-            ])
+                'multiple' => false
+            ))
             ->add('dateStartSearch', DateTimeType::class, [
                 'label' => false,
                 'required' => false,
@@ -63,16 +67,38 @@ class SearchType extends AbstractType
                 'time_widget' => 'single_text',
             ])
 
+            ->add('userSearch', CheckboxType::class, array(
+                'label' => 'Mes sorties',
+                'required' => false,
+
+//                'class' => User::class,
+//                'placeholder' => 'Selectionnez un organisateur',
+//                'expanded' => false,
+//                'multiple' => false,
+            ))
+
 //            ->add('userSearch', EntityType::class, array(
 //                'label' => 'Mes sorties',
 //                'required' => false,
 //                'class' => User::class,
-////                'query_builder' => function (UserRepository $repo) use ($id) {
-////                    return $repo->findBy($id);
-////                },
+////                'class' => User::class,
+////                'placeholder' => 'Selectionnez un organisateur',
 //                'expanded' => false,
 //                'multiple' => false,
 //            ))
+
+
+            ->add('participantSearch', CheckboxType::class, array(
+                'label' => 'Mes inscriptions',
+                'required' => false,
+                'mapped' => false
+//                'class' => User::class,
+//                'placeholder' => 'Selectionnez un organisateur',
+//                'expanded' => false,
+//                'multiple' => false,
+            ))
+
+
 
         ;
     }

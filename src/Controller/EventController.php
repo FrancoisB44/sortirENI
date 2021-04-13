@@ -116,7 +116,8 @@ class EventController extends AbstractController
         $data = new SearchData();
         $formSearch = $this->createForm(SearchType::class, $data);
 
-//        $userRepository = $this->getDoctrine()->getRepository(SearchData::class);
+//        $data->setUserSearch($this->getUser());
+
 //        $planner = $userRepository->find($this->getUser()->getUsername());
 //        $em = $this->getDoctrine()->getManager()->getRepository('App:User');
 //        $user = $em->find($request->getUser());
@@ -125,6 +126,9 @@ class EventController extends AbstractController
 
 
         $listByFilters = $eventRepository->findSearch($data);
+//        dump($data);
+//        dump($listByFilters);
+//        exit();
 
         return $this->render('event/listEvent2.html.twig', [
             'listByFilters' => $listByFilters,
