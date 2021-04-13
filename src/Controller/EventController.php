@@ -36,11 +36,13 @@ class EventController extends AbstractController
         $formEvent->handleRequest($request);
 
         //test de recuperation du nouvx lieu de creer
-        $foo= $request->query->get('idFoo');
+        //$foo = $request->query->get('idFoo');
+            $foo = $request->query->get('idFoo');
+
         $place= null;
         if(!empty($foo)) {
-            $place = $placeRepository->findOneBy(['id' => $foo]);
-            //$event->setPlace($place);
+            $place = $placeRepository->find($foo);
+            $event->setPlace($place);
         }
 
         if ($formEvent->isSubmitted() && $formEvent->isValid()) {

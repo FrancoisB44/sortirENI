@@ -16,6 +16,7 @@ use App\Form\PlaceType;
 use App\Form\CreateUserType;
 use App\Form\RegistrationFormType;
 use App\Form\StatusType;
+use App\Repository\PlaceRepository;
 use App\Security\AppAuthenticator;
 use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\EntityManagerInterface;
@@ -138,7 +139,7 @@ class AdminController extends AbstractController
     /**
      * @Route("/create_place_bis", name="create_place_bis")
      */
-    public function createPlaceBis(Request $request, EntityManagerInterface $entityManager): Response
+    public function createPlaceBis(Request $request,PlaceRepository $placeRepository, EntityManagerInterface $entityManager): Response
     {
         $place = new Place();
 
@@ -150,9 +151,10 @@ class AdminController extends AbstractController
             $entityManager->persist($place);
             $entityManager->flush();
 
+            $idFoo=$place->getId();
             $this->addFlash('success', 'Lieu ajouté !');
-
-            return $this->redirectToRoute('create');
+           //$foo= $placeRepository->find($idFoo);
+            return $this->redirectToRoute('create',['idFoo'=>$idFoo]);
 
         }
         $listPlace = $entityManager->getRepository('App:Place')->findAll();
@@ -160,6 +162,7 @@ class AdminController extends AbstractController
         return $this->render('admin/createPlace.html.twig', [
             'formPlace' => $formPlace->createView(),
             'listPlace' => $listPlace,
+            //'idFoo'=>$foo,
         ]);
     }
     /**

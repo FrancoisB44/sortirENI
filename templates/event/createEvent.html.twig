@@ -22,17 +22,22 @@
         <br>
         <a href="{{ path('create_place_bis') }}"> Ajouter un lieu </a>
         <div>
-            {% if foo is not null %}
-            <select id="select_place" name="select_place">
-                        <option value="{{ foo.id }}"> {{ foo.namePlace }} - {{ foo.street }} - {{ foo.zipCode }}-{{ foo.nameCity }}</option>
 
-            </select>
+            {% if foo is not null %}
+                <select id="select_place" name="select_place">
+                            <option value="{{ foo.id }}"> {{ foo.namePlace }} - {{ foo.street }} - {{ foo.zipCode }}-{{ foo.nameCity }}</option>
+                </select>
+
+{#                <select id="select_place" name="select_place">#}
+{#                    <option value="{{ foo.id }}"> {{ foo.namePlace }} - {{ foo.street }} - {{ foo.zipCode }}#}
+{#                        -{{ foo.nameCity }}</option>#}
+
+{#                </select>#}
             {% endif %}
         </div>
         <script>
             const searchCityUrl = "{{ path('demo_city_search') }}";
         </script>
-
 
         <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
         <script>
