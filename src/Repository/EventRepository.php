@@ -7,6 +7,7 @@ use App\Entity\Event;
 use App\Entity\User;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
+use Symfony\Component\Security\Core\User\UserInterface;
 
 /**
  * @method Event|null find($id, $lockMode = null, $lockVersion = null)
@@ -36,13 +37,14 @@ class EventRepository extends ServiceEntityRepository
      * Récupère les Events en lien avec la recherche
      * @return Event[]
      */
-    public function findSearch(SearchData $searchData) : array
+    public function findSearch(SearchData $searchData, UserInterface $user) : array
     {
         $query = $this
             ->createQueryBuilder('search')
             ->select('search', 'campus', 'user')
             ->join('search.campus', 'campus')
             ->join('search.user', 'user');
+//            ->join('search.users', 'users')
 //            ->join('search.event', 'event');
 
 
@@ -79,13 +81,13 @@ class EventRepository extends ServiceEntityRepository
         if(!empty($searchData->userSearch)) {
             $query = $query
                 ->andWhere('search.user = (:user)')
-                ->setParameter('user', ($searchData->userSearch));
+                ->setParameter('user', ($user->getId()));
         }
 
         if(!empty($searchData->participantSearch)) {
             $query = $query
                 ->andWhere('search.user IN (:participant)')
-                ->setParameter('participant', ($searchData->participantSearch));
+                ->setParameter('participant', ($searchData->userSearch));
         }
 
 

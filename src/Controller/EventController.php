@@ -125,7 +125,7 @@ class EventController extends AbstractController
         $formSearch->handleRequest($request);
 
 
-        $listByFilters = $eventRepository->findSearch($data);
+        $listByFilters = $eventRepository->findSearch($data, $this->getUser());
 //        dump($data);
 //        dump($listByFilters);
 //        exit();
