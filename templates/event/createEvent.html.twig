@@ -12,17 +12,23 @@
 
         <h3>Etape 1 : sélectionnez ou ajoutez un lieu</h3>
 
-        <label>Campus : </label>
-        {{ form_widget(formEvent.campus) }}
-<br>
 
         <label for="kw"> Ville : </label>
-{#            {{ form_label(formEvent.placeId) }}#}
-{#        {{ form_widget(formEvent.placeId) }}#}{# ca c est pr envoyer au controller #}
+        {# {{ form_label(formEvent.placeId) }} #}
+        {# {{ form_widget(formEvent.placeId) }} #}{# ca c est pr envoyer au controller #}
         <input type="text" id="kw">
-
+        <br>
         <div id="results"></div>
+        <br>
+        <a href="{{ path('create_place_bis') }}"> Ajouter un lieu </a>
+        <div>
+            {% if foo is not null %}
+            <select id="select_place" name="select_place">
+                        <option value="{{ foo.id }}"> {{ foo.namePlace }} - {{ foo.street }} - {{ foo.zipCode }}-{{ foo.nameCity }}</option>
 
+            </select>
+            {% endif %}
+        </div>
         <script>
             const searchCityUrl = "{{ path('demo_city_search') }}";
         </script>
@@ -54,20 +60,12 @@
 
         </script>
 
-            <a href="{{ path('create_place_bis') }}"> Ajouter un lieu </a>
-
-
-{#        <label>Lieu : </label>#}
-{#        {{ form_widget(formEvent.place.namePlace) }}#}
-{#        <label>Rue : </label>#}
-{#        {{ form_widget(formEvent.place.street) }}#}
-{#        <label>Code Postal : </label>#}
-{#        {{ form_widget(formEvent.place.zipCode) }}#}
-
 
         <h3>Etape 2 : créez un événement </h3>
 
-
+        <label>Campus : </label>
+        {{ form_widget(formEvent.campus) }}
+        <br>
 
         <label>Intitulé sortie : </label>
         {{ form_widget(formEvent.nameEvent) }}
@@ -94,10 +92,8 @@
         <br><br>
         {{ form_errors(formEvent) }}
 
-
-
-
-        {{ form_widget(formEvent) }} <button class="btn btn-success">Ajouter</button>
+        {{ form_widget(formEvent) }}
+        <button class="btn btn-success">Ajouter</button>
 
         {{ form_end(formEvent) }}
 

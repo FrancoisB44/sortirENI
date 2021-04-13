@@ -34,6 +34,14 @@ class EventController extends AbstractController
         $formEvent = $this->createForm(EventType::class, $event);
         $formEvent->handleRequest($request);
 
+        //test de recuperation du nouvx lieu de creer
+        $foo= $request->query->get('idFoo');
+        $place= null;
+        if(!empty($foo)) {
+            $place = $placeRepository->findOneBy(['id' => $foo]);
+            //$event->setPlace($place);
+        }
+
         if ($formEvent->isSubmitted() && $formEvent->isValid()) {
 //            $event->setUser($this->getUser()->getUsername());
             $event->setUser($this->getUser());
@@ -41,6 +49,7 @@ class EventController extends AbstractController
             $idPlace= $request->get('select_place');
             $place = $placeRepository->findOneBy(['id'=>$idPlace]);
             $event->setPlace($place);
+
 
             $dEvent = $event->getStartDateTime();
             $dLRegistration = $event->getRegistrationDeadLine();
@@ -61,11 +70,12 @@ class EventController extends AbstractController
 
             $this->addFlash('success', 'Sortie ajoutée !'. $idPlace);
 
-            return $this->redirectToRoute('list2');
+            return $this->redirectToRoute('list');
         }
 
         return $this->render('event/createEvent.html.twig', [
             'formEvent' => $formEvent->createView(),
+           'foo'=> $place
         ]);
     }
 
