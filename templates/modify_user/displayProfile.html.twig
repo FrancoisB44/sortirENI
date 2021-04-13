@@ -11,11 +11,11 @@
         <div class="m-4 ">
             <ul class="list-group ">
                 <h3>{{ profile.pseudo }}</h3>
-                <li class="list-group-item"> Prénom: {{ profile.firstNameUser }}</li>
-                <li class="list-group-item"> Nom: {{ profile.nameUser }}</li>
-                <li class="list-group-item"> Téléphone: {{ profile.phoneNumber }}</li>
-                <li class="list-group-item"> Email: {{ profile.mail }}</li>
-                <li class="list-group-item">Campus: {{ profile.campus}} </li>
+                <li class="list-group-item"> Prénom : {{ profile.firstNameUser }}</li>
+                <li class="list-group-item"> Nom : {{ profile.nameUser }}</li>
+                <li class="list-group-item"> Téléphone : {{ profile.phoneNumber }}</li>
+                <li class="list-group-item"> Email : {{ profile.mail }}</li>
+                <li class="list-group-item">Campus : {{ profile.campus}} </li>
             </ul>
             <br>
             {% if app.user.id == profile.id %}

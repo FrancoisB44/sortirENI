@@ -8,12 +8,27 @@
             <p class="text danger border"> IMAGE</p>
         </div>
         <div class="m-4 ">
+            <ul class="list-group ">
                 <h3>{{ app.user }}</h3>
                 {{ form_start(userForm) }}
-                {{ form_widget(userForm)}}
-                <button class="btn-success m-2" type="submit">Valider</button>
-                {{ form_end(userForm) }}
+                <li class="list-group-item"> Pseudo : {{ form_widget(userForm.pseudo) }}</li>
+                <li class="list-group-item"> Nom : {{ form_widget(userForm.nameUser) }}</li>
+                <li class="list-group-item"> Prénom : {{ form_widget(userForm.firstNameUser) }}</li>
+                <li class="list-group-item"> Téléphone : {{ form_widget(userForm.phoneNumber) }} </li>
+                <li class="list-group-item"> Email : {{ form_widget(userForm.mail) }}</li>
+
+                <li class="list-group-item"> {{ form_widget(userForm.plainPassword)}} </li>
+
+                {{ form_widget(userForm.picture) }}
+            </ul>
+            <br>
+            {{ form_widget(userForm)}}
+            <button type="submit" class="btn btn-success">Valider</button>
+            {{ form_end(userForm) }}
+        </div>
+
     </row>
+
 
 
 {% endblock %}

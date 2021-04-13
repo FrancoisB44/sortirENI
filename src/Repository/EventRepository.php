@@ -43,10 +43,11 @@ class EventRepository extends ServiceEntityRepository
             ->createQueryBuilder('search')
             ->select('search', 'campus', 'user')
             ->join('search.campus', 'campus')
+//            ->join('search.event', 'event')
             ->join('search.user', 'user');
 //            ->join('search.users', 'users')
-//            ->join('search.event', 'event');
 
+        $userId = $user->getId();
 
         if(!empty($searchData->textSearch)) {
             $query = $query
@@ -80,14 +81,15 @@ class EventRepository extends ServiceEntityRepository
 
         if(!empty($searchData->userSearch)) {
             $query = $query
-                ->andWhere('search.user = (:user)')
-                ->setParameter('user', ($user->getId()));
+                ->andWhere('search.user = (:userSearch)')
+                ->setParameter('userSearch', ($user));
         }
 
         if(!empty($searchData->participantSearch)) {
             $query = $query
-                ->andWhere('search.user IN (:participant)')
-                ->setParameter('participant', ($searchData->userSearch));
+                ->join('user.inscription', 'inscription')
+                ->andWhere('inscription.users = (:user)')
+                ->setParameter('user', ($user));
         }
 
 

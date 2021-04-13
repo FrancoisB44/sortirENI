@@ -3,6 +3,7 @@
 namespace App\Form;
 
 use App\Entity\User;
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use Symfony\Component\Form\Extension\Core\Type\FileType;
@@ -22,6 +23,8 @@ class ModificationFormType extends AbstractType
         $builder
 
             ->add('pseudo')
+
+
             ->add('nameUser')
             ->add('firstNameUser')
             ->add('phoneNumber')
@@ -40,8 +43,8 @@ class ModificationFormType extends AbstractType
                 'invalid_message' => 'The password fields must match.',
                 'options' => ['attr' => ['class' => 'password-field']],
                 'required' => false,
-                'first_options'  => ['label' => 'Mot de passe'],
-                'second_options' => ['label' => 'Répétez le mot de passe'],
+                'first_options'  => ['label' => 'Mot de passe : '],
+                'second_options' => ['label' => 'Répétez le mot de passe : '],
             ])
             ->add('picture', FileType::class, [
                 'label' => 'Image de profil',

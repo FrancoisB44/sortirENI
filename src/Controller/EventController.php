@@ -190,7 +190,7 @@ class EventController extends AbstractController
             $entityManager->flush();
             $this->addFlash('danger', 'Sortie annulée !');
 
-            return $this->redirectToRoute('list2');
+            return $this->redirectToRoute('list');
         }
         return $this->render('event/cancelEvent.html.twig', [
             'detailEvent' => $event,

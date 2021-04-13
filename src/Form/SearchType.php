@@ -91,7 +91,7 @@ class SearchType extends AbstractType
             ->add('participantSearch', CheckboxType::class, array(
                 'label' => 'Mes inscriptions',
                 'required' => false,
-                'mapped' => false
+//                'mapped' => false
 //                'class' => User::class,
 //                'placeholder' => 'Selectionnez un organisateur',
 //                'expanded' => false,
