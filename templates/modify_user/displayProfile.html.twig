@@ -21,6 +21,9 @@
             {% if app.user.id == profile.id %}
                 <a href="{{ path('user_modify_user', {'id': profile.id }) }}" class="btn btn-success btn-sm">Modifier</a>
             {% endif %}
+            <div class="col-md-2">
+                <button id="bu" type="submit"  onclick="history.go(-1)" class="btn btn-sm btn-white ">Retour</button>
+            </div>
         </div>
     </row>
 

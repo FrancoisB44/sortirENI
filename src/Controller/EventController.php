@@ -45,8 +45,14 @@ class EventController extends AbstractController
             $event->setPlace($place);
         }
 
+
+        $dEvent = $event->getStartDateTime();
+        $dLRegistration = $event->getRegistrationDeadLine();
+        $today = new \DateTime('now');
+
         if ($formEvent->isSubmitted() && $formEvent->isValid()) {
 //            $event->setUser($this->getUser()->getUsername());
+            if  ($dEvent > $today and $dLRegistration > $today and $dLRegistration > $dEvent) {
             $event->setUser($this->getUser());
 
             $idPlace= $request->get('select_place');
@@ -54,9 +60,6 @@ class EventController extends AbstractController
             $event->setPlace($place);
 
 
-            $dEvent = $event->getStartDateTime();
-            $dLRegistration = $event->getRegistrationDeadLine();
-            $today = new \DateTime('now');
 
             $statutId = $entityManager->getRepository(Status::class)->findAll();
 
@@ -71,9 +74,13 @@ class EventController extends AbstractController
             $entityManager->persist($event);
             $entityManager->flush();
 
-            $this->addFlash('success', 'Sortie ajoutée !'. $idPlace);
+            $this->addFlash('success', 'Sortie ajoutée !');
 
             return $this->redirectToRoute('list');
+        } else {
+                $this->addFlash('danger', 'Attention, vérifiez les dates!!!');
+                return $this->redirectToRoute('create');
+            }
         }
 
         return $this->render('event/createEvent.html.twig', [
