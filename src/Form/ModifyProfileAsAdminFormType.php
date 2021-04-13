@@ -25,7 +25,6 @@ class ModifyProfileAsAdminFormType extends AbstractType
             ->add('roles', ChoiceType::class, [
                 'choices' => [
                     'Utilisateur' => 'ROLE_USER',
-                    'Inactif' => 'ROLE_DISABLED',
                     'Administrateur' => 'ROLE_ADMIN'
                 ],
                 'expanded' => true,

@@ -35,8 +35,6 @@ class AdminUserRegistrationFormType extends AbstractType
                 'multiple' => true,
                 'label' => 'Rôles'
             ])
-            ->add('admin')
-            ->add('active')
             ->add('agreeTerms', CheckboxType::class, [
                 'mapped' => false,
                 'constraints' => [

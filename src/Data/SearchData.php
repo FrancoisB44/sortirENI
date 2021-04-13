@@ -24,21 +24,6 @@ class SearchData
      */
     public $campusSearch;
 
-//    /**
-//     * @return User
-//     */
-//    public function getUserSearch(): User
-//    {
-//        return $this->userSearch;
-//    }
-//
-//    /**
-//     * @param User $userSearch
-//     */
-//    public function setUserSearch(User $userSearch): void
-//    {
-//        $this->userSearch = $userSearch;
-//    }
 
     /**
      * @var User
@@ -61,7 +46,7 @@ class SearchData
     public $dateEndSearch;
 
     /**
-     * @var Users
+     * @var User
      */
     public $participantSearch;
 

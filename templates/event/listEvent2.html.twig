@@ -113,7 +113,7 @@
 
                                             <!-- Sortie ouverte, utilisateur déjà inscrit (ajouter href="{# {{ url('unsubscribe', {"id" : event.id }) }} #}"-->
                                             {% if event.status == 'Ouverte' and app.user in event.users %}
-                                                <a  class="btn btn-warning btn-sm">Se désister</a>
+                                                <a href="{{ url('unsubscribe', {"id" : event.id}) }}" class="btn btn-warning btn-sm">Se désister</a>
                                             {% endif %}
 
                                             <!-- Sortie terminée-->
@@ -123,7 +123,7 @@
                                         <td>
                                             <!-- Sortie ouverte, mais utilisateur = organisateur (ajouter href="{# {{ url('delete', {"id" : event.id }) }} #}"-->
                                             {% if event.status == 'Ouverte' and app.user.id == event.user.id %}
-                                                <a  class="btn btn-danger btn-sm">Annuler</a>
+                                                <a href=" {{ url('cancel_event', {"id" : event.id }) }}" class="btn btn-danger btn-sm">Annuler</a>
                                             {% endif %}
 
                                         </td>

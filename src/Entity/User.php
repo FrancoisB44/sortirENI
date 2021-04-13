@@ -43,14 +43,15 @@ class User implements UserInterface
     private $firstNameUser;
 
     /**
-     * @ORM\Column(type="decimal", precision=10, scale=0, nullable=true)
+     * @ORM\Column(type="string",  nullable=true)
      * @Assert\NotBlank(message="Veuillez renseigner un numéro de téléphone")
      */
     private $phoneNumber;
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * @ORM\Column(type="string", length=13, length=255)
      * @Assert\NotBlank(message="Veuillez renseigner un mail")
+     * @Assert\Email(message="Votre mail doit respecter le format xxx@xxx.com")
      */
     private $mail;
 
@@ -63,10 +64,6 @@ class User implements UserInterface
      * @ORM\Column(type="json")
      */
     private $roles = [];
-    /**
-     * @ORM\Column(type="boolean")
-     */
-    private $admin;
 
     /**
      * @ORM\Column(type="boolean")
@@ -216,21 +213,6 @@ class User implements UserInterface
         return $this;
     }
 
-    /**
-     * @return mixed
-     */
-    public function getAdmin()
-    {
-        return $this->admin;
-    }
-
-    /**
-     * @param mixed $admin
-     */
-    public function setAdmin($admin): void
-    {
-        $this->admin = $admin;
-    }
 
     /**
      * @return mixed

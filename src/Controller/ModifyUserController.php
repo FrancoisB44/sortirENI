@@ -67,10 +67,13 @@ class ModifyUserController extends AbstractController
 
             $entityManager->persist($profile);
             $entityManager->flush();
-            $this->addFlash('success', 'Modification success');
-            return $this->redirectToRoute('home');// pas sur du nom de la route
+            $this->addFlash('success', 'Modification enregistrée');
+            return $this->redirectToRoute('user_display_user', ['id' => $profile->getId()]);// pas sur du nom de la route
         }
-        return $this->render('modify_user/modifyProfile.html.twig', ["userForm" => $form->createView()]);
+        return $this->render('modify_user/modifyProfile.html.twig', [
+            "userForm" => $form->createView(),
+            'user' => $profile
+        ]);
     }
 
 }

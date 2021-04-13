@@ -8,6 +8,7 @@ use App\Entity\Event;
 use App\Entity\Place;
 use App\Entity\Status;
 use App\Entity\User;
+use App\Form\CancelEventFormType;
 use App\Form\EventType;
 use App\Form\SearchType;
 use App\Repository\CampusRepository;
@@ -135,7 +136,7 @@ class EventController extends AbstractController
         $formSearch->handleRequest($request);
 
 
-        $listByFilters = $eventRepository->findSearch($data);
+        $listByFilters = $eventRepository->findSearch($data, $this->getUser());
 //        dump($data);
 //        dump($listByFilters);
 //        exit();
@@ -168,21 +169,44 @@ class EventController extends AbstractController
 
         return $this->redirectToRoute('list');
     }
+    /**
+     * @Route(path="/unsubscribe/{id}", requirements={"id":"\d+"}, name="unsubscribe")
+     */
+    public function unsubscribe(Request $request, EntityManagerInterface $entityManager){
+        $id = $request->get('id');
+        $repo = $entityManager->getRepository(Event::class);
+        $event = $repo->find($id);
+        $event->removeUser($this->getUser());
+        $entityManager->flush();
+        return $this->redirectToRoute('list');
+    }
 
+    /**
+     * @Route(path="/cancel_event/{id}",requirements={"id":"\d+"}, name="cancel_event")
+     */
+    public function cancelEvent(Request $request, EntityManagerInterface $entityManager)
+    {
+        $id = $request->get('id');
+        $repo = $entityManager->getRepository(Event::class);
 
-//    public function place(Request $request, $placeId) {
-//        $event = new Event();
-//        $em = $this->getDoctrine()->getManager();
-//        $placeSearch = $em->getRepository(Place::class)->findAllPlaceByCity($placeId);
-//
-//        $form = $this->createForm(
-//            Event::class,
-//            $event,
-//            ['placeSearch' => $placeSearch]
-//
-//        );
-//    }
+        $event = $repo->find($id);
+        $cancelForm = $this->createForm(CancelEventFormType::class,$event);
+        $cancelForm->handleRequest($request);
 
+        if($cancelForm->isSubmitted() && $cancelForm->isValid()) {
+
+            $statutId = $entityManager->getRepository(Status::class)->findAll();
+            $event->setStatus($statutId[5]);
+            $entityManager->flush();
+            $this->addFlash('danger', 'Sortie annulée !');
+
+            return $this->redirectToRoute('list');
+        }
+        return $this->render('event/cancelEvent.html.twig', [
+            'detailEvent' => $event,
+            'cancelForm' => $cancelForm->createView()
+        ]);
+    }
 
 
 }

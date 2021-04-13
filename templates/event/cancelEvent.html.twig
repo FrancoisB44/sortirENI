@@ -1,0 +1,78 @@
+{% extends 'base.html.twig' %}
+
+{% block titlePage %}Annuler une sortie{% endblock %}
+
+
+{% block container %}
+
+    <div class="row">
+        <div class="col-md-12">
+            <div class="row" >
+                <div class="col-md-3">
+                </div>
+                <div class="col-md-6" style="align-items: center">
+
+                    <h2>Annuler: <b>{{ detailEvent.nameEvent | capitalize }}</b></h2>
+{#                    <button onclick="window.location.href='{{ path('inscription',{'id':detailEvent.id}) }}'">S'inscrire</button>#}
+                    <li>Début événement : {{ detailEvent.StartDateTime|date("d/m/Y") }} à {{ detailEvent.StartDateTime|date("H:i") }}</li>
+                    <li>Description : {{ detailEvent.infoEvent }}</li>
+                    <li>Durée en minutes de l'événement : {{ detailEvent.duration }}</li>
+
+                    {% if app.user.id != detailEvent.user.id %}
+                        <li>Evenement organisé par : {{ detailEvent.user }}</li>
+                    {% endif %}
+                    <!--Si profil = personne connectée-->
+                    {% if app.user.id == detailEvent.id %}
+                        <li>Evenement dont je suis l'organisateur</li>
+                    {% endif %}
+
+                    <br>
+                    <li>Inscription : {{ detailEvent.status }}</li>
+                    <br>
+
+                    {% set dateLimitRegistration = detailEvent.registrationDeadLine %}
+                    {% set dateLimitEvent = detailEvent.StartDateTime %}
+                    {% set today = "now" %}
+                    {% set differenceRegistration = date(dateLimitRegistration).diff(date(today)) %}
+                    {% set differenceEvent = date(dateLimitEvent).diff(date(today)) %}
+                    {% set leftDaysRegistration = differenceRegistration.days %}
+                    {% set leftDaysEvent = differenceEvent.days %}
+
+                    {% if date(dateLimitEvent) > date(today) %}
+                        {% if date(dateLimitRegistration) > date(today) %}
+                            <li>Inscription jusqu'au : {{ detailEvent.registrationDeadLine|date("d/m/Y") }} à {{ detailEvent.registrationDeadLine|date("H:i") }}</li>
+                            <p>(Il ne vous reste plus que {{ leftDaysRegistration }} jours pour vous inscrire)</p>
+                            {% if detailEvent.users|length == detailEvent.nbRegistrationsMax %}
+                                <li>Complet : {{ detailEvent.users|length }} / {{ detailEvent.nbRegistrationsMax }}</li>
+                                {% else %}
+                                <li>Déjà {{ detailEvent.users|length }} place(s) réservée(s) sur les {{ detailEvent.nbRegistrationsMax }} places disponibles</li>
+                            {% endif %}
+                        {% elseif date(detailEvent.registrationDeadLine) < today %}
+                            {% else %}
+                            <li>Trop tard, inscriptions terminées depuis le {{ detailEvent.registrationDeadLine|date("d/m/Y") }} à {{ detailEvent.registrationDeadLine|date("H:i") }}. L'événement débutera sans vous dans {{ leftDaysEvent }} jours</li>
+                        {% endif %}
+                    {% else %}
+                        <li>L'événement s'est déroulé sans vous le {{ detailEvent.StartDateTime|date("d/m/Y") }}</li>
+                    {% endif %}
+                    <br>
+
+                    <div class="row">
+                        <div class="col-md-4">
+                            {{ form_start(cancelForm) }}
+                            {{ form_widget(cancelForm) }}
+                            <button class="btn btn-danger btn-sm">Annuler</button>
+                            <a href="{{ url('list') }}" class="btn btn-success btn-sm">Retour à la liste</a>
+                            {{ form_end(cancelForm) }}
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+{% endblock %}
