@@ -61,7 +61,7 @@ class EventController extends AbstractController
 
             $this->addFlash('success', 'Sortie ajoutée !'. $idPlace);
 
-            return $this->redirectToRoute('list2');
+            return $this->redirectToRoute('list');
         }
 
         return $this->render('event/createEvent.html.twig', [
