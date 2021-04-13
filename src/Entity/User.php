@@ -63,10 +63,6 @@ class User implements UserInterface
      * @ORM\Column(type="json")
      */
     private $roles = [];
-    /**
-     * @ORM\Column(type="boolean")
-     */
-    private $admin;
 
     /**
      * @ORM\Column(type="boolean")
@@ -216,21 +212,6 @@ class User implements UserInterface
         return $this;
     }
 
-    /**
-     * @return mixed
-     */
-    public function getAdmin()
-    {
-        return $this->admin;
-    }
-
-    /**
-     * @param mixed $admin
-     */
-    public function setAdmin($admin): void
-    {
-        $this->admin = $admin;
-    }
 
     /**
      * @return mixed

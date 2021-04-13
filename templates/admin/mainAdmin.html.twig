@@ -4,7 +4,7 @@
 
 
     {% block container %}
-        <div class="row">
+        <div class="row d-flex justify-content-around">
             <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
                 <div class="box-part text-center">
                     <a class="nav-link mx-4 my-2 rounded border" href="{{ path('list_user')}}">
@@ -29,7 +29,7 @@
                 <p>Ajouter campus</p>
             </div>
         </div>
-        <div class="row">
+        <div class="row d-flex justify-content-around">
             <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
                 <div class="box-part text-center">
                     <a class="nav-link mx-4 my-2 rounded border" href="{{ path('create_place')}}">
@@ -44,6 +44,14 @@
                         <img height="40px" src="/img/icons/status.png" alt="Ajouter statut">
                     </a>
                     <p>Ajouter statut</p>
+                </div>
+            </div>
+            <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
+                <div class="box-part text-center">
+                    <a class="nav-link mx-4 my-2 rounded border" href="{{ path('create_user_as_admin')}}">
+                        <img height="40px" src="/img/icons/addUser.png" alt="Ajouter profil en admin">
+                    </a>
+                    <p>Ajout profil par admin</p>
                 </div>
             </div>
         </div>

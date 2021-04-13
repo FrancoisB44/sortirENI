@@ -21,11 +21,8 @@ class RegistrationController extends AbstractController
         $user = new User();
 
         //SET Role to USER
-        //$roles[] = "ROLE_DISABLED";
-        //$user->setRoles($roles);
-
-        //Set admin to false/0
-        $user->setAdmin(0);
+        $roles[] = "ROLE_DISABLED";
+        $user->setRoles($roles);
 
         $form = $this->createForm(RegistrationFormType::class, $user);
         $form->handleRequest($request);

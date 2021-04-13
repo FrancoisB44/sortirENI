@@ -6,101 +6,101 @@
 {% block container %}
 
 <div class="row">
-    <div class="col-md-12">
+        <div class="col-md-12">
 
-        {{ form_start(formEvent) }}
+                {{ form_start(formEvent) }}
 
-        <h3>Etape 1 : sélectionnez ou ajoutez un lieu</h3>
+                <h3>Etape 1 : sélectionnez ou ajoutez un lieu</h3>
 
-        <label>Campus : </label>
-        {{ form_widget(formEvent.campus) }}
-<br>
+                <label>Campus : </label>
+                {{ form_widget(formEvent.campus) }}
+                <br>
 
-        <label for="kw"> Ville : </label>
-{#            {{ form_label(formEvent.placeId) }}#}
-{#        {{ form_widget(formEvent.placeId) }}#}{# ca c est pr envoyer au controller #}
-        <input type="text" id="kw">
+                <label for="kw"> Ville : </label>
+                {#            {{ form_label(formEvent.placeId) }}#}
+                {#        {{ form_widget(formEvent.placeId) }}#}{# ca c est pr envoyer au controller #}
+                <input type="text" id="kw">
 
-        <div id="results"></div>
+                <div id="results"></div>
 
-        <script>
-            const searchCityUrl = "{{ path('demo_city_search') }}";
-        </script>
-
-
-        <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
-        <script>
-
-            let searchInput = document.getElementById("kw");
-
-            searchInput.addEventListener("keyup", sendAjaxRequest);
-
-            function sendAjaxRequest() {
-
-                let keyword = searchInput.value;
-
-                axios.get(searchCityUrl, {
-                    params: {
-                        "keyword": keyword
-                    }
-                })
-                    .then(function (response) {
-                        console.log(response.data);
-                        let resultsContainer = document.getElementById("results")
-                        resultsContainer.innerHTML = response.data;
-                    });
-
-            }
-
-        </script>
-
-            <a href="{{ path('create_place_bis') }}"> Ajouter un lieu </a>
+                <script>
+                        const searchCityUrl = "{{ path('demo_city_search') }}";
+                </script>
 
 
-{#        <label>Lieu : </label>#}
-{#        {{ form_widget(formEvent.place.namePlace) }}#}
-{#        <label>Rue : </label>#}
-{#        {{ form_widget(formEvent.place.street) }}#}
-{#        <label>Code Postal : </label>#}
-{#        {{ form_widget(formEvent.place.zipCode) }}#}
+                <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+                <script>
+
+                        let searchInput = document.getElementById("kw");
+
+                        searchInput.addEventListener("keyup", sendAjaxRequest);
+
+                        function sendAjaxRequest() {
+
+                                let keyword = searchInput.value;
+
+                                axios.get(searchCityUrl, {
+                                        params: {
+                                                "keyword": keyword
+                                        }
+                                })
+                                        .then(function (response) {
+                                                console.log(response.data);
+                                                let resultsContainer = document.getElementById("results")
+                                                resultsContainer.innerHTML = response.data;
+                                        });
+
+                        }
+
+                </script>
+
+                <a href="{{ path('create_place_bis') }}"> Ajouter un lieu </a>
 
 
-        <h3>Etape 2 : créez un événement </h3>
+                {#        <label>Lieu : </label>#}
+                {#        {{ form_widget(formEvent.place.namePlace) }}#}
+                {#        <label>Rue : </label>#}
+                {#        {{ form_widget(formEvent.place.street) }}#}
+                {#        <label>Code Postal : </label>#}
+                {#        {{ form_widget(formEvent.place.zipCode) }}#}
 
 
-        <label>Intitulé sortie : </label>
-        {{ form_widget(formEvent.nameEvent) }}
-        <br><br>
-
-        <label>Début de l'évenement : </label><br>
-        {{ form_widget(formEvent.StartDateTime) }}
-        <br>
-
-        <label>Durée : </label>
-        {{ form_widget(formEvent.duration) }}
-        <br><br>
-
-        <label>Inscription jusqu'au : </label><br>
-        {{ form_widget(formEvent.registrationDeadLine) }}
-        <br><br>
-
-        <label>Nombre maximum de participants : </label><br>
-        {{ form_widget(formEvent.nbRegistrationsMax) }}
-        <br><br>
-
-        <label>Description : </label>
-        {{ form_widget(formEvent.infoEvent) }}
-        <br><br>
-        {{ form_errors(formEvent) }}
+                <h3>Etape 2 : créez un événement </h3>
 
 
+                <label>Intitulé sortie : </label>
+                {{ form_widget(formEvent.nameEvent) }}
+                <br><br>
+
+                <label>Début de l'évenement : </label><br>
+                {{ form_widget(formEvent.StartDateTime) }}
+                <br>
+
+                <label>Durée : </label>
+                {{ form_widget(formEvent.duration) }}
+                <br><br>
+
+                <label>Inscription jusqu'au : </label><br>
+                {{ form_widget(formEvent.registrationDeadLine) }}
+                <br><br>
+
+                <label>Nombre maximum de participants : </label><br>
+                {{ form_widget(formEvent.nbRegistrationsMax) }}
+                <br><br>
+
+                <label>Description : </label>
+                {{ form_widget(formEvent.infoEvent) }}
+                <br><br>
+                {{ form_errors(formEvent) }}
 
 
-        {{ form_widget(formEvent) }} <button class="btn btn-success">Ajouter</button>
 
-        {{ form_end(formEvent) }}
 
-        {% endblock %}
+                {{ form_widget(formEvent) }} <button class="btn btn-success">Ajouter</button>
+
+                {{ form_end(formEvent) }}
+
+                {% endblock %}
 
 
 

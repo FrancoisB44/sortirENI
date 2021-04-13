@@ -56,6 +56,10 @@ class Event
      */
     private $infoEvent;
 
+    /**
+     * @ORM\Column(type="text", nullable=true)
+     */
+    private $motif;
 
     /**
      * @ORM\ManyToOne(targetEntity=Place::class, inversedBy="events", cascade={"persist"})
@@ -283,6 +287,22 @@ class Event
     public function __toString()
     {
         return $this->StartDateTime;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getMotif()
+    {
+        return $this->motif;
+    }
+
+    /**
+     * @param mixed $motif
+     */
+    public function setMotif($motif): void
+    {
+        $this->motif = $motif;
     }
 
 

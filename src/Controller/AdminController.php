@@ -168,7 +168,7 @@ class AdminController extends AbstractController
     public function createUserAsAdmin(Request $request,UserPasswordEncoderInterface $passwordEncoder, GuardAuthenticatorHandler $guardHandler, AppAuthenticator $authenticator)
     {
         $user = new User();
-        $form = $this->createForm(AdminUserRegistrationFormType::class, $user);
+        $form = $this->createForm(RegistrationFormType::class, $user);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
@@ -183,14 +183,13 @@ class AdminController extends AbstractController
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->persist($user);
             $entityManager->flush();
-            // do anything else you need here, like send an email
 
-            return $guardHandler->authenticateUserAndHandleSuccess(
-                $user,
-                $request,
-                $authenticator,
-                'main' // firewall name in security.yaml
-            );
+//            return $guardHandler->authenticateUserAndHandleSuccess(
+//                $user,
+//                $request,
+//                $authenticator,
+//                'main' // firewall name in security.yaml
+//            );
         }
 
         return $this->render('create_user/createProfileAsAdmin.html.twig', [
@@ -243,7 +242,7 @@ class AdminController extends AbstractController
     }
 
     /**
-     * @Route("/admin_home", name="admin_home")
+     * @Route("/home", name="admin_home")
      */
     public function mainAdmin(){
         return $this->render('admin/mainAdmin.html.twig');
