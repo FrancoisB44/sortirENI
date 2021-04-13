@@ -14,7 +14,7 @@
 
         <div id="bkgd" class="container-fluid ">
             <header class="row text-light bg d-flex align-items-center mb-5 p-3 shadow-lg">
-                <div class="col-lg-4 col-sm-12 d-flex justify-content-center">
+                <div class="col-lg-4 col-sm-12 d-flex justify-content-between">
                     <h1>
                         (re)Sortir.com<br>
                         <div>
@@ -29,8 +29,9 @@
                         {% block titlePage %}{% endblock %}
                     </h3>
                 </div>
-                <div class="col-lg-4 col-sm-12 d-flex justify-content-center">
-                    <ul class="nav">
+
+                <div class="col-lg-6 col-sm-6 d-flex justify-content-center">
+                    <ul class="nav ">
                         <li class="nav-item">
                             <a class="nav-link bg-white mx-4 my-2 rounded" href="{{ path('home') }}">Accueil</a>
                         </li>
@@ -63,6 +64,7 @@
                         {% endif %}
                     </ul>
                 </div>
+
             </header>
             <div class="row">
 
@@ -82,8 +84,10 @@
 
             </div>
             <footer class="row mt-5 p-3  d-flex justify-content-center">
-                <div class=" bg-succ col-md-12 ">
-                    {% block footer %}{% endblock %}
+                <div class=" col-md-12 ">
+                    {% block footer %}
+                    {% endblock %}
+                    <img src="{{ asset('img/logo/log.png') }}" alt="logo">
                     <p class="text-light">François, Aymeric & Agnès</p>
                 </div>
             </footer>
