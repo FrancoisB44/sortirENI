@@ -6,12 +6,13 @@
 {% block container %}
 
     <div class="row">
-    <div class="col-md-12">
+    <div class="col-md-3"></div>
+    <div class="col-md-6">
 
     {{ form_start(formPlace) }}
 
-    <div class="row">
-    <div class="col-md-6" >
+        <h3 style="text-align: center">Ajouter un lieu</h3>
+        <br>
 
         <label>Lieu : </label>
         {{ form_widget(formPlace.namePlace) }}
@@ -29,34 +30,66 @@
         {{ form_widget(formPlace.nameCity) }}
         <br><br>
 
+    <div class="row">
+    <div class="col-md-6">
         {{ form_widget(formPlace) }}
-        <button>Ajouter</button>
+        <button class="btn btn-success btn-sm">Ajouter</button>
+    </div>
+        <br>
 
         {{ form_end(formPlace) }}
 
+    <div class="col-md-6">
+        <div class="col-md-2">
+            <button id="bu" type="submit"  onclick="history.go(-1)" class="btn btn-sm btn-white ">Annuler</button>
+        </div>
+    </div>
     </div>
 
-    <div class="col-md-2">
-        <button id="bu" type="submit"  onclick="history.go(-1)" class="btn btn-lg btn-white ">Annuler</button>
     </div>
-    <div class="col-md-6" style="align-items: center">
 
-{#                            {%  if app.user %}#}
-{#                                <p style="text-align: center">Bienvenue {{ app.user.username }}</p>#}
-{#                            {% endif %}#}
 
+    <div class="row">
+    <div class="col-md-2"></div>
+
+    <div class="col-md-8" style="align-items: center">
+
+        <br>
         <h3 style="text-align: center">Liste des Lieux</h3>
 
-        <ul style="list-style-type: none">
 
-            {% for place in listPlace %}
-                <li><a href="{{ url('create_place', {"id" : place.id }) }}">{{ place.namePlace }} : {{ place.street }} à {{ place.nameCity }} ({{ place.zipCode }})</a></li>
-
-            {% endfor %}
-        </ul>
+        {% if listPlace | length > 0 %}
+            <table class="table">
+                <thead>
+                <tr>
+                    <th>Lieu</th>
+                    <th>Code postal</th>
+                    <th>Ville</th>
+                </tr>
+                </thead>
+                <tbody>
+                {% for place in listPlace %}
+                    <tr>
+                        <td>
+                            {{ place.namePlace }}
+                        </td>
+                        <td>
+                            {{ place.zipCode }}
+                        </td>
+                        <td>
+                            {{ place.street }}
+                        </td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+        {% else %}
+            <p>Aucun état à afficher </p>
+        {% endif %}
 
 
     </div>
+    <div class="col-md-2"></div>
 
 
 

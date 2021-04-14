@@ -30,14 +30,21 @@
                     <tr>
                         <th>Etat</th>
                         <th></th>
+                        <th></th>
                     </tr>
                     </thead>
                     <tbody>
                     {% for status in listStatus %}
                         <tr>
-                            <td>{{ status.wording }}</td>
+                            <td>
+
+                                {{ status.wording }}
+                            </td>
                             <td>
                                 <a href="{{ path('delete_status', {'id': status.id }) }}" class="btn btn-danger">Supprimer</a>
+                            </td>
+                            <td>
+                                <a href="{{ path('modify_status', {'id': status.id }) }}" class="btn btn-warning">Modifier</a>
                             </td>
                         </tr>
                     {% endfor %}
