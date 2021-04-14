@@ -283,6 +283,23 @@ class AdminController extends AbstractController
         return $this->redirectToRoute('create_status'); // rester sur la meme page
     }
 
+    /**
+     * @Route("/modify_status/{id}", requirements={"id":"\d+"}, name="modify_status")
+     */
+    public function modifyStatus(Request $request, EntityManagerInterface $entityManager)
+    {
+        $statusId = $request->get('id');
+        $status = $entityManager->getRepository(Status::class)->find($statusId);
+        $form = $this->createForm(StatusType::class,$status);
+        $form->handleRequest($request);
+        if ($form->isSubmitted() && $form->isValid()) {
+            $entityManager->persist($status);
+            $entityManager->flush();
+            $this->addFlash('success', 'Modification success');
+            return $this->redirectToRoute('list_user');// pas sur du nom de la route
+        }
+        return $this->render('admin/createStatus.twig', ["statusForm" => $form->createView(), "status"=>$status]);
+    }
 
 }
 

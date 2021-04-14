@@ -23,14 +23,14 @@ class EventRepository extends ServiceEntityRepository
     }
 
 
-    // Affichage de la liste Campus(id)
-    public function findByCampus($idCampus) {
-        return $this->createQueryBuilder('idCampus')
-            ->andWhere('idCampus.id = :val')
-            ->setParameter('val', $idCampus)
-            ->getQuery()
-            ->getResult();
-    }
+//    // Affichage de la liste Campus(id)
+//    public function findByCampus($idCampus) {
+//        return $this->createQueryBuilder('idCampus')
+//            ->andWhere('idCampus.id = :val')
+//            ->setParameter('val', $idCampus)
+//            ->getQuery()
+//            ->getResult();
+//    }
 
 
     /**
@@ -47,7 +47,7 @@ class EventRepository extends ServiceEntityRepository
             ->join('search.user', 'user');
 //            ->join('search.users', 'users')
 
-        $userId = $user->getId();
+//        $userId = $user->getId();
 
         if(!empty($searchData->textSearch)) {
             $query = $query
