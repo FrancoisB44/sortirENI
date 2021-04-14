@@ -1,35 +1,44 @@
-{%  extends('base.html.twig') %}
+{% extends('base.html.twig') %}
 {% block titlePage %}Mon Profil{% endblock %}
 
 
-{% block container  %}
-    <row class="d-flex justify-content-center align-items-center">
-        <div class="m-4">
-            <p class="text danger border"> IMAGE</p>
+{% block container %}
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-4">
+
+                <img class="rounded-circle" src="{{ asset('img/profilePicture/'~ app.user.pictureName) }}"
+                     alt="image de profil">
+
+            </div>
+            <div class="col-md-4 ">
+                <div id="card2" class="card shadow-lg ">
+                    <h3 class="modprof">{{ app.user }}</h3>
+                    <p> Pseudo  {{ form_widget(userForm.pseudo) }}</p>
+                    <p> Image   {{ form_widget(userForm.picture) }} </p>
+                    <p> Nom   {{ form_widget(userForm.nameUser) }}</p>
+                    <p> Prénom   {{ form_widget(userForm.firstNameUser) }}</p>
+                    <p> Téléphone  {{ form_widget(userForm.phoneNumber) }} </p>
+                    <p> Campus  {{ form_widget(userForm.campus) }} </p>
+                    <p> Email  {{ form_widget(userForm.mail) }} </p>
+{#                    <p> Nouveau mot de passe : </p>#}
+{#                    <p> {{ form_widget(userForm.plainPassword.first) }} </p>#}
+{#                    <p> Confirmation du mot de passe : </p>#}
+{#                    <p> {{ form_widget(userForm.plainPassword.second) }} </p>#}
+
+                    <div class="row">
+                        <div class=" col-md-3"></div>
+                        <div class=" col-md-6">
+                            {{ form_widget(userForm) }}
+                            <button type="submit" class="btn btn-success">Valider</button>
+                            <button id="bu" type="submit" onclick="history.go(-1)" class="btn  btn-white ">Retour</button>
+                        </div>
+                        <div class=" col-md-3"></div>
+                        {{ form_end(userForm) }}
+                    </div>
+                </div>
+            </div>
         </div>
-        <div class="m-4 ">
-            <ul class="list-group ">
-                <h3>{{ app.user }}</h3>
-                {{ form_start(userForm) }}
-                <li class="list-group-item"> Pseudo : {{ form_widget(userForm.pseudo) }}</li>
-                <li class="list-group-item"> Nom : {{ form_widget(userForm.nameUser) }}</li>
-                <li class="list-group-item"> Prénom : {{ form_widget(userForm.firstNameUser) }}</li>
-                <li class="list-group-item"> Téléphone : {{ form_widget(userForm.phoneNumber) }} </li>
-                <li class="list-group-item"> Email : {{ form_widget(userForm.mail) }}</li>
-                <li class="list-group-item"> Campus : {{ form_widget(userForm.campus) }}</li>
-
-                <li class="list-group-item"> {{ form_widget(userForm.plainPassword)}} </li>
-
-                {{ form_widget(userForm.picture) }}
-            </ul>
-            <br>
-            {{ form_widget(userForm)}}
-            <button type="submit" class="btn btn-success">Valider</button>
-            {{ form_end(userForm) }}
-        </div>
-
-    </row>
-
-
+    </div>
 
 {% endblock %}

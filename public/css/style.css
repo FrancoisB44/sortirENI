@@ -165,16 +165,39 @@ li{
     padding: 2%;
 }
 #bu2{
-    margin-left:50%;
+    margin-left:20%;
     border:1px solid black;
     margin-top: 22%;
 
 }
 #bubu2{
-    margin-left:60%;
+    margin-left:30%;
     border:1px solid black;
     margin-top: 22%;
 }
 .listelieux{
     margin-top: 5%;
+}
+/*css displayprofile*/
+.rounded-circle{
+    margin-top: 10%;
+    padding: 20% 20%;
+}
+.card
+{
+    margin-top:30%;
+    padding:5% 5%;
+}
+.pseud{
+    text-align: center;
+}
+/*css modifyprofile*/
+
+#card2{
+    margin-top:10%;
+    padding:5% 5%;
+}
+.modprof{
+    text-align: center;
+    padding: 5% 5%;
 }
