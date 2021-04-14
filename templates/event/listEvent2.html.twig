@@ -128,12 +128,17 @@
                                         </td>
                                         <td>
                                             <!-- Sortie ouverte, mais utilisateur -->
-                                            {% if event.status == 'Ouvert' and app.user.id == event.user.id and event.startDateTime > today %}
+                                            {% if event.status == 'Ouvert' and event.startDateTime > today %}
+                                                {%  if app.user.id == event.user.id or is_granted('ROLE_ADMIN') %}
                                                 <a href=" {{ url('cancel_event', {"id" : event.id }) }}" class="btn btn-danger btn-sm">Annuler</a>
+                                                {% endif %}
                                             {% endif %}
-                                            {% if event.status == 'Complet' and app.user in event.users and event.startDateTime > today %}
+                                            {% if event.status == 'Complet' and event.startDateTime > today %}
+                                                {% if app.user == event.users or is_granted('ROLE_ADMIN') %}
                                                 <a href=" {{ url('cancel_event', {"id" : event.id }) }}" class="btn btn-danger btn-sm">Annuler</a>
+                                                {% endif %}
                                             {% endif %}
+
 
                                         </td>
                                         <td>

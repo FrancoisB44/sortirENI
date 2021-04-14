@@ -52,7 +52,7 @@ class EventController extends AbstractController
 
         if ($formEvent->isSubmitted() && $formEvent->isValid()) {
 //            $event->setUser($this->getUser()->getUsername());
-            if  ($dEvent > $today and $dLRegistration > $today and $dLRegistration > $dEvent) {
+            if  ($dEvent > $today and $dLRegistration > $today and $dLRegistration < $dEvent) {
             $event->setUser($this->getUser());
 
             $idPlace= $request->get('select_place');
