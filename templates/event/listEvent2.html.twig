@@ -68,6 +68,8 @@
 
 {#                        {% endfor %}#}
 {#                    </ul>#}
+                    {% set today = date("now") %}
+{#                    {% set dateArchiv = today|date_modify('+' ~ 30 ~ ' day')|date("d/m/Y")  %}#}
 
                     {% if listByFilters | length > 0 %}
                         <table class="table">
@@ -87,6 +89,7 @@
                             </thead>
                             <tbody>
                                 {% for event in listByFilters %}
+                                    {% if today < event.startDateTime|date_modify('+' ~ 30 ~ ' day') %}
                                     <tr>
                                         <td>{{ event.nameEvent }}</td>
                                         <td>{{ event.startDateTime|date("d/m/Y") }} à {{ event.startDateTime|date("h:m") }}</td>
@@ -107,12 +110,12 @@
 
                                         <td>
                                             <!-- Sortie ouverte, utilisateur pas encore inscrit et place dispo-->
-                                            {% if event.status == 'Ouvert' and app.user not in event.users and event.users|length < event.nbRegistrationsMax %}
+                                            {% if event.status == 'Ouvert' and app.user not in event.users and event.users|length < event.nbRegistrationsMax and event.registrationDeadLine > today %}
                                                 <a href="{{ url('subscribe', {"id" : event.id }) }}" class="btn btn-primary btn-sm">S'inscrire</a>
                                             {% endif %}
 
-                                            <!-- Sortie ouverte, utilisateur déjà inscrit (ajouter href="{# {{ url('unsubscribe', {"id" : event.id }) }} #}"-->
-                                            {% if event.status == 'Ouvert' and app.user in event.users %}
+                                            <!-- Sortie ouverte, utilisateur déjà inscrit -->
+                                            {% if event.status == 'Ouvert' and app.user in event.users and event.startDateTime < today %}
                                                 <a href="{{ url('unsubscribe', {"id" : event.id}) }}" class="btn btn-warning btn-sm">Se désister</a>
                                             {% endif %}
                                             {% if event.status == 'Complet' and app.user in event.users %}
@@ -124,11 +127,11 @@
                                             <!-- Inscription terminée-->
                                         </td>
                                         <td>
-                                            <!-- Sortie ouverte, mais utilisateur = organisateur (ajouter href="{# {{ url('delete', {"id" : event.id }) }} #}"-->
-                                            {% if event.status == 'Ouvert' and app.user.id == event.user.id %}
+                                            <!-- Sortie ouverte, mais utilisateur -->
+                                            {% if event.status == 'Ouvert' and app.user.id == event.user.id and event.startDateTime < today %}
                                                 <a href=" {{ url('cancel_event', {"id" : event.id }) }}" class="btn btn-danger btn-sm">Annuler</a>
                                             {% endif %}
-                                            {% if event.status == 'Complet' and app.user in event.users %}
+                                            {% if event.status == 'Complet' and app.user in event.users and event.startDateTime < today %}
                                                 <a href=" {{ url('cancel_event', {"id" : event.id }) }}" class="btn btn-danger btn-sm">Annuler</a>
                                             {% endif %}
 
@@ -137,6 +140,7 @@
                                             <a href="{{ url('details', {"id" : event.id }) }}" class="btn btn-success btn-sm">Détail</a>
                                         </td>
                                     </tr>
+                                    {% endif %}
                                 {% endfor %}
                             </tbody>
                         </table>
