@@ -26,13 +26,13 @@ class RegistrationFormType extends AbstractType
             ->add('phoneNumber')
             ->add('mail')
             ->add('campus')
-            ->add('active')
             ->add('agreeTerms', CheckboxType::class, [
                 'mapped' => false,
                 'constraints' => [
                     new IsTrue([
                         'message' => 'You should agree to our terms.',
                     ]),
+                    'label' => ''
                 ],
             ])
             ->add('plainPassword', RepeatedType::class, [

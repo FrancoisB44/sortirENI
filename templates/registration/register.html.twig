@@ -16,11 +16,6 @@
     <div class="col-md-3"></div>
 {{ form_start(registrationForm) }}
 
-<div class="row p-4">
-    <div class="col-md-2"></div>
-    <div class="col-md-4 align-middle"><label for="name"> Image de Profil:</label></div>
-    <div class="col-md-3">{{ form_widget(registrationForm.picture) }} </div>
-</div>
 
 <div class="row p-3">
     <div class="col-md-2"></div>
@@ -48,32 +43,32 @@
 
 <div class="row p-3">
     <div class="col-md-2"></div>
-    <div class="col-md-4 align-middle"><label for="name">E-mail:</label></div>
+    <div class="col-md-4 align-middle"><label for="name">E-mail :</label></div>
     <div class="col-md-3">{{ form_widget(registrationForm.mail) }} </div>
 </div>
 <div class="row p-1">
     <div class="col-md-2"></div>
-    <div class="col-md-4 align-middle"><label for="name">Mot de Passe:</label></div>
+    <div class="col-md-4 align-middle"><label for="name">Mot de Passe :</label></div>
     <div class="col-md-3">{{ form_widget(registrationForm.plainPassword.first) }}  </div>
 </div>
     <div class="row p-1">
         <div class="col-md-2"></div>
-        <div class="col-md-4 align-middle"><label for="name">Confirmation de Mot de Passe:</label></div>
+        <div class="col-md-4 align-middle"><label for="name">Confirmation de Mot de Passe :</label></div>
         <div class="col-md-3">{{ form_widget(registrationForm.plainPassword.second) }}  </div>
     </div>
 <div class="row p-3">
     <div class="col-md-2"></div>
-    <div class="col-md-4"><label for="name">Nom du Campus:</label></div>
+    <div class="col-md-4"><label for="name">Nom du Campus :</label></div>
     <div class="col-md-3">{{ form_widget(registrationForm.campus) }} </div>
 </div>
-<div class="row p-3">
-    <div class="col-md-2"></div>
-    <div class="col-md-4"><label for="name">Statut:</label></div>
-    <div class="col-md-3">{{ form_widget(registrationForm.active) }} </div>
+<div class="row p-4">
+        <div class="col-md-2"></div>
+        <div class="col-md-4 align-middle"><label for="name"> Image de Profil :</label></div>
+        <div class="col-md-3">{{ form_widget(registrationForm.picture) }} </div>
 </div>
 <div class="row p-2">
     <div class="col-md-2"></div>
-    <div class="col-md-4 "><label for="name">AgreeTerms:</label></div>
+    <div class="col-md-4 "><label for="name">Accepter les conditions :</label></div>
     <div class="col-md-3">{{ form_widget(registrationForm.agreeTerms) }} </div>
 </div>
 
