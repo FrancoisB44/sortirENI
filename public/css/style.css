@@ -110,7 +110,8 @@ li{
 }
 
 
-/*css button  login.html.twig */
+/*css  login.html.twig */
+
 /*#butt{*/
 /*    margin: 10% 0;*/
 /*    border:1px solid black;*/
@@ -119,6 +120,11 @@ li{
 
     margin-left: 30%;
     border:1px solid black;
+}
+#bu{
+    margin: 10% 0;
+    border:1px solid black;
+    margin-left: 10%;
 }
 #inputPseudo{
     margin-left: 30% ;
@@ -137,10 +143,38 @@ li{
     border:1px solid black;
 
 }
-
 #bu{
     margin: 10% 0;
     border:1px solid black;
     margin-left: 10%;
 }
+/*#confP{*/
+/*    padding-top: 10%;*/
+/*}*/
+/*#confP2{*/
+/*    padding-top: 10%;*/
+/*}*/
 
+/*css  create place.html.twig */
+.ajoutlieu{
+    padding-left: 12%;
+    padding-bottom: 3%;
+    margin-top: 7%;
+}
+.champs{
+    padding: 5%;
+}
+#bu2{
+    margin-left:25%;
+    border:1px solid black;
+    margin-top: 22%;
+
+}
+#bubu2{
+    margin-left:11%;
+    border:1px solid black;
+    margin-top: 10%;
+}
+.listelieux{
+    margin-top: 5%;
+}
