@@ -6,34 +6,35 @@
 {% block container %}
     <div class="container-fluide">
         <div class="row">
-            <div class="col-md-6">
+            <div class="col-md-1"> </div>
+            <div class="col-md-5">
                 {{ form_start(formPlace) }}
                 <h3 class="ajoutlieu">Ajouter un lieu</h3>
                 <div class="forme-group col-md-6 ">
                     <div class="row">
-                        <div class="col-md-3"></div>
-                        <div class="col-md-6">
-                            <label class="champs">Lieu:</label>
+                        <div class="col-md-2"></div>
+                        <div class="col-md-7">
+                            <label class="champs"> Lieu :</label>
                             {{ form_widget(formPlace.namePlace) }}
                         </div>
                         <div class="col-md-3"></div>
                     </div>
                     <div class="row">
-                        <div class="col-md-3"></div>
-                        <div class="col-md-6"><label class="champs">Rue :</label>
+                        <div class="col-md-2"></div>
+                        <div class="col-md-7"><label class="champs"> Rue :</label>
                             {{ form_widget(formPlace.street) }}
                         </div>
                         <div class="col-md-3"></div>
                     </div>
                     <div class="row">
-                        <div class="col-md-3"></div>
-                        <div class="col-md-6"><label class="champs" >Ville:</label>{{ form_widget(formPlace.nameCity) }}
+                        <div class="col-md-2"></div>
+                        <div class="col-md-7"><label class="champs" > Ville :</label>{{ form_widget(formPlace.nameCity) }}
                         </div>
                         <div class="col-md-3"></div>
                     </div>
                     <div class="row">
-                        <div class="col-md-3"></div>
-                        <div class="col-md-6"><label class="champs" >Code postale:</label>{{ form_widget(formPlace.zipCode) }}</div>
+                        <div class="col-md-2"></div>
+                        <div class="col-md-7"><label class="champs" > Code postal :</label>{{ form_widget(formPlace.zipCode) }}</div>
                         <div class="col-md-3"></div>
                     </div>
                 </div>
@@ -60,23 +61,27 @@
                 {# <button  type="submit" onclick="history.go(-1)" class="btn btn-lg btn-white ">Annuler</button> #}
                 {# </div> #}
 
-                <div class="row">
-                    <div class="col-md-1"></div>
+
                     <div class="col-md-5">
+                        <div class="row">
+                        <div class="col-md-6">
                         {{ form_widget(formPlace) }}
                         <button id="bubu2" class="btn  btn-lg">Ajouter</button>
-                        <div class="col-md-5">  <button id="bu2" type="submit" onclick="history.go(-1)" class="btn btn-lg ">Annuler</button></div>
+                        </div>
+                        <div class="col-md-6">
+                            <button id="bu2" type="submit" onclick="history.go(-1)" class="btn btn-lg ">Annuler</button>
+                        </div>
                     </div>
-
+                    <div class="col-md-1"></div>
                     {{ form_end(formPlace) }}
-
+                </div>
 {#                    <div class="col-md-4"> </div>#}
 {#                        <div class="col-md-4">#}
 {#                            <button id="bu2" type="submit" onclick="history.go(-1)" class="btn btn-lg btn-white ">Annuler</button>#}
 {#                        </div>#}
 {#                    <div class="col-md-4"></div>#}
                 </div>
-            </div>
+
 
             <div class="col-md-6 p-2">
                 <h3 class="listelieux">Liste des Lieux</h3>
@@ -85,6 +90,7 @@
                         <thead>
                         <tr>
                             <th>Lieu</th>
+                            <th>Rue</th>
                             <th>Code postal</th>
                             <th>Ville</th>
                         </tr>
@@ -96,10 +102,13 @@
                                     {{ place.namePlace }}
                                 </td>
                                 <td>
+                                    {{ place.street }}
+                                </td>
+                                <td>
                                     {{ place.zipCode }}
                                 </td>
                                 <td>
-                                    {{ place.street }}
+                                    {{ place.nameCity }}
                                 </td>
                             </tr>
                         {% endfor %}

@@ -157,23 +157,23 @@ li{
 
 /*css  create place.html.twig */
 .ajoutlieu{
-    padding-left: 12%;
+    padding-left: 18%;
     padding-bottom: 3%;
     margin-top: 7%;
 }
 .champs{
-    padding: 5%;
+    padding: 2%;
 }
 #bu2{
-    margin-left:25%;
+    margin-left:50%;
     border:1px solid black;
     margin-top: 22%;
 
 }
 #bubu2{
-    margin-left:11%;
+    margin-left:60%;
     border:1px solid black;
-    margin-top: 10%;
+    margin-top: 22%;
 }
 .listelieux{
     margin-top: 5%;
