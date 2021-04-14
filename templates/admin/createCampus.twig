@@ -64,6 +64,9 @@
                 </table>
                 {% else %}
                     <p>Aucun campus à afficher </p>
+                    {{ form_widget(formCampus.nameCampus) }}
+                    {{ form_widget(formCampus) }}
+                    <button href="{{ path('create_campus') }}" class="btn btn-primary">Ajouter</button>
                 {% endif %}
 
                 {{ form_end(formCampus) }}

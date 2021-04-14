@@ -62,8 +62,12 @@
 
                     </tbody>
                 </table>
+
             {% else %}
                 <p>Aucun état à afficher </p>
+                {{ form_widget(formStatus.wording) }}
+                {{ form_widget(formStatus) }}
+                <button href="{{ path('create_status') }}" class="btn btn-primary">Ajouter</button>
             {% endif %}
 
             {{ form_end(formStatus) }}
