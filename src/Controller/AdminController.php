@@ -172,7 +172,7 @@ class AdminController extends AbstractController
     {
         $user = new User();
 
-        $roles[] = "ROLE_DISABLED";
+        $roles[] = "ROLE_USER";
         $user->setRoles($roles);
 
         $form = $this->createForm(RegistrationFormType::class, $user);
@@ -191,12 +191,13 @@ class AdminController extends AbstractController
             $entityManager->persist($user);
             $entityManager->flush();
 
-            return $guardHandler->authenticateUserAndHandleSuccess(
-                $user,
-                $request,
-                $authenticator,
-                'main' // firewall name in security.yaml
-            );
+//            return $guardHandler->authenticateUserAndHandleSuccess(
+//                $user,
+//                $request,
+//                $authenticator,
+//                'main' // firewall name in security.yaml
+//            );
+            return $this->render('admin/mainAdmin.html.twig');
         }
 
         return $this->render('admin/createProfileAsAdmin.html.twig', [
@@ -223,7 +224,7 @@ class AdminController extends AbstractController
         $entityManager->remove($user);
         $entityManager->flush();
 
-        $this->addFlash('success','utilisateur'.$user->getUsername().'a été supprimé');
+        $this->addFlash('success','L\'utilisateur a été supprimé');
 
         $list = $entityManager->getRepository(User::class)->findAll();
 
