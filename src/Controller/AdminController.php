@@ -168,9 +168,13 @@ class AdminController extends AbstractController
     /**
      * @Route("/create_user_as_admin", name="create_user_as_admin")
      */
-    public function createUserAsAdmin(Request $request,UserPasswordEncoderInterface $passwordEncoder, GuardAuthenticatorHandler $guardHandler, AppAuthenticator $authenticator)
+    public function createUserAsAdmin(Request $request,UserPasswordEncoderInterface $passwordEncoder, GuardAuthenticatorHandler $guardHandler, AppAuthenticator $authenticator):Response
     {
         $user = new User();
+
+        $roles[] = "ROLE_DISABLED";
+        $user->setRoles($roles);
+
         $form = $this->createForm(RegistrationFormType::class, $user);
         $form->handleRequest($request);
 
@@ -187,15 +191,15 @@ class AdminController extends AbstractController
             $entityManager->persist($user);
             $entityManager->flush();
 
-//            return $guardHandler->authenticateUserAndHandleSuccess(
-//                $user,
-//                $request,
-//                $authenticator,
-//                'main' // firewall name in security.yaml
-//            );
+            return $guardHandler->authenticateUserAndHandleSuccess(
+                $user,
+                $request,
+                $authenticator,
+                'main' // firewall name in security.yaml
+            );
         }
 
-        return $this->render('create_user/createProfileAsAdmin.html.twig', [
+        return $this->render('admin/createProfileAsAdmin.html.twig', [
             'registrationForm' => $form->createView(),
         ]);
     }
