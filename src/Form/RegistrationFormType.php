@@ -3,6 +3,7 @@
 namespace App\Form;
 
 use App\Entity\User;
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use Symfony\Component\Form\Extension\Core\Type\FileType;
@@ -26,13 +27,16 @@ class RegistrationFormType extends AbstractType
             ->add('phoneNumber')
             ->add('mail')
             ->add('campus')
+//            ->add('active', EntityType::class, [
+//                'class' => User::class,
+//                'label' => false
+//            ])
             ->add('agreeTerms', CheckboxType::class, [
                 'mapped' => false,
                 'constraints' => [
                     new IsTrue([
                         'message' => 'You should agree to our terms.',
                     ]),
-                    'label' => ''
                 ],
             ])
             ->add('plainPassword', RepeatedType::class, [

@@ -115,7 +115,7 @@
                                             {% endif %}
 
                                             <!-- Sortie ouverte, utilisateur déjà inscrit -->
-                                            {% if event.status == 'Ouvert' and app.user in event.users and event.startDateTime < today %}
+                                            {% if event.status == 'Ouvert' and app.user in event.users and event.startDateTime > today %}
                                                 <a href="{{ url('unsubscribe', {"id" : event.id}) }}" class="btn btn-warning btn-sm">Se désister</a>
                                             {% endif %}
                                             {% if event.status == 'Complet' and app.user in event.users %}
@@ -128,10 +128,10 @@
                                         </td>
                                         <td>
                                             <!-- Sortie ouverte, mais utilisateur -->
-                                            {% if event.status == 'Ouvert' and app.user.id == event.user.id and event.startDateTime < today %}
+                                            {% if event.status == 'Ouvert' and app.user.id == event.user.id and event.startDateTime > today %}
                                                 <a href=" {{ url('cancel_event', {"id" : event.id }) }}" class="btn btn-danger btn-sm">Annuler</a>
                                             {% endif %}
-                                            {% if event.status == 'Complet' and app.user in event.users and event.startDateTime < today %}
+                                            {% if event.status == 'Complet' and app.user in event.users and event.startDateTime > today %}
                                                 <a href=" {{ url('cancel_event', {"id" : event.id }) }}" class="btn btn-danger btn-sm">Annuler</a>
                                             {% endif %}
 

@@ -65,10 +65,10 @@ class User implements UserInterface
      */
     private $roles = [];
 
-    /**
-     * @ORM\Column(type="boolean")
-     */
-    private $active;
+//    /**
+//     * @ORM\Column(type="boolean")
+//     */
+//    private $active;
 
     /**
      * @ORM\ManyToMany(targetEntity=Event::class, inversedBy="users")
@@ -214,21 +214,21 @@ class User implements UserInterface
     }
 
 
-    /**
-     * @return mixed
-     */
-    public function getActive()
-    {
-        return $this->active;
-    }
-
-    /**
-     * @param mixed $active
-     */
-    public function setActive($active): void
-    {
-        $this->active = $active;
-    }
+//    /**
+//     * @return mixed
+//     */
+//    public function getActive()
+//    {
+//        return $this->active;
+//    }
+//
+//    /**
+//     * @param mixed $active
+//     */
+//    public function setActive($active): void
+//    {
+//        $this->active = $active;
+//    }
 
     /**
      * @see UserInterface
@@ -374,3 +374,8 @@ class User implements UserInterface
     }
 
 }
+
+
+
+
+
