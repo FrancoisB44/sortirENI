@@ -183,7 +183,6 @@ class EventController extends AbstractController
         }
 
 
-
         return $this->redirectToRoute('list');
     }
     /**

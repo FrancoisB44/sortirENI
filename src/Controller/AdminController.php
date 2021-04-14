@@ -301,6 +301,5 @@ class AdminController extends AbstractController
         return $this->render('admin/createStatus.twig', ["statusForm" => $form->createView(), "status"=>$status]);
     }
 
-
 }
 
