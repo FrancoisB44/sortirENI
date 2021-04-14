@@ -166,8 +166,14 @@ class EventController extends AbstractController
         $eventRepository = $this->getDoctrine()->getRepository(Event::class);
         $inscription = $eventRepository->find($id);
 
+
         if(count($inscription->getUsers()) < $inscription->getNbRegistrationsMax()) {
             $inscription->addUser($this->getUser());
+
+            if(count($inscription->getUsers()) == $inscription->getNbRegistrationsMax()) {
+                $statutId = $entityManager->getRepository(Status::class)->findAll();
+                $inscription->setStatus($statutId[7]);
+            }
 
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->persist($inscription);
@@ -176,6 +182,8 @@ class EventController extends AbstractController
             $this->addFlash('danger', 'Dommage, il n\'y a plus de place');
         }
 
+
+
         return $this->redirectToRoute('list');
     }
     /**
@@ -183,9 +191,18 @@ class EventController extends AbstractController
      */
     public function unsubscribe(Request $request, EntityManagerInterface $entityManager){
         $id = $request->get('id');
+
         $repo = $entityManager->getRepository(Event::class);
         $event = $repo->find($id);
+
         $event->removeUser($this->getUser());
+
+        if(count($event->getUsers()) < $event->getNbRegistrationsMax()) {
+            $statutId = $entityManager->getRepository(Status::class)->findAll();
+            $event->setStatus($statutId[1]);
+        }
+
+
         $entityManager->flush();
         return $this->redirectToRoute('list');
     }
