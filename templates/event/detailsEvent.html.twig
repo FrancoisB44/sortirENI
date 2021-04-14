@@ -42,9 +42,11 @@
                     {% if date(dateLimitEvent) > date(today) %}
                         {% if date(dateLimitRegistration) > date(today) %}
                             {% if detailEvent.users|length < detailEvent.nbRegistrationsMax %}
-                                <li>Inscription : {{ detailEvent.status }}
-                                    {% if detailEvent.status == "Annulée"%}
-                                        ( motif : {{ detailEvent.motif}})
+                                <li>Etat inscription : {{ detailEvent.status }}
+                                </li>
+                                <li>
+                                    {% if detailEvent.status == "Annulé"%}
+                                       Motif d'annulation : {{ detailEvent.motif}}
                                     {% endif %}
                                 </li>
                                 <li>Inscription jusqu'au : {{ detailEvent.registrationDeadLine|date("d/m/Y") }} à {{ detailEvent.registrationDeadLine|date("H:i") }}</li>
