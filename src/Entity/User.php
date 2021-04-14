@@ -49,7 +49,7 @@ class User implements UserInterface
     private $phoneNumber;
 
     /**
-     * @ORM\Column(type="string", length=13, length=255)
+     * @ORM\Column(type="string", length=255)
      * @Assert\NotBlank(message="Veuillez renseigner un mail")
      * @Assert\Email(message="Votre mail doit respecter le format xxx@xxx.com")
      */

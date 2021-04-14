@@ -26,9 +26,7 @@
                                 <th> </th>
                             </thead>
                                 {% for user in listUsers %}
-                                    <tr>
-                                    <td>{{ user.id }}</td>
-                                    <td>{{ user }}</td>
+                                    <td>{{ user.pseudo }}</td>
                                     <td>
                                         {% for role in user.roles %}
                                             {{ role }}

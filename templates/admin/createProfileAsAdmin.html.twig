@@ -1,0 +1,77 @@
+{% extends 'base.html.twig' %}
+
+{% block titlePage %}{% endblock %}
+
+{% block container %}
+
+    {% for flashError in app.flashes('verify_email_error') %}
+        <div class="alert alert-danger" role="alert">{{ flashError }}</div>
+    {% endfor %}
+
+<div class="row p-1">
+    <div class="col-md-6"></div>
+    <div class="col-md-3">
+        <h1 class="h3 mb-3 font-weight-normal">Inscription</h1>
+    </div>
+    <div class="col-md-3"></div>
+    {{ form_start(registrationForm) }}
+
+
+    <div class="row p-3">
+        <div class="col-md-2"></div>
+        <div class="col-md-4 align-middle"><label for="name">Pseudo :</label></div>
+        <div class="col-md-3">{{ form_widget(registrationForm.pseudo) }}</div>
+    </div>
+
+    <div class="row p-3">
+        <div class="col-md-2"></div>
+        <div class="col-md-4 align-middle"><label for="name">Nom :</label></div>
+        <div class="col-md-3">{{ form_widget(registrationForm.nameUser) }}</div>
+    </div>
+
+    <div class="row p-3">
+        <div class="col-md-2"></div>
+        <div class="col-md-4 align-middle"><label for="name">Prénom :</label></div>
+        <div class="col-md-3">{{ form_widget(registrationForm.firstNameUser) }}</div>
+    </div>
+
+    <div class="row p-3">
+        <div class="col-md-2"></div>
+        <div class="col-md-4 align-middle"><label for="name">Numéro de téléphone :</label></div>
+        <div class="col-md-3">{{ form_widget(registrationForm.phoneNumber) }}</div>
+    </div>
+
+    <div class="row p-3">
+        <div class="col-md-2"></div>
+        <div class="col-md-4 align-middle"><label for="name">E-mail :</label></div>
+        <div class="col-md-3">{{ form_widget(registrationForm.mail) }} </div>
+    </div>
+    <div class="row p-1">
+        <div class="col-md-2"></div>
+        <div class="col-md-4 align-middle"><label for="name">Mot de Passe :</label></div>
+        <div class="col-md-3">{{ form_widget(registrationForm.plainPassword.first) }}  </div>
+    </div>
+    <div class="row p-1">
+        <div class="col-md-2"></div>
+        <div class="col-md-4 align-middle"><label for="name">Confirmation de Mot de Passe :</label></div>
+        <div class="col-md-3">{{ form_widget(registrationForm.plainPassword.second) }}  </div>
+    </div>
+    <div class="row p-3">
+        <div class="col-md-2"></div>
+        <div class="col-md-4"><label for="name">Nom du Campus :</label></div>
+        <div class="col-md-3">{{ form_widget(registrationForm.campus) }} </div>
+    </div>
+
+    <div class="row p-4">
+        <div class="col-md-5"></div>
+        <div class="col-md-2">
+            <button id="but" class="btn btn-lg btn-white" type="submit">
+                Valider
+            </button>
+        </div>
+        <div class="col-md-2">
+            <button id="bu" type="submit"  onclick="history.go(-1)" class="btn btn-lg btn-white ">Annuler</button>
+        </div>
+
+
+        {% endblock %}
