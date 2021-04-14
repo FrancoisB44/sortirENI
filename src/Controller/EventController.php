@@ -31,7 +31,7 @@ class EventController extends AbstractController
     public function createEvent(Request $request, EntityManagerInterface $entityManager, PlaceRepository $placeRepository): Response
     {
         $event = new Event();
-
+        $event->setMotif(" ");
         $formEvent = $this->createForm(EventType::class, $event);
         $formEvent->handleRequest($request);
 
@@ -216,11 +216,10 @@ class EventController extends AbstractController
         $repo = $entityManager->getRepository(Event::class);
 
         $event = $repo->find($id);
+        $event->setMotif(null);
         $cancelForm = $this->createForm(CancelEventFormType::class,$event);
         $cancelForm->handleRequest($request);
-
-        if($cancelForm->isSubmitted() && $cancelForm->isValid()) {
-
+        if($cancelForm->isSubmitted() && $cancelForm->isValid()){
             $statutId = $entityManager->getRepository(Status::class)->findAll();
             $event->setStatus($statutId[5]);
             $entityManager->flush();
@@ -230,7 +229,7 @@ class EventController extends AbstractController
         }
         return $this->render('event/cancelEvent.html.twig', [
             'detailEvent' => $event,
-            'cancelForm' => $cancelForm->createView()
+            'cancelForm' => $cancelForm->createView(),
         ]);
     }
 
