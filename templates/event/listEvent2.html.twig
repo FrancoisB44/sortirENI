@@ -89,8 +89,8 @@
                                 {% for event in listByFilters %}
                                     <tr>
                                         <td>{{ event.nameEvent }}</td>
-                                        <td>{{ event.startDateTime|date("d/m/Y") }}</td>
-                                        <td>{{ event.registrationDeadLine|date("d/m/Y") }}</td>
+                                        <td>{{ event.startDateTime|date("d/m/Y") }} à {{ event.startDateTime|date("h:m") }}</td>
+                                        <td>{{ event.registrationDeadLine|date("d/m/Y") }} à {{ event.registrationDeadLine|date("h:m") }}</td>
                                         <td>{{ event.users|length }}/{{ event.nbRegistrationsMax }}
                                             <!-- Sortie ouverte, mais plus de place-->
                                             {% if event.status == 'Ouvert' and event.users|length == event.nbRegistrationsMax %}
@@ -103,7 +103,7 @@
                                                 x
                                             {% endif %}
                                         </td>
-                                        <td><a href="{{ url('user_display_user', {"id" : event.user.id }) }}" >{{ event.user }}</a></td>
+                                        <td><a href="{{ url('user_display_user', {"id" : event.user.id }) }}" >{{ event.user.pseudo }}</a></td>
 
                                         <td>
                                             <!-- Sortie ouverte, utilisateur pas encore inscrit et place dispo-->
@@ -126,6 +126,9 @@
                                         <td>
                                             <!-- Sortie ouverte, mais utilisateur = organisateur (ajouter href="{# {{ url('delete', {"id" : event.id }) }} #}"-->
                                             {% if event.status == 'Ouvert' and app.user.id == event.user.id %}
+                                                <a href=" {{ url('cancel_event', {"id" : event.id }) }}" class="btn btn-danger btn-sm">Annuler</a>
+                                            {% endif %}
+                                            {% if event.status == 'Complet' and app.user in event.users %}
                                                 <a href=" {{ url('cancel_event', {"id" : event.id }) }}" class="btn btn-danger btn-sm">Annuler</a>
                                             {% endif %}
 
