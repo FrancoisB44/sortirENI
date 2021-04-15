@@ -133,8 +133,11 @@
                                 {% endfor %}
                                 </tbody>
 
-
                             </table>
+                            <div class="pagination pagination-lg">
+                                {{ knp_pagination_render(listByFilters) }}
+                            </div>
+
                         {% else %}
                             <p>Aucune sortie ne correspond à votre recherche </p>
                         {% endif %}
