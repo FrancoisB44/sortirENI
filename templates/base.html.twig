@@ -2,6 +2,7 @@
 <html>
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="{{ asset('css/style.css') }}" type="text/css" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/css/bootstrap.min.css"
           rel="stylesheet" integrity="sha384-eOJMYsd53ii+scO/bJGFsiCZc+5NDVN2yr8+0RDqr0Ql0h+rP48ckxlpbzKgwra6"
@@ -9,12 +10,13 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/js/bootstrap.bundle.min.js"
             integrity="sha384-JEW9xMcG8R+pH31jmWH6WWP0WintQrMb4s7ZOdauHnUtxwoG2vI5DkLtS3qm9Ekf"
             crossorigin="anonymous"></script>
-    <link rel="icon" href="{{ asset('img/icons/re.png') }}"/>
+    <link rel="icon" href="{{ asset('img/logo/logg.png') }}"/>
     <title>Re-Sortir </title>
 </head>
 
 <body>
 <div id="bkgd" class="container-fluid ">
+
     <header class="row text-light bg d-flex align-items-center  p-3 shadow-lg">
         <div class="row-lg-4 col-sm-4 d-flex justify-content-between">
             <h1>(re)Sortir.com </h1>
@@ -25,26 +27,26 @@
                 <a class="nav-link mx-3" href="{{ path('home') }}" style="color:white;">Accueil</a>
                 {% if app.user %}
 
-                    <a class="nav-link mx-3 "
+                    <a class="nav-link mx-2 "
                        href="{{ path('user_display_user', {"id":app.user.id}) }}" style="color:white;">Mon profil</a>
 
                     <li class="nav-item">
-                        <a class="nav-link  mx-3 " href="{{ path('create') }}" style="color:white;">Créer sortie</a>
+                        <a class="nav-link  mx-2 " href="{{ path('create') }}" style="color:white;">Créer sortie</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link mx-3 " href="{{ path('list') }}" style="color:white;">Liste sorties</a>
+                        <a class="nav-link mx-2 " href="{{ path('list') }}" style="color:white;">Liste sorties</a>
                     </li>
-                    <li class="nav-item">
-                        <a class="nav-link mx-3" href="{{ path('app_logout') }}" style="color:white;">Déconnexion</a>
+                    <li class="nav-item pt-1">
+                        <a class="nav-link mx-2 " href="{{ path('app_logout') }}" style="color:white;">Déconnexion</a>
                         <!---a gerer la deconnexion-->
                     </li>
                 {% else %}
-                    <a class="nav-link" href="{{ path('app_login') }}" style="color:white;">Se connecter</a>
-                    <a class="nav-link" href="{{ path('app_register') }}" style="color:white;">S'inscrire</a>
+                    <a class="nav-link mx-2" href="{{ path('app_login') }}" style="color:white;">Se connecter</a>
+                    <a class="nav-link mx-2" href="{{ path('app_register') }}" style="color:white;">S'inscrire</a>
                 {% endif %}
                 {% if is_granted('ROLE_ADMIN') %}
-                    <li class="text-light nav-item bg-dark mx-4">
-                        <a class="nav-link" href="{{ path('admin_home') }}">Admin Page</a>
+                    <li class="text-light nav-item bg-white">
+                        <a id="admin" class="nav-link " href="{{ path('admin_home') }}"  style="color:#1f5f8f;">Admin Page</a>
                     </li>
                 {% endif %}
             </ul>
@@ -68,53 +70,40 @@
                     </div>
                 {% endfor %}
             {% endfor %}
+
             {% block container %}
-                <div class="section ">
-                    <h1 class="bienvenue">Bienvenue sur (re)Sortir.com !</h1>
 
-                    <div class="row">
-                        <div id="sect" class="col-md-5 mt-2">
-                            <p>Envie de voir du monde,faire des sorties, </p>
-                            <p> tout en respectant les gestes barrieres</p>
-                            <p>Tu es au bon endroit! </p>
-                        </div>
-
-                        <div class="col-md-6 p-5 mt-5">
-                            <div class="flip-card p-2">
-                                <div class="flip-card-inner">
-                                    <div class="flip-card-front">
-                                        <img src="{{ asset('img/logo/sortie.png') }}" alt="Avatar"
-                                             style="width:300px;height:300px;">
-                                    </div>
-                                    <div class="flip-card-back align-middle">
-                                        Clique-la
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-md-1">
-                        </div>
-                    </div>
-                </div>
-            {% endblock %}
+            <h1 class="bienvenue">Bienvenue sur (re)Sortir.com !</h1>
+            {# {{ app.user.pseudo }} faire en dynamique #}
+            <div class="row pl-5">
+                <div class=" col-md- 5"></div></div>
+            <div id="sect" class="col-md- 3 pl-5 mt-5">
+                <p>Envie de voir du monde </p>
+                <p>faire des sorties, </p>
+                <p>Tu es au bon endroit! </p>
+                <p> si tu veux consulter la liste des sortie clique juste en dessous</p>
+                <a  style="color: black" href="{{ path('list') }}" >Liste sorties</a>
+            </div>
+            <div class=" col-md- 4"></div>
         </div>
     </div>
-
+    {% endblock %}
     <footer>
         {% block footer %}
-        {% endblock %}
 
-             <div class="row">
-                 <div class=" col-md- 4">
-                <img id="logo" src="{{ asset('img/logo/logg.png') }}" alt="logo">
-                  </div>
-              </div>
-        <div class="row">
-            <div class=" col-md-4 " id="foot">Aymeric-françois-Agnès</div>
-        </div>
+        <div class=" col-m- 2"></div>
+        <div class=" col-m-6 " id="foot">Aymeric-François-Agnès</div>
+        <div class=" col-m- 4"></div>
 
-    </footer>
+{# <div class="row">#}
+{# <div class=" col-md- 4"></div>#}
+{# <div class=" col-md-4 " id="foot">Aymeric-François-Agnès</div>#}
+{# <div class=" col-md- 4"></div>#}
+{# </div>#}
+  {% endblock %}
+ </footer>
 </div>
 
 </body>
+
 </html>
