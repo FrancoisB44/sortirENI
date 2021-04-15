@@ -239,6 +239,30 @@ class EventController extends AbstractController
         ]);
     }
 
+    /**
+     * @Route(path="/reactive_event/{id}",requirements={"id":"\d+"}, name="reactive_event")
+     */
+    public function reactiveEvent(Request $request, EntityManagerInterface $entityManager)
+    {
+        $id = $request->get('id');
+        $repo = $entityManager->getRepository(Event::class);
+
+        $event = $repo->find($id);
+        $event->setMotif(null);
+//        $cancelForm = $this->createForm(CancelEventFormType::class,$event);
+//        $cancelForm->handleRequest($request);
+//        if($cancelForm->isSubmitted() && $cancelForm->isValid()){
+            $statutId = $entityManager->getRepository(Status::class)->findAll();
+            $event->setStatus($statutId[1]);
+
+            $this->addFlash('success', 'Sortie réactivée !');
+
+
+//        }
+        $entityManager->flush();
+        return $this->redirectToRoute('list');
+    }
+
 
 //    /**
 //     * @Route("/create_place", name="create_place")

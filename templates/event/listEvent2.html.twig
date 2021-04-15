@@ -124,6 +124,15 @@
                                                     {% endif %}
                                                 {% endif %}
 
+                                                {% if event.status == 'Annulé' and event.startDateTime > today %}
+                                                    {% if app.user.id == event.user.id or is_granted('ROLE_ADMIN') %}
+                                                        <a href=" {{ url('reactive_event', {"id" : event.id }) }}" class="btn btn-warning btn-sm">Réactiver</a>
+                                                    {% endif %}
+                                                {% endif %}
+
+
+
+
                                             </td>
                                             <td>
                                                 <a href="{{ url('details', {"id" : event.id }) }}" class="btn btn-success btn-sm">Détail</a>
