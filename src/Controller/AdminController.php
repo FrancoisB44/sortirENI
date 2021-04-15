@@ -234,19 +234,34 @@ class AdminController extends AbstractController
     /**
      * @Route("/modify_user_as_admin/{id}", requirements={"id":"\d+"}, name="modify_user_as_admin")
      */
-    public function modifyUser(Request $request, EntityManagerInterface $entityManager, UserPasswordEncoderInterface $passwordEncoder)
+    public function modifyUser(Request $request, EntityManagerInterface $entityManager)
     {
         $profileId = $request->get('id');
+        $action = $request->get('action');
+
         $profile = $entityManager->getRepository(User::class)->find($profileId);
-        $form = $this->createForm(ModifyProfileAsAdminFormType::class,$profile);
-        $form->handleRequest($request);
-        if ($form->isSubmitted() && $form->isValid()) {
+
+        if($action == 'ban'){
+            $roles[] = "ROLE_DISABLED";
+            $profile->setRoles($roles);
             $entityManager->persist($profile);
             $entityManager->flush();
-            $this->addFlash('success', 'Modification success');
             return $this->redirectToRoute('list_user');// pas sur du nom de la route
         }
-        return $this->render('admin/modifyProfileAsAdmin.html.twig', ["userForm" => $form->createView(), "user"=>$profile]);
+        if($action == 'admin'){
+            $roles[] = "ROLE_ADMIN";
+            $profile->setRoles($roles);
+            $entityManager->persist($profile);
+            $entityManager->flush();
+            return $this->redirectToRoute('list_user');// pas sur du nom de la route
+        }
+        if($action == 'unBan'){
+            $roles[] = "ROLE_USER";
+            $profile->setRoles($roles);
+            $entityManager->persist($profile);
+            $entityManager->flush();
+            return $this->redirectToRoute('list_user');// pas sur du nom de la route
+        }
     }
 
     /**

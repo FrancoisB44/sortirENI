@@ -238,7 +238,7 @@ class User implements UserInterface
         {
             $roles = $this->roles;
             // guarantee every user at least has ROLE_USER
-            $roles[] = 'ROLE_DISABLED';// on ajoute le role user ds le tableau de roles et un retourne ce tab avc la nvlle valeur
+            $roles[] = null;// on ajoute le role user ds le tableau de roles et un retourne ce tab avc la nvlle valeur
             return array_unique($roles);
         }
     }

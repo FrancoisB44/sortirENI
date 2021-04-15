@@ -22,22 +22,50 @@
 
                                 <th>Utilisateurs</th>
                                 <th>Roles</th>
-                                <th> </th>
-                                <th> </th>
+                                <th></th>
+                                <th></th>
+                                <th></th>
                             </thead>
                                 {% for user in listUsers %}
-                                    <td>{{ user.pseudo }}</td>
+                                    <td><b>{{ user.pseudo }}</b></td>
                                     <td>
-                                        {% for role in user.roles %}
-                                            {{ role }}
+                                        {% for userR in user.roles %}
+                                            {% if userR == 'ROLE_USER' %}
+                                                <p class="text-success">Utilisateur</p>
+                                            {% endif %}
+
+                                            {% if userR == 'ROLE_ADMIN' %}
+                                                <p class="text-primary">admin</p>
+                                            {% endif %}
+
+                                            {% if userR == 'ROLE_DISABLED' %}
+                                                <p class="text-danger">banni</p>
+                                            {% endif %}
                                         {% endfor %}
                                     </td>
                                     <td>
-                                        <a href="{{ path('delete_user', {'id': user.id }) }}" class="btn btn-danger" >Supprimer</a>
+                                        <a href="{{ path('delete_user', {'id': user.id }) }}" class="btn btn-danger" >Supprimer </a>
                                     </td>
                                     <td>
-                                        <a href="{{ path('modify_user_as_admin', {'id': user.id }) }}" class="btn btn-warning">Modifier</a>
+                                        {% for userR in user.roles %}
+                                            {% if userR == 'ROLE_USER' %}
+                                                <a href="{{ path('modify_user_as_admin', {'id': user.id,'action':'ban' }) }}" class="btn btn-warning" >Désactiver</a>
+                                            {% endif %}
+
+                                            {% if userR == 'ROLE_DISABLED' %}
+                                                <a href="{{ path('modify_user_as_admin', {'id': user.id,'action':'unBan' }) }}" class="btn btn-success" >Réactiver</a>
+                                            {% endif %}
+                                        {% endfor %}
                                     </td>
+                                    <td>
+                                        {% for userR in user.roles %}
+                                            {% if userR == 'ROLE_USER' %}
+                                                <a href="{{ path('modify_user_as_admin', {'id': user.id,'action':'admin' }) }}" class="btn btn-primary" >Passer admin</a>
+                                            {% endif %}
+                                        {% endfor %}
+
+                                    </td>
+
                                     </tr>
                                 {% endfor %}
                         </table>
