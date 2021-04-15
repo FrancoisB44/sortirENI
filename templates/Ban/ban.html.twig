@@ -1,0 +1,13 @@
+{% extends 'base.html.twig' %}
+
+{% block titlePage %}{% endblock %}
+
+{% block container %}
+
+    {% if is_granted('ROLE_USER') %}
+        <h1>Coucou user les pages admin sont bloquées</h1>
+    {% else %}
+        <h1>Coucou banned bitch, u   mad?!</h1>
+    {% endif %}
+
+        {% endblock %}
