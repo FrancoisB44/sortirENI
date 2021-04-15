@@ -206,7 +206,7 @@ li{
 #cardEvent{
     padding:2% 2% ;
     margin:20% 5%;
-    background-color: rgba(255,218,185,0.3);
+    background-color: rgba(255,255,255,0.3);
 }
 
 .listeSorties{
@@ -229,4 +229,8 @@ li{
 }
 .nomEvent{
     text-align: center;
+}
+/*create event et ajax cities  */
+#cardEvent{
+    background-color: rgba(255,255,255,0.3);
 }
