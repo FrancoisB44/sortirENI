@@ -80,8 +80,8 @@ class EventController extends AbstractController
 
             return $this->redirectToRoute('list');
         } else {
-                $this->addFlash('danger', 'Attention, vérifiez les dates!!!');
-                return $this->redirectToRoute('create');
+                $this->addFlash('danger', 'Attention, incohérence dans la saisie des dates!!!');
+//                return $this->redirectToRoute('create');
             }
         }
 

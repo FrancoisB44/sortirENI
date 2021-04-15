@@ -3,7 +3,7 @@
 {% block title %}Register{% endblock %}
 
 {% block container %}
-
+<div>
     {% for flashError in app.flashes('verify_email_error') %}
         <div class="alert alert-danger" role="alert">{{ flashError }}</div>
     {% endfor %}
@@ -75,6 +75,7 @@
 <div class="row p-4">
     <div class="col-md-5"></div>
     <div class="col-md-2">
+        {{ form_widget(registrationForm) }}
         <button id="but" class="btn btn-lg btn-white" type="submit">
             Valider
         </button>
@@ -82,6 +83,8 @@
     <div class="col-md-2">
         <button id="bu" type="submit"  onclick="history.go(-1)" class="btn btn-lg btn-white ">Annuler</button>
     </div>
+</div>
 
     {{ form_end(registrationForm) }}
-    {% endblock %}
+</div>
+{% endblock %}

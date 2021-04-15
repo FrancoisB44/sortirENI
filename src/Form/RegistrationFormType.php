@@ -66,7 +66,7 @@ class RegistrationFormType extends AbstractType
                 'required' => false,
                 'constraints' => [
                     new Image([ //new Image
-                        'maxSize' => '10240k',
+                        'maxSize' => '1024k',
                     ])
                 ]
             ])
