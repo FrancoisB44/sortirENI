@@ -31,7 +31,7 @@
                     <tr>
                         <th>Campus</th>
                         <th></th>
-                        <th></th>
+
                     </tr>
                     </thead>
                     <tbody>
@@ -42,10 +42,7 @@
                             {#  #}
                             <a href="{{ path('delete_campus', {'id': campus.id }) }}" class="btn btn-danger" >Supprimer</a>
                         </td>
-                        <td>
-                            <!--href="{# {{ path('modify_campus_as_admin', {'id': campus.id }) }} #}"-->
-                            <a  class="btn btn-warning">Modifier</a>
-                        </td>
+
                     </tr>
                     {% endfor %}
                     <tr>

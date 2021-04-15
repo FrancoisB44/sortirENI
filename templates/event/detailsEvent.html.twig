@@ -11,12 +11,14 @@
             <div class="col-md-6  p-5 mt-5 mr-5">
                 <div class="card p-3 shadow-lg">
                     <h3 class="nomEvent p-2 ">{{ detailEvent.nameEvent | capitalize }}</h3>
-                    <p>Début événement : {{ detailEvent.StartDateTime|date("d/m/Y") }}
-                        à {{ detailEvent.StartDateTime|date("H:i") }}</p>
-                    <p> Description : {{ detailEvent.infoEvent }}</p>
-                    <p> Durée en minutes de l'événement : {{ detailEvent.duration }} </p>
+                    <p><b>Début événement : </b>{{ detailEvent.StartDateTime|date("d/m/Y") }}
+                            à {{ detailEvent.StartDateTime|date("H:i") }}</p>
+                    <p><b> Rue : </b>{{ detailEvent.place.street }}</p>
+                    <p><b> Ville : </b>{{ detailEvent.place.nameCity }}</p>
+                    <p><b> Description : </b>{{ detailEvent.infoEvent }}</p>
+                    <p><b> Durée en minutes de l'événement : </b>{{ detailEvent.duration }} </p>
                     {% if app.user.id != detailEvent.user.id %}
-                        <p> Evenement organisé par : {{ detailEvent.user }}</p>
+                        <p> <b>Evenement organisé par :</b> {{ detailEvent.user }}</p>
                     {% endif %}
                     <!--Si profil = personne connectée-->
                     {% if app.user.id == detailEvent.user.id %}
@@ -33,19 +35,19 @@
                     {% if date(dateLimitEvent) > date(today) %}
                         {% if date(dateLimitRegistration) > date(today) %}
                             {% if detailEvent.users|length < detailEvent.nbRegistrationsMax %}
-                                <p>Etat inscription : {{ detailEvent.status }}</p>
+                                <p><b>Etat inscription :</b> {{ detailEvent.status }}</p>
 
                                 {% if detailEvent.status == "Annulé" %}
-                                    <p>Motif d'annulation : {{ detailEvent.motif }}</p>
+                                    <p><b>Motif d'annulation :</b> {{ detailEvent.motif }}</p>
                                 {% endif %}
 
-                                <p>Inscription jusqu'au : {{ detailEvent.registrationDeadLine|date("d/m/Y") }}
+                                <p><b>Inscription jusqu'au : </b>{{ detailEvent.registrationDeadLine|date("d/m/Y") }}
                                     à {{ detailEvent.registrationDeadLine|date("H:i") }}</p>
-                                <p>(Il ne vous reste plus que {{ leftDaysRegistration }} jours pour vous inscrire)</p>
-                                <p>Déjà {{ detailEvent.users|length }} place(s) réservée(s) sur
+                                <p>(Il ne vous reste plus que<b> {{ leftDaysRegistration }} jours </b>pour vous inscrire)</p>
+                                <p>Déjà <b>{{ detailEvent.users|length }} place(s) réservée(s)</b> sur
                                     les {{ detailEvent.nbRegistrationsMax }} places disponibles</p>
                             {% else %}
-                                <p>Complet : {{ detailEvent.users|length }} / {{ detailEvent.nbRegistrationsMax }}</p>
+                                <p><b>Complet : </b>{{ detailEvent.users|length }} / {{ detailEvent.nbRegistrationsMax }}</p>
                             {% endif %}
                             {# {% if detailEvent.users|length == detailEvent.nbRegistrationsMax %} #}
                             {# <li>Complet : {{ detailEvent.users|length }} / {{ detailEvent.nbRegistrationsMax }}</li> #}
@@ -55,7 +57,7 @@
 
                         {% elseif date(detailEvent.registrationDeadLine) < today %}
                         {% else %}
-                            <p>Trop tard, inscriptions terminées depuis
+                            <p><b>Trop tard</b>, inscriptions terminées depuis
                                 le {{ detailEvent.registrationDeadLine|date("d/m/Y") }}
                                 à {{ detailEvent.registrationDeadLine|date("H:i") }}. L'événement débutera sans vous
                                 dans {{ leftDaysEvent }} jours</p>

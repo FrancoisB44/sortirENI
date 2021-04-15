@@ -6,20 +6,20 @@
     <div class="row">
         <div class="col-md-4">
             {# <p class="text danger border"> </p> #}
-            <img class="rounded-circle" style="max-height:512px" src="{{ asset('img/profilePicture/'~ app.user.pictureName) }}"
+            <img class="rounded-circle" style="max-height:512px" src="{{ asset('img/profilePicture/'~ profile.pictureName) }}"
                  alt="image de profil">
         </div>
         <div class="col-md-4 ">
             <div id="cardDisp" class="card shadow-lg">
                 <h3 class="pseud">{{ profile.pseudo }}</h3>
-                <p>Prénom : {{ profile.firstNameUser }}</p>
-                <p> Nom : {{ profile.nameUser }}</p>
-                <p> Téléphone : {{ profile.phoneNumber }}</p>
-                <p> Email : {{ profile.mail }} </p>
-                <p> Campus : {{ profile.campus }} </p>
+                <p><b>Prénom : </b>{{ profile.firstNameUser }}</p>
+                <p><b> Nom : </b>{{ profile.nameUser }}</p>
+                <p><b> Téléphone :</b> {{ profile.phoneNumber }}</p>
+                <p><b> Email : </b>{{ profile.mail }} </p>
+                <p><b> Campus : </b>{{ profile.campus }} </p>
             </div>
 
-            <div class="row">
+            <div class="row p-2">
                 <div class=" col-md-3"></div>
                 <div class=" col-md-6">
                     {% if app.user.id == profile.id %}
@@ -27,6 +27,7 @@
                            class="btn btn-success ">Modifier</a>
                     {% endif %}
                     <button id="bu" type="submit" onclick="history.go(-1)" class="btn  btn-white ">Retour</button>
+
                 </div>
                 <div class=" col-md-3"></div>
             </div>

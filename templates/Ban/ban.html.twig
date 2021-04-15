@@ -5,9 +5,72 @@
 {% block container %}
 
     {% if is_granted('ROLE_USER') %}
-        <h1>Coucou user les pages admin sont bloquées</h1>
-    {% else %}
-        <h1>Coucou banned bitch, u   mad?!</h1>
-    {% endif %}
+        <div class="raw ">
+            <h1 class="bienvenue">Vous n'avez pas de droit administrateur {{ app.user.pseudo }} !</h1>
 
-        {% endblock %}
+            <div class="row">
+                <div class="col-md-3"></div>
+                <div id="sect" class="col-md-6">
+                    <div class="d-flex justify-content-center">
+                        <img class="rounded-circle" style="max-height:512px" src="{{ asset('img/profilePicture/'~ app.user.pictureName) }}"
+                             alt="image de profil">
+
+                    </div>
+                    <br>
+                    <div class="d-flex justify-content-center">
+                        <button id="bu" type="submit" onclick="history.go(-1)" class="btn btn-white btn-lg align-content-center">Retour</button>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="exampleFormControlTextarea1">Envoyez nous un mail :</label>
+                        <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
+                    </div>
+                    <br>
+                    <br>
+                    <button class="btn btn-success">Envoyer le mail</button>
+                </div>
+
+
+                <div class="col-md-3">
+                </div>
+            </div>
+        </div>
+    {% else %}
+    <div class="raw ">
+        <h1 class="bienvenue">Vous êtes banni {{ app.user.pseudo }} !</h1>
+
+
+        <div class="row">
+            <div class="col-md-3"></div>
+            <div id="sect" class="col-md-6">
+                <div class="d-flex justify-content-center">
+                    <img class="rounded-circle" style="max-height:512px" src="{{ asset('img/profilePicture/'~ app.user.pictureName) }}"
+                         alt="image de profil">
+
+                </div>
+                <br>
+                <div class="d-flex justify-content-center">
+                <button id="bu" type="submit" onclick="history.go(-1)" class="btn btn-white btn-lg align-content-center">Retour</button>
+                </div>
+
+                <p>Vous n'avez pas respecté les conditions d'utilisation du site.</p>
+                <p>Envoyez nous un mail d'excuses pour que nous puissions, éventuellement et arbitrairement, vous réintégrer.</p>
+                <p>Et respectes les mamans FDP !</p>
+                <br>
+                <div class="form-group">
+                    <label for="exampleFormControlTextarea1">Envoyez nous un mail :</label>
+                    <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
+                </div>
+                <br>
+                <br>
+                <button class="btn btn-success">Envoyer le mail</button>
+            </div>
+
+            <div class="col-md-3">
+            </div>
+        </div>
+    </div>
+    {% endif %}
+{% endblock %}
+
+
