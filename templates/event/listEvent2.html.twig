@@ -8,46 +8,45 @@
         <div class="row">
             <div class="col-md-3">
                 <div  id="cardEvent" class="card">
-{#                {% if app.user %}#}
-{#                    <p> {{ "now"|date("d/m/Y") }}</p>#}
-{#                    <p> {{ app.user.username }}</p>#}
-{#                {% endif %}#}
-                {{ form_start(formSearch) }}
+                    {#                {% if app.user %}#}
+                    {#                    <p> {{ "now"|date("d/m/Y") }}</p>#}
+                    {#                    <p> {{ app.user.username }}</p>#}
+                    {#                {% endif %}#}
+                    {{ form_start(formSearch) }}
 
                     <h5 class="h5">Filtrer par nom de sortie :</h5>
                     <div class="cham"> {{ form_row(formSearch.textSearch) }}</div>
 
-                <h5 class="h5">Filtrer par campus :</h5>
+                    <h5 class="h5">Filtrer par campus :</h5>
                     <div class="cham"> {{ form_row(formSearch.campusSearch) }}</div>
 
-                <h5 class="h5">Filtrer par état de l'événement :</h5>
+                    <h5 class="h5">Filtrer par état de l'événement :</h5>
                     <div class="cham"> {{ form_row(formSearch.statusSearch) }}</div>
 
-                <h5 class="h5">Filtrer par date de début d'événement : </h5>
+                    <h5 class="h5">Filtrer par date de début d'événement : </h5>
                     <div class="cham"> {{ form_row(formSearch.dateStartSearch) }}</div>
 
-                <h5 class="h5">Filtrer par date de fin de l'événement : </h5>
-               <div class="cham"> {{ form_row(formSearch.dateEndSearch) }}</div>
+                    <h5 class="h5">Filtrer par date de fin de l'événement : </h5>
+                    <div class="cham"> {{ form_row(formSearch.dateEndSearch) }}</div>
 
-                <h5 class="h5"> Filtrer par sorties : </h5>
+                    <h5 class="h5"> Filtrer par sorties : </h5>
                     <div class="cham2">{{ form_row(formSearch.userSearch) }}</div>
                     <div class="cham2"> {{ form_row(formSearch.participantSearch) }}</div>
 
-                <div class="row">
-                    <div class="col-md-2"></div>
-                    <div class="col-md-4">
-                        <button id="rechEvent" type="submit" class="btn btn-primary">Rechercher</button>
-                    </div>
+                    <div class="row">
+                        <div class="col-md-2"></div>
+                        <div class="col-md-4">
+                            <button id="rechEvent" type="submit" class="btn btn-primary">Rechercher</button>
+                        </div>
 
-                    <div class="col-md-6">
-                        <a href="{{ url('create') }}" class="btn btn-success">Créer sortie</a>
+                        <div class="col-md-6">
+                            <a href="{{ url('create') }}" class="btn btn-success">Créer sortie</a>
+                        </div>
                     </div>
+                    {{ form_end(formSearch) }}
                 </div>
-                {{ form_end(formSearch) }}
-            </div>
             </div>
 
-                    <h3 style="text-align: center">Liste des sorties</h3>
 
             {# liste des events #}
             <div class="col-md-9">
@@ -76,78 +75,80 @@
                                 <tbody>
                                 {% for event in listByFilters %}
                                     {% if today < event.startDateTime|date_modify('+' ~ 30 ~ ' day') %}
-                                    <tr>
-                                        <td>{{ event.nameEvent }}</td>
-                                        <td>{{ event.startDateTime|date("d/m/Y") }} à {{ event.startDateTime|date("h:m") }}</td>
-                                        <td>{{ event.registrationDeadLine|date("d/m/Y") }} à {{ event.registrationDeadLine|date("h:m") }}</td>
-                                        <td>{{ event.users|length }}/{{ event.nbRegistrationsMax }}
-                                            <!-- Sortie ouverte, mais plus de place-->
-                                            {% if event.status == 'Ouvert' and event.users|length == event.nbRegistrationsMax %}
-                                                 : Complet
-                                            {% endif %}
-                                        </td>
-                                        <td>{{ event.status }}</td>
-                                        <td>
-                                            {% if app.user in event.users %}
-                                                x
-                                            {% endif %}
-                                        </td>
-                                        <td><a href="{{ url('user_display_user', {"id" : event.user.id }) }}" >{{ event.user.pseudo }}</a></td>
-
-                                        <td>
-                                            <!-- Sortie ouverte, utilisateur pas encore inscrit et place dispo-->
-                                            {% if event.status == 'Ouvert' and app.user not in event.users and event.users|length < event.nbRegistrationsMax and event.registrationDeadLine > today %}
-                                                <a href="{{ url('subscribe', {"id" : event.id }) }}" class="btn btn-primary btn-sm">S'inscrire</a>
-                                            {% endif %}
-
-                                            <!-- Sortie ouverte, utilisateur déjà inscrit -->
-                                            {% if event.status == 'Ouvert' and app.user in event.users and event.startDateTime > today %}
-                                                <a href="{{ url('unsubscribe', {"id" : event.id}) }}" class="btn btn-warning btn-sm">Se désister</a>
-                                            {% endif %}
-                                            {% if event.status == 'Complet' and app.user in event.users %}
-                                                <a href="{{ url('unsubscribe', {"id" : event.id}) }}" class="btn btn-warning btn-sm">Se désister</a>
-                                            {% endif %}
-
-                                            <!-- Sortie terminée-->
-
-                                            <!-- Inscription terminée-->
-                                        </td>
-                                        <td>
-                                            <!-- Sortie ouverte, mais utilisateur -->
-                                            {% if event.status == 'Ouvert' and event.startDateTime > today %}
-                                                {%  if app.user.id == event.user.id or is_granted('ROLE_ADMIN') %}
-                                                <a href=" {{ url('cancel_event', {"id" : event.id }) }}" class="btn btn-danger btn-sm">Annuler</a>
+                                        <tr>
+                                            <td>{{ event.nameEvent }}</td>
+                                            <td>{{ event.startDateTime|date("d/m/Y") }} à {{ event.startDateTime|date("h:m") }}</td>
+                                            <td>{{ event.registrationDeadLine|date("d/m/Y") }} à {{ event.registrationDeadLine|date("h:m") }}</td>
+                                            <td>{{ event.users|length }}/{{ event.nbRegistrationsMax }}
+                                                <!-- Sortie ouverte, mais plus de place-->
+                                                {% if event.status == 'Ouvert' and event.users|length == event.nbRegistrationsMax %}
+                                                    : Complet
                                                 {% endif %}
-                                            {% endif %}
-                                            {% if event.status == 'Complet' and event.startDateTime > today %}
-                                                {% if app.user == event.users or is_granted('ROLE_ADMIN') %}
-                                                <a href=" {{ url('cancel_event', {"id" : event.id }) }}" class="btn btn-danger btn-sm">Annuler</a>
+                                            </td>
+                                            <td>{{ event.status }}</td>
+                                            <td>
+                                                {% if app.user in event.users %}
+                                                    x
                                                 {% endif %}
-                                            {% endif %}
+                                            </td>
+                                            <td><a href="{{ url('user_display_user', {"id" : event.user.id }) }}" >{{ event.user.pseudo }}</a></td>
 
+                                            <td>
+                                                <!-- Sortie ouverte, utilisateur pas encore inscrit et place dispo-->
+                                                {% if event.status == 'Ouvert' and app.user not in event.users and event.users|length < event.nbRegistrationsMax and event.registrationDeadLine > today %}
+                                                    <a href="{{ url('subscribe', {"id" : event.id }) }}" class="btn btn-primary btn-sm">S'inscrire</a>
+                                                {% endif %}
 
-                                        </td>
-                                        <td>
-                                            <a href="{{ url('details', {"id" : event.id }) }}" class="btn btn-success btn-sm">Détail</a>
-                                        </td>
-                                    </tr>
+                                                <!-- Sortie ouverte, utilisateur déjà inscrit -->
+                                                {% if event.status == 'Ouvert' and app.user in event.users and event.startDateTime > today %}
+                                                    <a href="{{ url('unsubscribe', {"id" : event.id}) }}" class="btn btn-warning btn-sm">Se désister</a>
+                                                {% endif %}
+                                                {% if event.status == 'Complet' and app.user in event.users %}
+                                                    <a href="{{ url('unsubscribe', {"id" : event.id}) }}" class="btn btn-warning btn-sm">Se désister</a>
+                                                {% endif %}
+
+                                                <!-- Sortie terminée-->
+
+                                                <!-- Inscription terminée-->
+                                            </td>
+                                            <td>
+                                                <!-- Sortie ouverte, mais utilisateur -->
+                                                {% if event.status == 'Ouvert' and event.startDateTime > today %}
+                                                    {% if app.user.id == event.user.id or is_granted('ROLE_ADMIN') %}
+                                                    <a href=" {{ url('cancel_event', {"id" : event.id }) }}" class="btn btn-danger btn-sm">Annuler</a>
+                                                    {% endif %}
+                                                {% endif %}
+                                                {% if event.status == 'Complet' and event.startDateTime > today %}
+                                                    {% if app.user.id == event.user.id or is_granted('ROLE_ADMIN') %}
+                                                    <a href=" {{ url('cancel_event', {"id" : event.id }) }}" class="btn btn-danger btn-sm">Annuler</a>
+                                                    {% endif %}
+                                                {% endif %}
+
+                                            </td>
+                                            <td>
+                                                <a href="{{ url('details', {"id" : event.id }) }}" class="btn btn-success btn-sm">Détail</a>
+                                            </td>
+                                        </tr>
                                     {% endif %}
                                 {% endfor %}
-                                {{ knp_pagination_render(listByFilters) }}
                                 </tbody>
+
+
                             </table>
                         {% else %}
                             <p>Aucune sortie ne correspond à votre recherche </p>
                         {% endif %}
                     </div>
                 </div>
-
-
             </div>
+
+
         </div>
     </div>
 
 
+
+{% endblock %}
 
 
     {# <div class="row"> #}
@@ -303,4 +304,3 @@
 
 
 
-{% endblock %}
