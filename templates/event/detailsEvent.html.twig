@@ -4,33 +4,24 @@
 
 
 {% block container %}
-
-
-        <div class="col-md-12">
-            <div class="row" >
-                <div class="col-md-3">
-                </div>
-                <div class="col-md-6" style="align-items: center">
-
-                    <h2>{{ detailEvent.nameEvent | capitalize }}</h2>
-{#                    <button onclick="window.location.href='{{ path('inscription',{'id':detailEvent.id}) }}'">S'inscrire</button>#}
-                    <li>Début événement : {{ detailEvent.StartDateTime|date("d/m/Y") }} à {{ detailEvent.StartDateTime|date("H:i") }}</li>
-                    <li>Description : {{ detailEvent.infoEvent }}</li>
-                    <li>Durée en minutes de l'événement : {{ detailEvent.duration }}</li>
-
+    <div class="container-fluid">
+        <div class="row">
+            {# <div class="col-md-1"> #}
+            {# </div> #}
+            <div class="col-md-6  p-5 mt-5 mr-5">
+                <div class="card p-3 shadow-lg">
+                    <h3 class="nomEvent p-2 ">{{ detailEvent.nameEvent | capitalize }}</h3>
+                    <p>Début événement : {{ detailEvent.StartDateTime|date("d/m/Y") }}
+                        à {{ detailEvent.StartDateTime|date("H:i") }}</p>
+                    <p> Description : {{ detailEvent.infoEvent }}</p>
+                    <p> Durée en minutes de l'événement : {{ detailEvent.duration }} </p>
                     {% if app.user.id != detailEvent.user.id %}
-                        <li>Evenement organisé par : {{ detailEvent.user }}</li>
+                        <p> Evenement organisé par : {{ detailEvent.user }}</p>
                     {% endif %}
                     <!--Si profil = personne connectée-->
                     {% if app.user.id == detailEvent.user.id %}
-                        <li>Evenement dont je suis l'organisateur</li>
+                        <p>Evenement dont je suis l'organisateur</p>
                     {% endif %}
-
-{#                    <br>#}
-{#                    <li>Inscription : {{ detailEvent.status }}</li>#}
-{#                    <br>#}
-
-
                     {% set dateLimitRegistration = detailEvent.registrationDeadLine %}
                     {% set dateLimitEvent = detailEvent.StartDateTime %}
                     {% set today = "now" %}
@@ -42,101 +33,110 @@
                     {% if date(dateLimitEvent) > date(today) %}
                         {% if date(dateLimitRegistration) > date(today) %}
                             {% if detailEvent.users|length < detailEvent.nbRegistrationsMax %}
-                                <li>Etat inscription : {{ detailEvent.status }}
-                                </li>
-                                <li>
-                                    {% if detailEvent.status == "Annulé"%}
-                                       Motif d'annulation : {{ detailEvent.motif}}
-                                    {% endif %}
-                                </li>
-                                <li>Inscription jusqu'au : {{ detailEvent.registrationDeadLine|date("d/m/Y") }} à {{ detailEvent.registrationDeadLine|date("H:i") }}</li>
+                                <p>Etat inscription : {{ detailEvent.status }}</p>
+
+                                {% if detailEvent.status == "Annulé" %}
+                                    <p>Motif d'annulation : {{ detailEvent.motif }}</p>
+                                {% endif %}
+
+                                <p>Inscription jusqu'au : {{ detailEvent.registrationDeadLine|date("d/m/Y") }}
+                                    à {{ detailEvent.registrationDeadLine|date("H:i") }}</p>
                                 <p>(Il ne vous reste plus que {{ leftDaysRegistration }} jours pour vous inscrire)</p>
-                                <li>Déjà {{ detailEvent.users|length }} place(s) réservée(s) sur les {{ detailEvent.nbRegistrationsMax }} places disponibles</li>
+                                <p>Déjà {{ detailEvent.users|length }} place(s) réservée(s) sur
+                                    les {{ detailEvent.nbRegistrationsMax }} places disponibles</p>
                             {% else %}
-                                <li>Complet : {{ detailEvent.users|length }} / {{ detailEvent.nbRegistrationsMax }}</li>
+                                <p>Complet : {{ detailEvent.users|length }} / {{ detailEvent.nbRegistrationsMax }}</p>
                             {% endif %}
-{#                            {% if detailEvent.users|length == detailEvent.nbRegistrationsMax %}#}
-{#                                <li>Complet : {{ detailEvent.users|length }} / {{ detailEvent.nbRegistrationsMax }}</li>#}
-{#                                {% else %}#}
-{#                                <li>Déjà {{ detailEvent.users|length }} place(s) réservée(s) sur les {{ detailEvent.nbRegistrationsMax }} places disponibles</li>#}
-{#                            {% endif %}#}
+                            {# {% if detailEvent.users|length == detailEvent.nbRegistrationsMax %} #}
+                            {# <li>Complet : {{ detailEvent.users|length }} / {{ detailEvent.nbRegistrationsMax }}</li> #}
+                            {# {% else %} #}
+                            {# <li>Déjà {{ detailEvent.users|length }} place(s) réservée(s) sur les {{ detailEvent.nbRegistrationsMax }} places disponibles</li> #}
+                            {# {% endif %} #}
 
                         {% elseif date(detailEvent.registrationDeadLine) < today %}
-                            {% else %}
-                            <li>Trop tard, inscriptions terminées depuis le {{ detailEvent.registrationDeadLine|date("d/m/Y") }} à {{ detailEvent.registrationDeadLine|date("H:i") }}. L'événement débutera sans vous dans {{ leftDaysEvent }} jours</li>
+                        {% else %}
+                            <p>Trop tard, inscriptions terminées depuis
+                                le {{ detailEvent.registrationDeadLine|date("d/m/Y") }}
+                                à {{ detailEvent.registrationDeadLine|date("H:i") }}. L'événement débutera sans vous
+                                dans {{ leftDaysEvent }} jours</p>
                         {% endif %}
                     {% else %}
-                        <li>L'événement s'est déroulé sans vous le {{ detailEvent.StartDateTime|date("d/m/Y") }}</li>
+                        <p>L'événement s'est déroulé sans vous le {{ detailEvent.StartDateTime|date("d/m/Y") }}</p>
                     {% endif %}
-
-                    <br><br>
-
-
-                    {% if participants | length > 0 %}
-                    <table class="table">
-                        <thead>
-                            <tr>
-                                <th>Pseudo</th>
-                                <th>Nom</th>
-                                <th></th>
-                                <th></th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                        {% for participants in participants  %}
-                            <tr>
-                                <td>{{ participants.pseudo }}</td>
-                                <td>{{ participants.username }} {{ participants.firstNameUser }}</td>
-                                <td>
-                                    <!--Si profil différent du user (personne connectée)-->
-                                    {% if app.user.id != participants.id %}
-                                        <a href="{{ url('user_display_user', {"id" : participants.id }) }}" class="btn btn-success btn-sm">Consulter profil</a>
-                                    {% endif %}
-                                    <!--Si profil = personne connectée-->
-                                    {% if app.user.id == participants.id %}
-                                        <a href="{{ url('user_display_user', {"id" : app.user.id }) }}" class="btn btn-success btn-sm">Mon profil</a>
-                                    {% endif %}
-                                </td>
-                                <td>
-                                    {# if admin = supprimer participant #}
-                                </td>
-                            </tr>
-                        {% endfor %}
-                        </tbody>
-                    </table>
-                    {% endif %}
-
-                    <br>
-
-                    <div class="row">
-                        <div class="col-md-4">
-{#                            <button type="submit" class="btn btn-success" onclick="history.go(-1)">Retour à la liste</button>#}
-                            <a href="{{ url('list') }}" class="btn btn-success btn-sm">Retour à la liste</a>
-                        </div>
-                        <div class="col-md-4">
-                            <!-- Sortie ouverte, utilisateur pas encore inscrit et place dispo-->
-                            {% if detailEvent.status == 'Ouverte' and app.user not in detailEvent.users and detailEvent.users|length < detailEvent.nbRegistrationsMax and event.registrationDeadLine > today %}
-                                <a href="{{ url('subscribe', {"id" : detailEvent.id }) }}" class="btn btn-primary btn-sm">S'inscrire</a>
-                            {% endif %}
-                            <!-- Sortie ouverte, utilisateur déjà inscrit (ajouter href="{# {{ url('unsubscribe', {"id" : event.id }) }} #}"-->
-                            {% if detailEvent.status == 'Ouverte' and app.user in detailEvent.users and event.startDateTime < today %}
-                                <a href="{{ url('unsubscribe', {"id" : detailEvent.id}) }}" class="btn btn-warning btn-sm">Se désister</a>
-                            {% endif %}
-                        </div>
-                        <div class="col-md-4">
-                            <!-- Sortie ouverte, mais utilisateur = organisateur (ajouter href="{# {{ url('delete', {"id" : event.id }) }} #}"-->
-                            {% if detailEvent.status == 'Ouverte' and app.user.id == detailEvent.user.id and event.startDateTime < today %}
-                                <a  class="btn btn-danger btn-sm">Annuler</a>
-                            {% endif %}
-                        </div>
 
                 </div>
-                <div class="col-md-3">
+            </div>
+            <div class="col-md-6 mt-5">
+                {% if participants | length > 0 %}
+                    <div class="row">
+                        <div class="col-md-10">
+                            <table class="table">
+                                <h3 class="pseud"> Liste des participants à la sortie</h3>
+                                <thead>
+                                <tr>
+                                    <th>Pseudo</th>
+                                    <th>Nom</th>
+                                    <th>Prénom</th>
+                                    <th></th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                {% for participants in participants %}
+                                    <tr>
+                                        <td>{{ participants.pseudo }}</td>
+                                        <td>{{ participants.username }} </td>
+                                        <td>{{ participants.firstNameUser }} </td>
+                                        <!--Si profil différent du user (personne connectée)-->
+
+                                        <td>
+                                            {% if app.user.id != participants.id %}
+                                                <a href="{{ url('user_display_user', {"id" : participants.id }) }}"
+                                                   class="btn btn-success btn-sm">Consulter profil</a>
+                                            {% endif %}
+                                            <!--Si profil = personne connectée-->
+                                            {% if app.user.id == participants.id %}
+                                                <a href="{{ url('user_display_user', {"id" : app.user.id }) }}"
+                                                   class="btn btn-success btn-sm">Mon profil</a>
+                                            {% endif %}
+                                        </td>
+                                        <td>
+                                            {# if admin = supprimer participant #}
+                                        </td>
+                                    </tr>
+                                {% endfor %}
+                                {# faire le paginator ds le controlleur  #}
+{#                                {{ knp_pagination_render(participants) }}#}
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                {% endif %}
+                <button type="submit" class="btn btn-success" onclick="history.go(-1)">Retour à la liste</button>
+{#                <a href="{{ url('list') }}" class="btn btn-success btn-sm">Retour à la liste</a>#}
+            </div>
+
+            <div class="row">
+                 <div class="col-md-4">
+                <!-- Sortie ouverte, utilisateur pas encore inscrit et place dispo-->
+                     {% if detailEvent.status == 'Ouverte' and app.user not in detailEvent.users and detailEvent.users|length < detailEvent.nbRegistrationsMax and event.registrationDeadLine > today %}
+                         <a href="{{ url('subscribe', {"id" : detailEvent.id }) }}"
+                              class="btn btn-primary btn-sm">S'inscrire</a>
+                     {% endif %}
+                <!-- Sortie ouverte, utilisateur déjà inscrit (ajouter href="{# {{ url('unsubscribe', {"id" : event.id }) }} #}"-->
+                     {% if detailEvent.status == 'Ouverte' and app.user in detailEvent.users and event.startDateTime < today %}
+                        <a href="{{ url('unsubscribe', {"id" : detailEvent.id}) }}" class="btn btn-warning btn-sm">Se
+                             désister</a>
+                      {% endif %}
+                 </div>
+                 <div class="col-md-4">
+                <!-- Sortie ouverte, mais utilisateur = organisateur (ajouter href="{# {{ url('delete', {"id" : event.id }) }} #}"-->
+                {% if detailEvent.status == 'Ouverte' and app.user.id == detailEvent.user.id and event.startDateTime < today %}
+                    <a class="btn btn-danger btn-sm">Annuler</a>
+                {% endif %}
+                 </div>
+                <div class="col-md-4">
                 </div>
             </div>
         </div>
     </div>
-
-
-
 {% endblock %}

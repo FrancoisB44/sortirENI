@@ -183,7 +183,7 @@ li{
     margin-top: 10%;
     padding: 20% 20%;
 }
-.card
+#cardDisp
 {
     margin-top:30%;
     padding:5% 5%;
@@ -226,4 +226,7 @@ li{
     padding-bottom: 5%;
     /*margin: 5% 5% ;*/
 
+}
+.nomEvent{
+    text-align: center;
 }
