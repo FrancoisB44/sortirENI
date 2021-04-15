@@ -5,30 +5,28 @@
 
 {% block container %}
 
-    <div class="row">
-        <div class="col-md-12">
-            <div class="row" >
-                <div class="col-md-3">
-                </div>
-                <div class="col-md-6" style="align-items: center">
+    <div class="row f-flex justify-content-center">
+        <div class="col-md-6  p-5 mt-5 mr-5">
+            <div class="card p-5 shadow-lg " >
+                <div class="col-md-6 " style="align-items: center">
 
-                    <h2>Annuler: <b>{{ detailEvent.nameEvent | capitalize }}</b></h2>
+                    <h3 class="nomEvent p-2 ">Annuler : <b>{{ detailEvent.nameEvent | capitalize }}</b></h3>
 {#                    <button onclick="window.location.href='{{ path('inscription',{'id':detailEvent.id}) }}'">S'inscrire</button>#}
-                    <li>Début événement : {{ detailEvent.StartDateTime|date("d/m/Y") }} à {{ detailEvent.StartDateTime|date("H:i") }}</li>
-                    <li>Description : {{ detailEvent.infoEvent }}</li>
-                    <li>Durée en minutes de l'événement : {{ detailEvent.duration }}</li>
+                    <p>Début événement : {{ detailEvent.StartDateTime|date("d/m/Y") }} à {{ detailEvent.StartDateTime|date("H:i") }}</p>
+                    <p>Description : {{ detailEvent.infoEvent }}</p>
+                    <p>Durée en minutes de l'événement : {{ detailEvent.duration }}</p>
 
                     {% if app.user.id != detailEvent.user.id %}
-                        <li>Evenement organisé par : {{ detailEvent.user }}</li>
+                        <p>Evenement organisé par : {{ detailEvent.user }}</p>
                     {% endif %}
                     <!--Si profil = personne connectée-->
                     {% if app.user.id == detailEvent.id %}
-                        <li>Evenement dont je suis l'organisateur</li>
+                        <p>Evenement dont je suis l'organisateur</p>
                     {% endif %}
 
-                    <br>
-                    <li>Inscription : {{ detailEvent.status }}</li>
-                    <br>
+
+                    <p>Inscription : {{ detailEvent.status }}</p>
+
 
                     {% set dateLimitRegistration = detailEvent.registrationDeadLine %}
                     {% set dateLimitEvent = detailEvent.StartDateTime %}
@@ -40,28 +38,30 @@
 
                     {% if date(dateLimitEvent) > date(today) %}
                         {% if date(dateLimitRegistration) > date(today) %}
-                            <li>Inscription jusqu'au : {{ detailEvent.registrationDeadLine|date("d/m/Y") }} à {{ detailEvent.registrationDeadLine|date("H:i") }}</li>
+                            <p>Inscription jusqu'au : {{ detailEvent.registrationDeadLine|date("d/m/Y") }} à {{ detailEvent.registrationDeadLine|date("H:i") }}</p>
                             <p>(Il ne vous reste plus que {{ leftDaysRegistration }} jours pour vous inscrire)</p>
                             {% if detailEvent.users|length == detailEvent.nbRegistrationsMax %}
-                                <li>Complet : {{ detailEvent.users|length }} / {{ detailEvent.nbRegistrationsMax }}</li>
+                                <p>Complet : {{ detailEvent.users|length }} / {{ detailEvent.nbRegistrationsMax }}</p>
                                 {% else %}
-                                <li>Déjà {{ detailEvent.users|length }} place(s) réservée(s) sur les {{ detailEvent.nbRegistrationsMax }} places disponibles</li>
+                                <p>Déjà {{ detailEvent.users|length }} place(s) réservée(s) sur les {{ detailEvent.nbRegistrationsMax }} places disponibles</p>
                             {% endif %}
                         {% elseif date(detailEvent.registrationDeadLine) < today %}
                             {% else %}
-                            <li>Trop tard, inscriptions terminées depuis le {{ detailEvent.registrationDeadLine|date("d/m/Y") }} à {{ detailEvent.registrationDeadLine|date("H:i") }}. L'événement débutera sans vous dans {{ leftDaysEvent }} jours</li>
+                            <p>Trop tard, inscriptions terminées depuis le {{ detailEvent.registrationDeadLine|date("d/m/Y") }} à {{ detailEvent.registrationDeadLine|date("H:i") }}. L'événement débutera sans vous dans {{ leftDaysEvent }} jours</p>
                         {% endif %}
                     {% else %}
-                        <li>L'événement s'est déroulé sans vous le {{ detailEvent.StartDateTime|date("d/m/Y") }}</li>
+                        <p>L'événement s'est déroulé sans vous le {{ detailEvent.StartDateTime|date("d/m/Y") }}</p>
                     {% endif %}
-                    <br>
 
                     <div class="row">
                         <div class="col-md-4">
                             {{ form_start(cancelForm) }}
+                        </div>
+                        <div>
+                            Motif :
                             {{ form_widget(cancelForm) }}
-                                <button class="btn btn-danger btn-sm">Confirmer</button>
-                            <a href="{{ url('list') }}" class="btn btn-success btn-sm">Retour à la liste</a>
+                            <button class="btn btn-danger m-1 mt-2 btn-sm">Confirmer</button>
+                            <a href="{{ url('list') }}" class="btn m-1 mt-2 btn-success btn-sm">Retour à la liste</a>
                             {{ form_end(cancelForm) }}
                         </div>
                     </div>
