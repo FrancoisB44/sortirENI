@@ -15,6 +15,7 @@ use App\Repository\CampusRepository;
 use App\Repository\EventRepository;
 use App\Repository\PlaceRepository;
 use Doctrine\ORM\EntityManagerInterface;
+use Knp\Component\Pager\PaginatorInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -93,7 +94,7 @@ class EventController extends AbstractController
     /**
      * @Route(path="/list2", name="list2")
      */
-    public function listEvent(EntityManagerInterface $entityManager) {
+    public function listEvent(EntityManagerInterface $entityManager, PaginatorInterface $paginator) {
 
         $listEvent = $entityManager->getRepository('App:Event')->findAll();
         $listCampus = $entityManager->getRepository(Campus::class)->findAll();
@@ -131,7 +132,7 @@ class EventController extends AbstractController
     /**
      * @Route(path="/list", name="list")
      */
-    public function findByFilters(EventRepository $eventRepository, Request $request, EntityManagerInterface $em) {
+    public function findByFilters(EventRepository $eventRepository,PaginatorInterface $paginator, Request $request, EntityManagerInterface $em) {
 
         $data = new SearchData();
         $formSearch = $this->createForm(SearchType::class, $data);
@@ -149,9 +150,14 @@ class EventController extends AbstractController
 //        dump($data);
 //        dump($listByFilters);
 //        exit();
+         $event= $paginator->paginate(
+            $listByFilters, // Requête contenant les données à paginer (ici nos articles)
+            $request->query->getInt('page', 1), // Numéro de la page en cours, passé dans l'URL, 1 si aucune page
+            2 // Nombre de résultats par page
+        );
 
         return $this->render('event/listEvent2.html.twig', [
-            'listByFilters' => $listByFilters,
+            'listByFilters' => $event,
             'formSearch' => $formSearch->createView(),
 //            'planner' => $planner
         ]);
