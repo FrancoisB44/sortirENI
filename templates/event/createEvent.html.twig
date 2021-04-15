@@ -14,7 +14,7 @@
 
 
 
-<div  id="cardEvent" class="card p-3">
+<div  id="cardEvent" class="card p-4">
         <h3>Etape 1 : sélectionnez un lieu</h3>
         <label for="kw"> Ville : </label>
 {#         {{ form_label(formEvent.placeId) }}#}
@@ -22,15 +22,19 @@
         <input type="text" id="kw">
 
         <div id="results"></div>
+
         <div class="espace p-2"></div>
         <a href="{{ path('create_place_bis') }}" class="btn btn-success btn-sm"> Ajouter un lieu </a>
         <div class="espace p-2"></div>
         <div>
 
             {% if foo is not null %}
-                <select id="select_place" name="select_place">
-                    <option value="{{ foo.id }}"> {{ foo.namePlace }} - {{ foo.street }} - {{ foo.zipCode }}-{{ foo.nameCity }}</option>
-                </select>
+{#                <select id="select_place" name="select_place">#}
+{#                    <option value="{{ foo.id }}"> {{ foo.namePlace }} - {{ foo.street }} - {{ foo.zipCode }}-{{ foo.nameCity }}</option>#}
+{#                </select>#}
+                    <p> Dernier lieu ajouté :</p>
+                    <input type="hidden" name="select_place" value="{{ foo.id }}">
+                    <div> {{ foo.namePlace }} - {{ foo.street }} - {{ foo.zipCode }}-{{ foo.nameCity }}</div>
 
             {% endif %}
         </div>
@@ -84,14 +88,17 @@
         {{ form_widget(formEvent.StartDateTime) }}
         <div class="espace p-2"></div>
 
+
+        <label>Inscription jusqu'au : </label>
+        <div class="espace p-2"></div>
+        {{ form_widget(formEvent.registrationDeadLine) }}
+        <div class="espace p-2"></div>
+
         <label>Durée : </label>
         <div class="espace p-2"></div>
         {{ form_widget(formEvent.duration) }}
+        <div class="espace p-2"></div>
 
-        <div class="espace p-2"></div>
-        <label>Inscription jusqu'au : </label>
-        {{ form_widget(formEvent.registrationDeadLine) }}
-        <div class="espace p-2"></div>
 
         <label>Nombre maximum de participants : </label>
         <div class="espace p-2"></div>
