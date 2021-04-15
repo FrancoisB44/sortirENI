@@ -135,36 +135,36 @@ class AdminController extends AbstractController
             'listPlace' => $listPlace,
             ]);
     }
-    //test
-    /**
-     * @Route("/create_place_bis", name="create_place_bis")
-     */
-    public function createPlaceBis(Request $request,PlaceRepository $placeRepository, EntityManagerInterface $entityManager): Response
-    {
-        $place = new Place();
 
-        $formPlace = $this->createForm(PlaceType::class, $place);
-        $formPlace->handleRequest($request);
-
-        if ($formPlace->isSubmitted() && $formPlace->isValid()) {
-
-            $entityManager->persist($place);
-            $entityManager->flush();
-
-            $idFoo=$place->getId();
-            $this->addFlash('success', 'Lieu ajouté !');
-           //$foo= $placeRepository->find($idFoo);
-            return $this->redirectToRoute('create',['idFoo'=>$idFoo]);
-
-        }
-        $listPlace = $entityManager->getRepository('App:Place')->findAll();
-
-        return $this->render('admin/createPlace.html.twig', [
-            'formPlace' => $formPlace->createView(),
-            'listPlace' => $listPlace,
-            //'idFoo'=>$foo,
-        ]);
-    }
+//    /**
+//     * @Route("/create_place_bis", name="create_place_bis")
+//     */
+//    public function createPlaceBis(Request $request,PlaceRepository $placeRepository, EntityManagerInterface $entityManager): Response
+//    {
+//        $place = new Place();
+//
+//        $formPlace = $this->createForm(PlaceType::class, $place);
+//        $formPlace->handleRequest($request);
+//
+//        if ($formPlace->isSubmitted() && $formPlace->isValid()) {
+//
+//            $entityManager->persist($place);
+//            $entityManager->flush();
+//
+//            $idFoo=$place->getId();
+//            $this->addFlash('success', 'Lieu ajouté !');
+//           //$foo= $placeRepository->find($idFoo);
+//            return $this->redirectToRoute('create',['idFoo'=>$idFoo]);
+//
+//        }
+//        $listPlace = $entityManager->getRepository('App:Place')->findAll();
+//
+//        return $this->render('admin/createPlace.html.twig', [
+//            'formPlace' => $formPlace->createView(),
+//            'listPlace' => $listPlace,
+//            //'idFoo'=>$foo,
+//        ]);
+//    }
     /**
      * @Route("/create_user_as_admin", name="create_user_as_admin")
      */

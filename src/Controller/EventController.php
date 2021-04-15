@@ -10,6 +10,7 @@ use App\Entity\Status;
 use App\Entity\User;
 use App\Form\CancelEventFormType;
 use App\Form\EventType;
+use App\Form\PlaceType;
 use App\Form\SearchType;
 use App\Repository\CampusRepository;
 use App\Repository\EventRepository;
@@ -53,7 +54,7 @@ class EventController extends AbstractController
 
         if ($formEvent->isSubmitted() && $formEvent->isValid()) {
 //            $event->setUser($this->getUser()->getUsername());
-            if  ($dEvent > $today and $dLRegistration > $today and $dLRegistration > $dEvent) {
+            if  ($dEvent > $today and $dLRegistration > $today and $dLRegistration < $dEvent) {
             $event->setUser($this->getUser());
 
             $idPlace= $request->get('select_place');
@@ -153,7 +154,7 @@ class EventController extends AbstractController
          $event= $paginator->paginate(
             $listByFilters, // Requête contenant les données à paginer (ici nos articles)
             $request->query->getInt('page', 1), // Numéro de la page en cours, passé dans l'URL, 1 si aucune page
-            2 // Nombre de résultats par page
+            10 // Nombre de résultats par page
         );
 
         return $this->render('event/listEvent2.html.twig', [
@@ -239,6 +240,65 @@ class EventController extends AbstractController
     }
 
 
+//    /**
+//     * @Route("/create_place", name="create_place")
+//     */
+//    public function createPlace(Request $request, EntityManagerInterface $entityManager): Response
+//    {
+//        $place = new Place();
+//
+//        $formPlace = $this->createForm(PlaceType::class, $place);
+//        $formPlace->handleRequest($request);
+//
+//        if ($formPlace->isSubmitted() && $formPlace->isValid()) {
+//
+//            $entityManager->persist($place);
+//            $entityManager->flush();
+//
+//            $this->addFlash('success', 'Lieu ajouté !');
+//
+//            return $this->redirectToRoute('create_place');
+//        }
+//        $listPlace = $entityManager->getRepository('App:Place')->findAll();
+//
+//        return $this->render('admin/createPlace.html.twig', [
+//            'formPlace' => $formPlace->createView(),
+//            'listPlace' => $listPlace,
+//        ]);
+//    }
+
+    /**
+     * @Route("/create_place_bis", name="create_place_bis")
+     */
+    public function createPlaceBis(Request $request,PlaceRepository $placeRepository, EntityManagerInterface $entityManager): Response
+    {
+        $place = new Place();
+
+        $formPlace = $this->createForm(PlaceType::class, $place);
+        $formPlace->handleRequest($request);
+
+        if ($formPlace->isSubmitted() && $formPlace->isValid()) {
+
+            $entityManager->persist($place);
+            $entityManager->flush();
+
+            $idFoo=$place->getId();
+            $this->addFlash('success', 'Lieu ajouté !');
+            //$foo= $placeRepository->find($idFoo);
+            return $this->redirectToRoute('create',['idFoo'=>$idFoo]);
+
+        }
+        $listPlace = $entityManager->getRepository('App:Place')->findAll();
+
+        return $this->render('admin/createPlace.html.twig', [
+            'formPlace' => $formPlace->createView(),
+            'listPlace' => $listPlace,
+            //'idFoo'=>$foo,
+        ]);
+    }
+
+
 }
+
 
 
