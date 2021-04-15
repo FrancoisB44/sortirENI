@@ -1,3 +1,4 @@
+
 {% extends 'base.html.twig' %}
 
 {% block titlePage %}Ajouter une sortie{% endblock %}
@@ -5,29 +6,30 @@
 
 {% block container %}
 
-<div class="row">
+<div class="row p-3">
     <div class="d-flex justify-content-center col-md-12">
 
         {{ form_start(formEvent) }}
 
+
+
+
+<div  id="cardEvent" class="card p-3">
         <h3>Etape 1 : sélectionnez un lieu</h3>
-        <br>
-
-
         <label for="kw"> Ville : </label>
-        {# {{ form_label(formEvent.placeId) }} #}
+{#         {{ form_label(formEvent.placeId) }}#}
         {# {{ form_widget(formEvent.placeId) }} #}{# ca c est pr envoyer au controller #}
         <input type="text" id="kw">
-        <br>
+
         <div id="results"></div>
-        <br>
+        <div class="espace p-2"></div>
         <a href="{{ path('create_place_bis') }}" class="btn btn-success btn-sm"> Ajouter un lieu </a>
-        <br><br>
+        <div class="espace p-2"></div>
         <div>
 
             {% if foo is not null %}
                 <select id="select_place" name="select_place">
-                            <option value="{{ foo.id }}"> {{ foo.namePlace }} - {{ foo.street }} - {{ foo.zipCode }}-{{ foo.nameCity }}</option>
+                    <option value="{{ foo.id }}"> {{ foo.namePlace }} - {{ foo.street }} - {{ foo.zipCode }}-{{ foo.nameCity }}</option>
                 </select>
 
             {% endif %}
@@ -63,44 +65,102 @@
         </script>
 
 
-        <h3>Etape 2 : créez un événement </h3>
-        <br>
+        <h3 class="creer pt-3">Etape 2 : créez un événement </h3>
+        <div class="espace p-2"></div>
+        <div class="espace p-2"></div>
 
         <label>Votre campus : </label>
+        <div class="espace p-2"></div>
         {{ form_widget(formEvent.campus) }}
-        <br><br>
+        <div class="espace p-2"></div>
 
         <label>Intitulé sortie : </label>
+        <div class="espace p-2"></div>
         {{ form_widget(formEvent.nameEvent) }}
-        <br><br>
+        <div class="espace p-2"></div>
 
-        <label>Début de l'évenement : </label><br>
+        <label>Début de l'évenement : </label>
+        <div class="espace p-2"></div>
         {{ form_widget(formEvent.StartDateTime) }}
-        <br>
+        <div class="espace p-2"></div>
 
         <label>Durée : </label>
+        <div class="espace p-2"></div>
         {{ form_widget(formEvent.duration) }}
-        <br><br>
 
-        <label>Inscription jusqu'au : </label><br>
+        <div class="espace p-2"></div>
+        <label>Inscription jusqu'au : </label>
         {{ form_widget(formEvent.registrationDeadLine) }}
-        <br><br>
+        <div class="espace p-2"></div>
 
-        <label>Nombre maximum de participants : </label><br>
+        <label>Nombre maximum de participants : </label>
+        <div class="espace p-2"></div>
         {{ form_widget(formEvent.nbRegistrationsMax) }}
-        <br><br>
+        <div class="espace p-2"></div>
 
         <label>Description : </label>
+        <div class="espace p-2"></div>
         {{ form_widget(formEvent.infoEvent) }}
-        <br><br>
+
         {{ form_errors(formEvent) }}
 
         {{ form_widget(formEvent) }}
+        <div class="espace p-2"></div>
         <button class="btn btn-success">Ajouter</button>
 
         {{ form_end(formEvent) }}
-
+</div>
         {% endblock %}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
