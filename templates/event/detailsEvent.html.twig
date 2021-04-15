@@ -118,19 +118,19 @@
             <div class="row">
                  <div class="col-md-4">
                 <!-- Sortie ouverte, utilisateur pas encore inscrit et place dispo-->
-                     {% if detailEvent.status == 'Ouverte' and app.user not in detailEvent.users and detailEvent.users|length < detailEvent.nbRegistrationsMax and event.registrationDeadLine > today %}
+                     {% if detailEvent.status == 'Ouvert' and app.user not in detailEvent.users and detailEvent.users|length < detailEvent.nbRegistrationsMax and detailEvent.registrationDeadLine < today %}
                          <a href="{{ url('subscribe', {"id" : detailEvent.id }) }}"
                               class="btn btn-primary btn-sm">S'inscrire</a>
                      {% endif %}
                 <!-- Sortie ouverte, utilisateur déjà inscrit (ajouter href="{# {{ url('unsubscribe', {"id" : event.id }) }} #}"-->
-                     {% if detailEvent.status == 'Ouverte' and app.user in detailEvent.users and event.startDateTime < today %}
+                     {% if detailEvent.status == 'Ouvert' and app.user in detailEvent.users and detailEvent.startDateTime < today %}
                         <a href="{{ url('unsubscribe', {"id" : detailEvent.id}) }}" class="btn btn-warning btn-sm">Se
                              désister</a>
                       {% endif %}
                  </div>
                  <div class="col-md-4">
                 <!-- Sortie ouverte, mais utilisateur = organisateur (ajouter href="{# {{ url('delete', {"id" : event.id }) }} #}"-->
-                {% if detailEvent.status == 'Ouverte' and app.user.id == detailEvent.user.id and event.startDateTime < today %}
+                {% if detailEvent.status == 'Ouvert' and app.user.id == detailEvent.user.id and detailEvent.startDateTime < today %}
                     <a class="btn btn-danger btn-sm">Annuler</a>
                 {% endif %}
                  </div>
@@ -139,4 +139,5 @@
             </div>
         </div>
     </div>
+
 {% endblock %}

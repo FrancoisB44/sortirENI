@@ -7,9 +7,10 @@
         <div class="row">
             <div class="col-md-4">
 
-                <img class="rounded-circle" src="{{ asset('img/profilePicture/'~ app.user.pictureName) }}"
+                <img class="rounded-circle" style="max-height:512px" src="{{ asset('img/profilePicture/'~ app.user.pictureName) }}"
                      alt="image de profil">
 
+                {{ form_start(userForm) }}
             </div>
             <div class="col-md-4 ">
                 <div id="card2" class="card shadow-lg ">
@@ -40,5 +41,6 @@
             </div>
         </div>
     </div>
+
 
 {% endblock %}
